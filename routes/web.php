@@ -21,59 +21,33 @@ use App\Http\Controllers\CategoryController;
 |
 */
 
-// Rute untuk halaman verifikasi
+// Rute untuk halaman verifikasi email
 Route::get('/auth/verify', function () {
     return view('auth.verify');
 })->name('verification.notice');
-Auth::routes(['verify' => true]);
-Route::get('/', [HomeController::class, 'Anim'])->name('Anim');
-// Otentikasi dengan verifikasi email
-// Gunakan ini jika ingin fitur verifikasi email diaktifkan
-// Gunakan ini jika tidak butuh verifikasi email
-// Auth::routes();
 
+// Otentikasi dengan verifikasi email diaktifkan
+Auth::routes(['verify' => true]);
+
+// Rute yang dapat diakses tanpa login
+Route::get('/', [HomeController::class, 'Anim'])->name('Anim');
 // Rute untuk pengguna yang sudah login dan terverifikasi
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/user', [UserController::class, 'index'])->name('user');
     Route::get('/table', [TableController::class, 'index'])->name('table');
-    Route::get('/home', [dashboardController::class, 'index'])->name('home');
-    Route::post('/logout', [LoginController::class, 'logout'])->name('logout'); // Logout dengan metode POST
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
-// Rute untuk pengguna yang sudah login
-// Route::middleware(['auth'])->group(function () {
 
-//     // Rute untuk Admin
-//     Route::middleware(['role:is_admin'])->group(function () {
-//         Route::get('/user', [UserController::class, 'index'])->name('user');
-//         Route::get('/home', [dashboardController::class, 'index'])->name('home');
-//         Route::resource('animes', AnimeController::class); // CRUD khusus admin
-//         Route::get('/table', [TableController::class, 'index'])->name('table');
-//     });
-
-//     // Rute untuk Member
-//     Route::middleware(['role:is_member'])->group(function () {
-//         Route::get('/', [HomeController::class, 'Anim'])->name('Anim');
-//     });
-
-//     // Rute logout untuk semua yang login
-//     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-// });
-
-// // Rute untuk tamu (guest)
-// Route::middleware(['guest'])->group(function () {
-//     Route::get('/login2', [dashboardController::class, 'login2'])->name('login2');
-//     Route::get('/register2', [dashboardController::class, 'register2'])->name('register2');
-//     Route::get('/', [HomeController::class, 'Anim'])->name('Anim'); // Rute untuk guest
-// });
-
-// Rute untuk tamu (guest)
+// Rute untuk tamu (guest) - Dapat mengakses halaman login dan register
 Route::middleware(['guest'])->group(function () {
     Route::get('/login2', [dashboardController::class, 'login2'])->name('login2');
     Route::get('/register2', [dashboardController::class, 'register2'])->name('register2');
 });
-// anime
 
+Route::get('/', [HomeController::class, 'Anim'])->name('Anim'); // Dapat diakses tanpa login
 
-Route::resource('categories', CategoryController::class);
-
-Route::resource('animes', AnimeController::class);
+Route::middleware(['auth', 'verified', 'role:is_admin'])->group(function () {
+    Route::get('/home', [dashboardController::class, 'index'])->name('home');
+    Route::resource('categories', CategoryController::class);
+    Route::resource('animes', AnimeController::class);
+});
