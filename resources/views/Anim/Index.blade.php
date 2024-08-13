@@ -26,7 +26,7 @@
             <h1>My Hero Academia</h1>
             <p>Boku no Hero Academia<br>Genre: Action, Comedy</p>
         </div>
-        <img src="{{ asset('img/banner-bnh.jpg') }}" alt="My Hero Academia Banner">
+        <img src="{{ asset('img/banner-bnh.jpg') }}" alt="My Hero Academia  Banner">
     </div>
     <div class="myslider fade banner-boruto">
         <div class="txt">
