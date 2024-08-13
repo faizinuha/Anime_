@@ -31,7 +31,7 @@ class AnimeController extends Controller
             'name' => 'required|string|max:255',
             'category_id' => 'required|exists:categories,id', // Validasi category_id
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'video' => 'nullable|mimes:mp4,avi,mkv|max:10240', // validasi video
+            'video' => 'nullable|mimes:mp4,avi,mkv|max:9999', // validasi video
             'release_date' => 'required|date',
         ]);
     

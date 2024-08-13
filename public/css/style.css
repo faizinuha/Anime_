@@ -66,10 +66,10 @@ header {
     top: 10%;
     width: 230px;
     height: 60px;
-    background-image: url(./img/gambar-1.svg);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    background-image: url("../img/gambar-1.svg");
 }
 
 .web-logo h1 {
@@ -198,7 +198,7 @@ nav ul li:hover .dropdown-menu {
 
 nav ul li:hover .dropdown-menu ul {
     display: block;
-    /* margin: 10px; */
+    margin: 10px;
     text-align: center;
 }
 
@@ -492,11 +492,9 @@ nav ul li:hover .dropdown-menu ul {
     align-self: center;
     align-content: center;
     justify-content: space-around;
-    border-radius:30px;
 }
 
 .latest .video-slider .video {
-    background: cover;
     margin: 5px;
 }
 
@@ -677,7 +675,7 @@ nav ul li:hover .dropdown-menu ul {
     -webkit-filter: grayscale(100%);
 }
 
-.complete-item a:hover .complete-text {}
+/* .complete-item a:hover .complete-text {} */
 
 .complete-item a:hover .complete-text {
     color: #50badd;

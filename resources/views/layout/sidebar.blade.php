@@ -97,7 +97,7 @@
             </a>
             <ul class="menu-sub">
                 <li class="menu-item">
-                    <a href="{{ route('table') }}" class="menu-link">
+                    <a href="{{ route('table.index') }}" class="menu-link">
                         <div data-i18n="Error">Data User</div>
                     </a>
                 </li>

@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     {
 
         DB::table('users')->updateOrInsert(
-            ['email' => 'rtxalham@gmail.com'], // Kondisi pencocokan
+            ['email' => 'rozakadm@gmail.com'], // Kondisi pencocokan
             [
                 'name' => 'Zaki',
                 'password' => Hash::make('as'),

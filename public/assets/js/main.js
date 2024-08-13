@@ -2,6 +2,7 @@
  * Main
  */
 
+
 'use strict';
 
 let menu, animate;
@@ -56,6 +57,7 @@ let menu, animate;
       }
     });
   }
+  // const myslide = document.querySelectorAll('.myslider');
 
   // Display in main menu when menu scrolls
   let menuInnerContainer = document.getElementsByClassName('menu-inner'),
@@ -116,3 +118,8 @@ let menu, animate;
   // Auto update menu collapsed/expanded based on the themeConfig
   window.Helpers.setCollapsed(true, false);
 })();
+
+// Path: helpers.js
+/**
+ * Helpers
+ */

@@ -61,7 +61,7 @@ Route::middleware(['auth','role:is_admin'])->group(function () {
 Route::resource('jadwals', JadwalController::class);
 Route::resource('table', TableController::class);
 
-// // Route untuk menampilkan formulir tambah data
+// // // Route untuk menampilkan formulir tambah data
 // Route::get('/table/create', [TableController::class, 'create'])->name('table.create');
 // // Route untuk menyimpan data baru
 // Route::post('/table', [TableController::class, 'store'])->name('table.store');
