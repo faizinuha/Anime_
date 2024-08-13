@@ -18,7 +18,8 @@ class CreateAnimesTable extends Migration
             $table->string('name');
             $table->string('image')->nullable();
             $table->string('video')->nullable();  // Removed 'after' clause
-            $table->date('release_date');
+            $table->foreignId('category_id')->references('id')->on('categories')->onDelete('restrict')->onUpdate('cascade');
+            $table->date('release_date');   
             $table->timestamps();
         });
     }

@@ -13,42 +13,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('users')->updateOrInsert(
-            ['email' => 'midas@gmail.com'], // Kondisi pencocokan
-            [
-                'name' => 'muhammad idris',
-                'password' => Hash::make('12345678'),
-                'role' => 'is_member',
-                'email_verified_at' => now(), // Menandai email sebagai verified
-            ]
-        );
-        
-        DB::table('users')->updateOrInsert(
-            ['email' => 'safei@gmail.com'],
-            [
-                'name' => 'safei',
-                'password' => Hash::make('12345678'),
-                'role' => 'is_member',
-                'email_verified_at' => now(), // Menandai email sebagai verified
-            ]
-        );
-        
-        DB::table('users')->updateOrInsert(
-            ['email' => 'idris@gmail.com'],
-            [
-                'name' => 'idris',
-                'password' => Hash::make('12345678'),
-                'role' => 'is_guest',
-                'email_verified_at' => now(), // Menandai email sebagai verified
-            ]
-        );
+
         DB::table('users')->updateOrInsert(
             ['email' => 'rtxalham@gmail.com'], // Kondisi pencocokan
             [
                 'name' => 'Zaki',
-                'password' => Hash::make('12345678'),
+                'password' => Hash::make('as'),
                 'role' => 'is_admin',
-                'email_verified_at' => now(), // Menandai email sebagai verified
+                // 'email_verified_at' => now(), // Menandai email sebagai verified
             ]
         );
         $this->call([

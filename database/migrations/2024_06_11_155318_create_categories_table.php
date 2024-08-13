@@ -10,18 +10,9 @@ return new class extends Migration {
             $table->string('name');
             $table->timestamps();
         });
-
-        // Menambahkan relasi category_id ke dalam tabel animes
-        Schema::table('animes', function (Blueprint $table) {
-            $table->foreignId('category_id')->constrained('categories');
-        });
     }
 
     public function down() {
-        Schema::table('animes', function (Blueprint $table) {
-            $table->dropForeign(['category_id']);
-            $table->dropColumn('category_id');
-        });
         Schema::dropIfExists('categories');
     }
 };

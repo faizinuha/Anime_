@@ -6,6 +6,7 @@
     <div class="col-md-8">
         <div class="card">
             <div class="container text-center">
+
                 <img src="{{ asset('img/verfy.png') }}" class="img-fluid" width="150px">
             </div>
             <div class="card-header text-center">Verify Your Email Address</div>
