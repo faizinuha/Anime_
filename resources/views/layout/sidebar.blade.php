@@ -78,11 +78,11 @@
                 <div data-i18n="Account Settings">All Dates</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item">
+                {{-- <li class="menu-item">
                     <a href="{{ route('user') }}" class="menu-link">
                         <div data-i18n="Account">Account</div>
                     </a>
-                </li>
+                </li> --}}
                 <li class="menu-item">
                     <a href="#" class="menu-link">
                         <div data-i18n="Notifications">Notifications</div>
@@ -108,7 +108,12 @@
                 </li>
                 <li class="menu-item">
                     <a href="{{ route('categories.index') }}" class="menu-link">
-                        <div data-i18n="Under Maintenance">Data Anime</div>
+                        <div data-i18n="Under Maintenance">Data Category</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="{{ route('jadwals.index') }}" class="menu-link">
+                        <div data-i18n="Under Maintenance">data Jadwal Anime</div>
                     </a>
                 </li>
             </ul>

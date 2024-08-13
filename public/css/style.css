@@ -492,9 +492,11 @@ nav ul li:hover .dropdown-menu ul {
     align-self: center;
     align-content: center;
     justify-content: space-around;
+    border-radius:30px;
 }
 
 .latest .video-slider .video {
+    background: cover;
     margin: 5px;
 }
 

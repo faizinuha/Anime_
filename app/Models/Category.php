@@ -10,6 +10,6 @@ class Category extends Model
     use HasFactory;
 
     public function animes(){
-        return $this->hasMany(Anime::class);
+        return $this->hasMany(Anime::class, 'category_name', 'name');
     }
 }

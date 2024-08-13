@@ -14,9 +14,9 @@
   </div>
   <nav>
       <ul>
-          <li class="active-tab"><a href="#">HOME</a></li>
-          <li><a href="list.html">ANIME LIST</a></li>
-          <li><a href="#">GENRE <i class="fas fa-caret-down"></i></a>
+          <li class="active-tab"><a href="{{route('home')}}">Home</a></li>
+          <li><a href="list.html">Anime List</a></li>
+          <li><a href="#">Genre <i class="fas fa-caret-down"></i></a>
               <div class="dropdown-menu">
                   <ul>
                       <li><a href="#">Action</a></li>
@@ -36,7 +36,7 @@
                   </ul>
               </div>
           </li>
-          <li><a href="jadwal.html">JADWAL RILIS</a></li>
+          <li><a href="jadwal.html">Anime</a></li>
       </ul>
   </nav>
 </div>

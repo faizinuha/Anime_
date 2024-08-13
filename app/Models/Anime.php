@@ -10,11 +10,12 @@ class Anime extends Model
     use HasFactory;
 
     protected $dates = ['release_date'];
-    protected $fillable = ['name', 'release_date', 'image', 'video', 'category_id'];
+
+    protected $fillable = ['name', 'release_date', 'image', 'video', 'category_name'];
 
     public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'category_name', 'name');
     }
     
 }

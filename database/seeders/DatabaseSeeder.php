@@ -13,27 +13,44 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('users')->insert([
+        DB::table('users')->updateOrInsert(
+            ['email' => 'midas@gmail.com'], // Kondisi pencocokan
             [
                 'name' => 'muhammad idris',
-                'email' => 'midas@gmail.com',
                 'password' => Hash::make('12345678'),
-                'role' => 'is_admin'
-            ],
+                'role' => 'is_member',
+                'email_verified_at' => now(), // Menandai email sebagai verified
+            ]
+        );
+        
+        DB::table('users')->updateOrInsert(
+            ['email' => 'safei@gmail.com'],
             [
                 'name' => 'safei',
-                'email' => 'safei@gmail.com',
                 'password' => Hash::make('12345678'),
-                'role' => 'is_member'
-            ],
+                'role' => 'is_member',
+                'email_verified_at' => now(), // Menandai email sebagai verified
+            ]
+        );
+        
+        DB::table('users')->updateOrInsert(
+            ['email' => 'idris@gmail.com'],
             [
                 'name' => 'idris',
-                'email' => 'idris@gmail.com',
                 'password' => Hash::make('12345678'),
-                'role' => 'is_guest'
+                'role' => 'is_guest',
+                'email_verified_at' => now(), // Menandai email sebagai verified
             ]
-        ]);
-
+        );
+        DB::table('users')->updateOrInsert(
+            ['email' => 'rtxalham@gmail.com'], // Kondisi pencocokan
+            [
+                'name' => 'Zaki',
+                'password' => Hash::make('12345678'),
+                'role' => 'is_admin',
+                'email_verified_at' => now(), // Menandai email sebagai verified
+            ]
+        );
         $this->call([
             CategorySeeder::class,
             // AnimeSeeder::class,

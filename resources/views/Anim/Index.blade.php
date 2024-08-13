@@ -67,19 +67,21 @@
     </div>
 
     <!-- TOP-3 ANIME -->
-    <div id="top-anime">
-        <div class="top123 container">
-            <div class="top-item">
-                <img src="{{asset('./img/top-1.jpg')}}" alt="top 1">
-                <div class="top-text">
-                    <h1>1</h1>
-                    <div class="top-title">
-                        <h3>Boruto: Naruto Next Generations</h3>
-                        <p>Genre: Action, Adventure</p>
-                    </div>
+  @foreach ($animes as $anim)
+  <div id="top-anime">
+    <div class="top123 container">
+        <div class="top-item">
+            <img src="{{ asset('storage/' . $anim->image) }}" alt="top 1">
+            <div class="top-text">
+                <h1>1</h1>
+                <div class="top-title">
+                    <h3>{{ $anim->name }}</h3>
+                    <p> {{ $anim->category_name}} </p>
                 </div>
             </div>
-            <div class="top-item">
+        </div>
+  @endforeach
+            {{-- <div class="top-item">
                 <img src="{{asset('./img/top-2.jpg')}}" alt="top 2">
                 <div class="top-text">
                     <h1>2</h1>
@@ -99,28 +101,30 @@
                         <p>Genre: Action, Supernatural</p>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 
     <!-- LATEST RELEASE -->
-    <div id="latest-release container">
-        <div class="latest">
-            <div class="title">
-                <h1>LATEST <br>RELEASE</h1>
+   @foreach ($animes as $vite)
+   <div id="latest-release container">
+    <div class="latest">
+        <div class="title">
+            <h1>Akan<br>Rilis</h1>
+        </div>
+        <div class="video-slider">
+            <a class="prev-videoslide">&#10094;</a>
+            <div class="video video1">
+                <iframe width="360" height="210" src="{{ asset('storage/' . $vite->video) }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
-            <div class="video-slider">
-                <a class="prev-videoslide">&#10094;</a>
-                <div class="video video1">
-                    <iframe width="360" height="210" src="https://www.youtube.com/embed/swwUoExDIng" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-                <div class="video video2">
-                    <iframe width="360" height="210" src="https://www.youtube.com/embed/g1ARRcK4LVs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-                <a class="next-videoslide">&#10095;</a>
-            </div>
+            {{-- <div class="video video2">
+                <iframe width="360" height="210" src="https://www.youtube.com/embed/g1ARRcK4LVs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div> --}}
+            <a class="next-videoslide">&#10095;</a>
         </div>
     </div>
+</div>
+   @endforeach
 
     <!-- ON-GOING -->
     <div id="on-going">

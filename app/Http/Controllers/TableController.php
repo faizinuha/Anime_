@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 namespace App\Http\Controllers;
 
 use App\Models\User;
@@ -8,8 +9,8 @@ class TableController extends Controller
 {
     public function index()
     {
-        $user = User::all();
-        return view('table.index', compact('user'));
+        $users = User::all();
+        return view('table.index', compact('users'));
     }
 
     public function create()
@@ -22,7 +23,7 @@ class TableController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:6',
+            'password' => 'required|string|min:6|confirmed',
             'role' => 'required|string'
         ]);
 
@@ -47,6 +48,7 @@ class TableController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $id,
+            'password' => 'nullable|string|min:8|confirmed', // Password tidak wajib diubah
             'role' => 'required|string'
         ]);
 
@@ -54,11 +56,13 @@ class TableController extends Controller
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
+            'password' => $request->password ? bcrypt($request->password) : $user->password, // Hanya update password jika diisi
             'role' => $request->role
         ]);
 
         return redirect()->route('table')->with('success', 'Berhasil Update User');
     }
+
 
     public function destroy($id)
     {
