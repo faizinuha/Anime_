@@ -12,7 +12,7 @@ class AnimeController extends Controller
     {
         // Memuat anime beserta kategori yang terkait
         $animes = Anime::with('category')->get();
-    
+
         // Mengirim data 'animes' ke view
         return view('animes.index', compact('animes'));
     }
@@ -29,7 +29,7 @@ class AnimeController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'category_name' => 'required|exists:categories,id', // Validasi category_name
+            'category_id' => 'required|exists:categories,id', // Validasi category_id
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'video' => 'nullable|mimes:mp4,avi,mkv|max:10240', // validasi video
             'release_date' => 'required|date',
@@ -37,7 +37,7 @@ class AnimeController extends Controller
     
         $anime = new Anime();
         $anime->name = $request->name;
-        $anime->category_name = $request->category_name; // Simpan category_name
+        $anime->category_id = $request->category_id; // Simpan category_id
         $anime->release_date = $request->release_date;
     
         if ($request->hasFile('image')) {
@@ -73,14 +73,14 @@ class AnimeController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'category_name' => 'required|exists:categories,id', // Validasi category_name
+            'category_id' => 'required|exists:categories,id', // Validasi category_id
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'video' => 'nullable|mimes:mp4,avi,mkv|max:10240', // validasi video
             'release_date' => 'required|date',
         ]);
     
         $anime->name = $request->name;
-        $anime->category_name = $request->category_name; // Update category_name
+        $anime->category_id = $request->category_id; // Update category_id
         $anime->release_date = Carbon::createFromFormat('d-m-Y', $request->release_date)->format('Y-m-d');
     
         if ($request->hasFile('image')) {

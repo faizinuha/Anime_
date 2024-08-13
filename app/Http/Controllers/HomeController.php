@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
         // $this->middleware('check.data.exists'); // Tambahkan middleware untuk cek data
     }
 
@@ -28,4 +28,5 @@ class HomeController extends Controller
     {
         return view('home');
     }
+  
 }

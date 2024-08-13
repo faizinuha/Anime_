@@ -1,13 +1,11 @@
 @extends('layouts.app')
 
 @section('content') 
-
 <div class="row justify-content-center mt-5">
     <div class="col-md-8">
         <div class="card">
             <div class="container text-center">
-
-                <img src="{{ asset('img/verfy.png') }}" class="img-fluid" width="150px">
+                <img src="{{ asset('Img1/verfy.png') }}" class="img-fluid" width="150px">
             </div>
             <div class="card-header text-center">Verify Your Email Address</div>
             <div class="card-body">
@@ -18,11 +16,21 @@
                 @endif
                 
                 Before proceeding, please check your email for a verification link. If you did not receive the email,
-                <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
+                <form class="d-inline" method="POST" action="{{ route('verification.resend') }}" id="resendForm">
                     @csrf
-                    <button type="submit" class="btn btn-link p-0 m-0 align-baseline" onclick="alert()">click here to request another</button>.
+                    <button type="submit" class="btn btn-link p-0 m-0 align-baseline">click here to request another</button>.
                 </form>
             </div>
         </div>
     </div>    
 </div>
+<script>
+    document.getElementById('resendForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Loading');
+        setTimeout(() => {
+            this.submit();
+        }, 3000);
+    });
+</script>
+@endsection

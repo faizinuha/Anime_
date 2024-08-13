@@ -46,6 +46,6 @@ class LoginController extends Controller
         $request->session()->invalidate(); // Menghapus sesi saat ini
         $request->session()->regenerateToken(); // Regenerasi token CSRF untuk keamanan
 
-        return redirect()->route('/'); // Arahkan ke rute 'Anim'
+        return redirect()->route('/home'); // Arahkan ke rute 'Anim'
     }
 }

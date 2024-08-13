@@ -76,7 +76,7 @@
                 <h1>1</h1>
                 <div class="top-title">
                     <h3>{{ $anim->name }}</h3>
-                    <p> {{ $anim->category_name}} </p>
+                    <p> {{ $anim->category->name}} </p>
                 </div>
             </div>
         </div>

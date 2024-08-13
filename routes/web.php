@@ -30,8 +30,10 @@ Route::get('/auth/verify', function () {
 // Otentikasi dengan verifikasi email diaktifkan
 Auth::routes(['verify' => true]);
 
+// ===============================[Bagian data akun]=============================================//
 Route::get('/', [HomeController::class, 'Anim'])->name('Anim');
-
+Route::get('/list', [dashboardController::class, 'list'])->name('list');
+// ===============================[akhir]=============================================//
 
 // Rute yang dapat diakses tanpa login
 // ===============================[Bagian data akun]=============================================//

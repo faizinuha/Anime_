@@ -11,11 +11,11 @@ class Anime extends Model
 
     protected $dates = ['release_date'];
 
-    protected $fillable = ['name', 'release_date', 'image', 'video', 'category_name'];
+    protected $fillable = ['name', 'release_date', 'image', 'video', 'category_id'];
 
     public function category()
     {
-        return $this->belongsTo(Category::class, 'category_name', 'name');
+        return $this->belongsTo(Category::class, 'category_id');
     }
     
 }
