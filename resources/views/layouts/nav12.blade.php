@@ -28,34 +28,27 @@
         </div>
         <nav>
             <ul>
-                <li class="active-tab"><a href="#">HOME</a></li>
-                <li><a href="list.html">ANIME LIST</a></li>
+                <li class="active-tab"><a href="{{route('Anim')}}">HOME</a></li>
+                <li><a href="{{route('list')}}">ANIME LIST</a></li>
                 <li><a href="#">GENRE <i class="fas fa-caret-down"></i></a>
                     <div class="dropdown-menu">
+                        @php
+                        $categories = App\Models\Category::all();
+                    @endphp
+                    @forelse ($categories as $category)
                         <ul>
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Adventure</a></li>
-                            <li><a href="#">Comedy</a></li>
-                            <li><a href="#">Drama</a></li>
-                            <li><a href="#">Fantasy</a></li>
-                            <li><a href="#">Horror</a></li>
-                            <li><a href="#">Music</a></li>
-                            <li><a href="#">Parody</a></li>
-                            <li><a href="#">Romance</a></li>
-                            <li><a href="#">School</a></li>
-                            <li><a href="#">Sci-fi</a></li>
-                            <li><a href="#">Slice of life</a></li>
-                            <li><a href="#">Sports</a></li>
-                            <li><a href="#">Thriller</a></li>
+                            <li><a href="{{ route('Anim') }}">{{ $category->name }}</a></li>
                         </ul>
+                    @empty
+                        <p>Category Maising</p>
+                    @endforelse
                     </div>
                 </li>
                 <li><a href="jadwal.html">JADWAL RILIS</a></li>
             </ul>
         </nav>
     </header>
-
-
+    @yield('content')
      <!-- JS FILE -->
      <script src="{{asset('js/main.js')}} "></script>
      <!-- FONTAWESOME ICONS -->

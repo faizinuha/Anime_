@@ -38,16 +38,16 @@ Route::get('/list', [dashboardController::class, 'list'])->name('list');
 // Rute yang dapat diakses tanpa login
 // ===============================[Bagian data akun]=============================================//
 // Rute untuk pengguna yang sudah login dan terverifikasi
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-});
+// Route::middleware(['auth', 'verified'])->group(function () {
+//     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+// });
 // Rute login hanya untuk guest
 Route::middleware(['guest'])->group(function () {
     Route::get('/login2', [dashboardController::class, 'login2'])->name('login2');
     Route::get('/register2', [dashboardController::class, 'register2'])->name('register2');
 });
 // Rute logout untuk pengguna yang sudah login
-Route::middleware(['auth', 'verified'])->post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::middleware(['auth'])->post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth','role:is_admin'])->group(function () {
     Route::get('/home', [dashboardController::class, 'index'])->name('home');

@@ -69,7 +69,7 @@ header {
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    background-image: url("../img/gambar-1.svg");
+    /* background-image: url("../img/gambar-1.svg"); */
 }
 
 .web-logo h1 {
@@ -624,26 +624,32 @@ nav ul li:hover .dropdown-menu ul {
 .complete .anime-complete {
     display: -ms-grid;
     display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 30px;
+    margin: auto;
     -ms-grid-columns: auto auto auto auto;
     -webkit-grid-columns: auto auto auto auto;
     -moz-grid-columns: auto auto auto auto;
     -o-grid-columns: auto auto auto auto;
     grid-template-columns: auto auto auto auto;
-    margin: auto;
+    /* margin: auto; */
 }
 
 .complete-item {
-    padding: 50px 20px;
-    width: 244px;
-    /* width: fit-content; */
-    height: 341px;
-    margin: 0 auto 30px auto;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    margin: 20px;
+    padding: 15px;
+    width: 250px;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .complete-item img {
     display: block;
     margin: auto;
-    height: 250px;
+    max-width: 100%;
+    height: auto;
 }
 
 .complete-item .complete-text {

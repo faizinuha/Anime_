@@ -19,8 +19,6 @@
                             required>
                     </div>
 
-
-
                     <div class="form-group mb-3">
                         <label for="release_date">Di Rilis Pada:</label>
                         <input type="date" id="release_date" name="release_date" class="form-control"

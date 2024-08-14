@@ -5,28 +5,28 @@
             <h1>Attack on Titan</h1>
             <p>Shingeki no Kyojin<br>Genre: Action, Drama, Fantasy, Mystery</p>
         </div>
-        <img src="{{ asset('img/banner-aot.jpg') }}" alt="Attack on Titan Banner">
+        <img src="{{ asset('./img/banner-aot.jpg') }}" alt="Attack on Titan Banner">
     </div>
     <div class="myslider fade banner-kny">
         <div class="txt">
             <h1>Demon Slayer</h1>
             <p>Kimetsu no Yaiba<br>Genre: Action, Supernatural</p>
         </div>
-        <img src="{{ asset('img/banner-kny-3.jpg') }}" alt="Demon Slayer Banner">
+        <img src="{{ asset('./img/banner-kny-3.jpg') }}" alt="Demon Slayer Banner">
     </div>
     <div class="myslider fade">
         <div class="txt">
             <h1>One Piece</h1>
             <p>One Piece<br>Genre: Action, Adventure, Comedy, Drama, Fantasy</p>
         </div>
-        <img src="{{ asset('img/banner-op-2.jpg') }}" alt="One Piece Banner">
+        <img src="{{ asset('./img/banner-op-2.jpg') }}" alt="One Piece Banner">
     </div>
     <div class="myslider fade banner-bnha">
         <div class="txt">
             <h1>My Hero Academia</h1>
             <p>Boku no Hero Academia<br>Genre: Action, Comedy</p>
         </div>
-        <img src="{{ asset('img/banner-bnh.jpg') }}" alt="My Hero Academia  Banner">
+        <img src="{{ asset('./img/banner-bnh.jpg') }}" alt="My Hero Academia  Banner">
     </div>
     <div class="myslider fade banner-boruto">
         <div class="txt">
@@ -154,7 +154,7 @@
 
 <!-- COMPLETE -->
 <div class="complete ">
-    <h1>COMPLETE</h1>
+    <h1>Tamat</h1>
     <div class="anime-complete container ">
         @foreach ($animes as $i)
         <div class="complete-item ">
@@ -167,7 +167,7 @@
         </a>
     </div>
     @endforeach
-        <div class="complete-item ">
+         <div class="complete-item ">
             <a href="# ">
                 <img src="{{ asset('img/complete/img2.jpg') }}" alt=" ">
                 <div class="complete-text ">
@@ -176,7 +176,7 @@
                 </div>
             </a>
         </div>
-        <div class="complete-item ">
+         <div class="complete-item ">
             <a href="# ">
                 <img src="{{ asset('img/complete/img3.jpg') }}" alt=" ">
                 <div class="complete-text ">
@@ -211,7 +211,7 @@
                     <p>Genre: Comedy, Romance, Shounen</p>
                 </div>
             </a>
-        </div>
+         </div>
     </div>
 </div>
 

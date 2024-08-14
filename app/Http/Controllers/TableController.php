@@ -34,7 +34,7 @@ class TableController extends Controller
             'role' => $request->role
         ]);
 
-        return redirect()->route('table')->with('success', 'Berhasil Tambah User');
+        return redirect()->route('table.index')->with('success', 'Berhasil Tambah User');
     }
 
     public function edit($id)
@@ -60,7 +60,7 @@ class TableController extends Controller
             'role' => $request->role
         ]);
 
-        return redirect()->route('table')->with('success', 'Berhasil Update User');
+        return redirect()->route('table.index')->with('success', 'Berhasil Update User');
     }
 
 
@@ -69,6 +69,6 @@ class TableController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('table')->with('success', 'Berhasil Hapus User');
+        return redirect()->route('table.index')->with('success', 'Berhasil Hapus User');
     }
 }
