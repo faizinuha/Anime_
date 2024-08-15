@@ -56,6 +56,9 @@
         /* Perbesar gambar dan video */
         .table img,
         .table video {
+            /* object-fit: cover; */
+            width: 150px;
+            height: 250px;
             max-width: 100%;
             height: auto;
             border-radius: 5px;

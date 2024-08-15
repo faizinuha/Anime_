@@ -2,7 +2,10 @@
 
 @section('content')
 <style>
-    /* Style untuk container utama */
+    /* Style untuk container utama */   
+    *{
+        scroll-behavior: smooth;
+    }
     .anime-list {
         display: flex; 
         flex-wrap: wrap;
@@ -55,10 +58,14 @@
         color: #ccc;
         text-align: center;
     }
+    .underline{
+        text-decoration: underline !important;
+        color: #000;
+    }
 </style>
 
 <div class="container mt-4">
-    <h1 class="text-center">Daftar Anime</h1>
+    <h1 class="text-center underline" style="color: #50badd">Daftar Anime</h1>
     <div class="anime-list">
         @foreach ($animes as $anime)
             <div class="anime-card">
