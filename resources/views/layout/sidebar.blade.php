@@ -111,11 +111,11 @@
                         <div data-i18n="Under Maintenance">Data Category</div>
                     </a>
                 </li>
-                <li class="menu-item">
+                {{-- <li class="menu-item">
                     <a href="{{ route('jadwals.index') }}" class="menu-link">
                         <div data-i18n="Under Maintenance">data Jadwal Anime</div>
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </li>
         <!-- Components -->

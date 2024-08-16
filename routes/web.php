@@ -61,7 +61,7 @@ Route::middleware(['auth','role:is_admin'])->group(function () {
     Route::get('/table', [TableController::class, 'index'])->name('table');
 });
 // ========================[ Bagian crud]================================//
-Route::resource('jadwals', JadwalController::class);
+// Route::resource('jadwals', JadwalController::class);
 Route::resource('table', TableController::class);
 
 // // // Route untuk menampilkan formulir tambah data

@@ -3,20 +3,19 @@
 <section class="hero">
   <div class="container">
     <div class="hero__slider owl-carousel">
-        @foreach ($animes as $item)
           <div class="hero__items set-bg" data-setbg="{{asset('assetanime/img/hero/hero-1.jpg')}}">
               <div class="row">
                   <div class="col-lg-6">
                       <div class="hero__text">
-                          <div class="label"> {{$item->category->name}} </div>
-                          <h2> {{$item->name}} </h2>
+                          <div class="label">Adventure</div>
+                          <h2>Fate / Stay Night: Unlimited Blade Works</h2>
                           <p>After 30 days of travel across the world...</p>
                           <a href="#"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
                       </div>
                   </div>
               </div>
           </div>
-          {{-- <div class="hero__items set-bg" data-setbg="{{asset('assetanime/img/hero/hero-1.jpg')}}">
+         <div class="hero__items set-bg" data-setbg="{{asset('assetanime/img/hero/hero-1.jpg')}}">
               <div class="row">
                   <div class="col-lg-6">
                       <div class="hero__text">
@@ -39,13 +38,10 @@
                       </div>
                   </div>
               </div>
-          </div> --}}
-          @endforeach
+          </div> 
       </div>
   </div>
 </section>
-
-
 
     <!-- Product Section Begin -->
     <section class="product spad">
@@ -56,17 +52,17 @@
                       <div class="row">
                           <div class="col-lg-8 col-md-8 col-sm-8">
                               <div class="section-title">
-                                  <h4>Trending Now</h4>
+                                  <h4>Hari ini </h4>
                               </div>
                           </div>
                           <div class="col-lg-4 col-md-4 col-sm-4">
                               <div class="btn__all">
-                                  <a href="#" class="primary-btn">View All <span class="arrow_right"></span></a>
+                                  <a href="{{route('list')}}" class="primary-btn">View All <span class="arrow_right"></span></a>
                               </div>
                           </div>
                       </div>
+                      @foreach ($animes as $item)
                       <div class="row">
-                        @foreach ($animes as $item)
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="{{ asset('storage/' . $item->image) }}">
@@ -78,12 +74,12 @@
                                     <ul>
                                         <li>{{ $item->category->name }}</li>
                                     </ul>
-                                    <h5><a href="#">{{ $item->name }}</a></h5>
+                                    <h5><a href="{{route('genre')}}">{{ $item->name }}</a></h5>
                                 </div>
                             </div>
                         </div>
                     @endforeach                    
-                          {{-- <div class="col-lg-4 col-md-6 col-sm-6">
+                          <div class="col-lg-4 col-md-6 col-sm-6">
                               <div class="product__item">
                                   <div class="product__item__pic set-bg" data-setbg="{{asset('assetanime/img/trending/trend-2.jpg')}}">
                                       <div class="ep">18 / 18</div>
@@ -114,7 +110,7 @@
                                       <h5><a href="#">Shingeki no Kyojin Season 3 Part 2</a></h5>
                                   </div>
                               </div>
-                          </div> --}}
+                          </div>
                           <div class="col-lg-4 col-md-6 col-sm-6">
                               <div class="product__item">
                                   <div class="product__item__pic set-bg" data-setbg="{{ asset('assetanime/img/trending/trend-4.jpg') }}">

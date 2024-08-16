@@ -1,12 +1,11 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Anime;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Carbon\Carbon;
+// use Carbon\Carbon;
 
 class AnimeController extends Controller
 {
@@ -14,18 +13,14 @@ class AnimeController extends Controller
     {
         // Memuat anime beserta kategori yang terkait
         $animes = Anime::with('category')->get();
-
-        // Mengirim data 'animes' ke view
         return view('animes.index', compact('animes'));
     }
-
 
     public function create()
     {
         $categories = Category::all();
         return view('animes.create', compact('categories'));
     }
-
 
     public function store(Request $request)
     {
@@ -36,13 +31,23 @@ class AnimeController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'video' => 'nullable|mimes:mp4,avi,mkv,webp|max:9999',
             'release_date' => 'required|date',
+            'description' => 'nullable|string',
+            'status' => 'required|in:Ongoing,Completed,Upcoming',
+            'rating' => 'nullable|numeric|min:0|max:10',
+            'studio' => 'nullable|string|max:255',
+            'episodes' => 'nullable|integer',
+            'trailer' => 'nullable|string|max:255',
+            'popularity' => 'nullable|integer',
+            'type' => 'required|in:TV,Movie,OVA,ONA,Special',
+            'aired_from' => 'nullable|date',
+            'aired_to' => 'nullable|date',
+            'duration' => 'nullable|integer',
+            'synonyms' => 'nullable|string|max:255',
         ]);
 
         // Buat objek anime baru
         $anime = new Anime();
-        $anime->name = $request->name;
-        $anime->category_id = $request->category_id;
-        $anime->release_date = $request->release_date;
+        $anime->fill($request->all());
 
         // Upload dan simpan gambar jika ada
         if ($request->hasFile('image')) {
@@ -67,13 +72,10 @@ class AnimeController extends Controller
         return redirect()->route('animes.index')->with('success', 'Anime berhasil ditambahkan.');
     }
 
-
-
     public function show(Anime $anime)
     {
         return view('animes.show', compact('anime'));
     }
-
 
     public function edit(Anime $anime)
     {
@@ -81,20 +83,29 @@ class AnimeController extends Controller
         return view('animes.edit', compact('anime', 'categories'));
     }
 
-
     public function update(Request $request, Anime $anime)
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'category_id' => 'required|exists:categories,id', // Validasi category_id
+            'category_id' => 'required|exists:categories,id', 
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'video' => 'nullable|mimes:mp4,avi,mkv|max:10240', // validasi video
+            'video' => 'nullable|mimes:mp4,avi,mkv|max:10240', 
             'release_date' => 'required|date',
+            'description' => 'nullable|string',
+            'status' => 'required|in:Ongoing,Completed,Upcoming',
+            'rating' => 'nullable|numeric|min:0|max:10',
+            'studio' => 'nullable|string|max:255',
+            'episodes' => 'nullable|integer',
+            'trailer' => 'nullable|string|max:255',
+            'popularity' => 'nullable|integer',
+            'type' => 'required|in:TV,Movie,OVA,ONA,Special',
+            'aired_from' => 'nullable|date',
+            'aired_to' => 'nullable|date',
+            'duration' => 'nullable|integer',
+            'synonyms' => 'nullable|string|max:255',
         ]);
 
-        $anime->name = $request->name;
-        $anime->category_id = $request->category_id; // Update category_id
-        $anime->release_date = Carbon::createFromFormat('d-m-Y', $request->release_date)->format('Y-m-d');
+        $anime->fill($request->all());
 
         if ($request->hasFile('image')) {
             if ($anime->image) {
@@ -116,7 +127,6 @@ class AnimeController extends Controller
 
         return redirect()->route('animes.index')->with('success', 'Anime berhasil diperbarui.');
     }
-
 
     public function destroy(Anime $anime)
     {

@@ -2,65 +2,66 @@
 @section('content')
    <section class="anime-details spad">
         <div class="container">
-            <div class="anime__details__content">
-                <div class="row">
+            <div class="anime__details__content">          
+                @foreach ($animes as $anime)
+                <div class="row mb-4">
                     <div class="col-lg-3">
-                        <div class="anime__details__pic set-bg" data-setbg="{{asset('assetanime/img/anime/details-pic.jpg')}}">
-                            <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                            <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                        <div class="anime__details__pic set-bg" data-setbg="{{ asset('storage/' . $anime->image) }}">
+                            <div class="comment"><i class="fa fa-comments"></i> {{ $anime->comments_count }}</div>
+                            <div class="view"><i class="fa fa-eye"></i> {{ $anime->views_count }}</div>
                         </div>
                     </div>
                     <div class="col-lg-9">
                         <div class="anime__details__text">
                             <div class="anime__details__title">
-                                <h3>Fate Stay Night: Unlimited Blade</h3>
-                                <span>フェイト／ステイナイト, Feito／sutei naito</span>
+                                <h3>{{ $anime->name }}</h3>
+                                <span>{{ $anime->alternative_title }}</span>
                             </div>
                             <div class="anime__details__rating">
                                 <div class="rating">
-                                    <a href="#"><i class="fa fa-star"></i></a>
-                                    <a href="#"><i class="fa fa-star"></i></a>
-                                    <a href="#"><i class="fa fa-star"></i></a>
-                                    <a href="#"><i class="fa fa-star"></i></a>
-                                    <a href="#"><i class="fa fa-star-half-o"></i></a>
+                                    @for ($i = 0; $i < $anime->rating; $i++)
+                                        <a href="#"><i class="fa fa-star"></i></a>
+                                    @endfor
+                                    @if (floor($anime->rating) < $anime->rating)
+                                        <a href="#"><i class="fa fa-star-half-o"></i></a>
+                                    @endif
+                                    @for ($i = 0; $i < (5 - ceil($anime->rating)); $i++)
+                                        <a href="#"><i class="fa fa-star-o"></i></a>
+                                    @endfor
                                 </div>
-                                <span>1.029 Votes</span>
+                                <span>{{ $anime->votes_count }} Votes</span>
                             </div>
-                            <p>Every human inhabiting the world of Alcia is branded by a “Count” or a number written on
-                                their body. For Hina’s mother, her total drops to 0 and she’s pulled into the Abyss,
-                                never to be seen again. But her mother’s last words send Hina on a quest to find a
-                            legendary hero from the Waste War - the fabled Ace!</p>
+                            <p>{{ $anime->description }}</p>
                             <div class="anime__details__widget">
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6">
                                         <ul>
-                                            <li><span>Type:</span> TV Series</li>
-                                            <li><span>Studios:</span> Lerche</li>
-                                            <li><span>Date aired:</span> Oct 02, 2019 to ?</li>
-                                            <li><span>Status:</span> Airing</li>
-                                            <li><span>Genre:</span> Action, Adventure, Fantasy, Magic</li>
+                                            <li><span>Type:</span> {{ $anime->type }}</li>
+                                            <li><span>Studios:</span> {{ $anime->studio }}</li>
+                                            <li><span>Date aired:</span> {{ \Carbon\Carbon::parse($anime->aired_from)->format('M d, Y') }} to {{ $anime->aired_to ? \Carbon\Carbon::parse($anime->aired_to)->format('M d, Y') : '?' }}</li>
+                                            <li><span>Status:</span> {{ $anime->status }}</li>
+                                            <li><span>Genre:</span> {{$anime->category->name}} </li>
                                         </ul>
                                     </div>
                                     <div class="col-lg-6 col-md-6">
                                         <ul>
-                                            <li><span>Scores:</span> 7.31 / 1,515</li>
-                                            <li><span>Rating:</span> 8.5 / 161 times</li>
-                                            <li><span>Duration:</span> 24 min/ep</li>
-                                            <li><span>Quality:</span> HD</li>
-                                            <li><span>Views:</span> 131,541</li>
+                                            <li><span>Scores:</span> {{ $anime->scores }} / {{ $anime->scores_count }}</li>
+                                            <li><span>Rating:</span> {{ $anime->rating }} / {{ $anime->ratings_count }} times</li>
+                                            <li><span>Duration:</span> {{ $anime->duration }} min/ep</li>
+                                            <li><span>Quality:</span>1040{{ $anime->quality }}</li>
+                                            <li><span>Views:</span>240K{{ $anime->views_count }}</li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                             <div class="anime__details__btn">
                                 <a href="#" class="follow-btn"><i class="fa fa-heart-o"></i> Follow</a>
-                                <a href="#" class="watch-btn"><span>Watch Now</span> <i
-                                    class="fa fa-angle-right"></i></a>
-                                </div>
+                                <a href="#" class="watch-btn"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
+            @endforeach            
                 <div class="row">
                     <div class="col-lg-8 col-md-8">
                         <div class="anime__details__review">
