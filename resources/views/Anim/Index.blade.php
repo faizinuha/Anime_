@@ -2,20 +2,21 @@
 @section('content')
 <section class="hero">
   <div class="container">
-      <div class="hero__slider owl-carousel">
+    <div class="hero__slider owl-carousel">
+        @foreach ($animes as $item)
           <div class="hero__items set-bg" data-setbg="{{asset('assetanime/img/hero/hero-1.jpg')}}">
               <div class="row">
                   <div class="col-lg-6">
                       <div class="hero__text">
-                          <div class="label">Adventure</div>
-                          <h2>Fate / Stay Night: Unlimited Blade Works</h2>
+                          <div class="label"> {{$item->category->name}} </div>
+                          <h2> {{$item->name}} </h2>
                           <p>After 30 days of travel across the world...</p>
                           <a href="#"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
                       </div>
                   </div>
               </div>
           </div>
-          <div class="hero__items set-bg" data-setbg="{{asset('assetanime/img/hero/hero-1.jpg')}}">
+          {{-- <div class="hero__items set-bg" data-setbg="{{asset('assetanime/img/hero/hero-1.jpg')}}">
               <div class="row">
                   <div class="col-lg-6">
                       <div class="hero__text">
@@ -38,10 +39,12 @@
                       </div>
                   </div>
               </div>
-          </div>
+          </div> --}}
+          @endforeach
       </div>
   </div>
 </section>
+
 
 
     <!-- Product Section Begin -->

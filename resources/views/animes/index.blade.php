@@ -118,10 +118,7 @@
         </h4>
 
         <!-- Tabel Daftar Anime -->
-        <div class="card">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <a href="{{ route('animes.create') }}" class="btn btn-primary rounded-pill">Tambah Anime</a>
-            </div>
+      
             <div class="table-responsive text-nowrap">
                 <table id="example" class="table table-bordered">
                     <thead>

@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('jadwals', function (Blueprint $table) {
             $table->id();
             $table->foreignId('anime_id')->references('id')->on('animes')->onDelete('restrict')->onUpdate('cascade');
+            $table->string('tanggal');
+            $table->string('waktu');
+            $table->string('keterangan');
             $table->timestamps();
         });
     }
