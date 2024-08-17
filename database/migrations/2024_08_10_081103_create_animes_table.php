@@ -22,14 +22,10 @@ class CreateAnimesTable extends Migration
             $table->date('release_date');
             $table->text('description')->nullable();  // Deskripsi anime
             $table->enum('status', ['Ongoing', 'Completed', 'Upcoming'])->default('Upcoming');  // Status rilis
-            $table->decimal('rating', 10000)->nullable();  // Rating
             $table->string('studio')->nullable();  // Studio produksi
             $table->integer('episodes')->nullable();  // Jumlah episode
             $table->string('trailer')->nullable();  // URL trailer
-            $table->integer('popularity')->default(0);  // Popularitas
-            $table->enum('type', ['Movie', 'OVA', 'ONA', 'Special'])->default('TV');  // Tipe anime
-            $table->date('aired_from')->nullable();  // Tanggal mulai tayang
-            $table->date('aired_to')->nullable();  // Tanggal selesai tayang
+            $table->enum('type', ['TV', 'Movie', 'OVA', 'ONA', 'Special'])->default('TV');  // Tipe anime
             $table->integer('duration')->nullable();  // Durasi tiap episode
             $table->string('synonyms')->nullable();  // Nama sinonim
             $table->timestamps();

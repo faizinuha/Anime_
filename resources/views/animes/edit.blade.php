@@ -79,12 +79,7 @@
                         </select>
                     </div>
 
-                    <!-- Rating -->
-                    <div class="form-group mb-3">
-                        <label for="rating">Rating</label>
-                        <input type="number" id="rating" name="rating" class="form-control"
-                            value="{{ old('rating', $anime->rating) }}" min="0" max="10" step="0.1">
-                    </div>
+
 
                     <!-- Studio -->
                     <div class="form-group mb-3">
@@ -107,12 +102,7 @@
                             value="{{ old('trailer', $anime->trailer) }}">
                     </div>
 
-                    <!-- Popularitas -->
-                    <div class="form-group mb-3">
-                        <label for="popularity">Popularitas</label>
-                        <input type="number" id="popularity" name="popularity" class="form-control"
-                            value="{{ old('popularity', $anime->popularity) }}">
-                    </div>
+
 
                     <!-- Tipe -->
                     <div class="form-group mb-3">
@@ -126,20 +116,6 @@
                             <option value="Special" {{ old('type', $anime->type) == 'Special' ? 'selected' : '' }}>Special
                             </option>
                         </select>
-                    </div>
-
-                    <!-- Ditayangkan Dari -->
-                    <div class="form-group mb-3">
-                        <label for="aired_from">Ditayangkan Dari:</label>
-                        <input type="date" id="aired_from" name="aired_from" class="form-control"
-                            value="{{ old('aired_from', $anime->aired_from ? \Carbon\Carbon::parse($anime->aired_from)->format('Y-m-d') : '') }}">
-                    </div>
-
-                    <!-- Ditayangkan Hingga -->
-                    <div class="form-group mb-3">
-                        <label for="aired_to">Ditayangkan Hingga:</label>
-                        <input type="date" id="aired_to" name="aired_to" class="form-control"
-                            value="{{ old('aired_to', $anime->aired_to ? \Carbon\Carbon::parse($anime->aired_to)->format('Y-m-d') : '') }}">
                     </div>
 
 

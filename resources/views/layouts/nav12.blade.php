@@ -48,12 +48,18 @@
                             <ul>
                                 {{-- <li class="active"><a href="{{ route('Anim') }}">Homepage</a></li> --}}
                                 <li class="active">
-                                    @if (auth()->user()->role == 'is_admin')
-                                        <a href="{{ route('home') }}">Homepage</a>
+                                    @if (auth()->check())
+                                        @if (auth()->user()->role == 'is_admin')
+                                            <a href="{{ route('home') }}">Homepage</a>
+                                        @else
+                                            <a href="{{ route('Anim') }}">Homepage</a>
+                                        @endif
                                     @else
                                         <a href="{{ route('Anim') }}">Homepage</a>
+                                        <!-- Route untuk pengguna yang belum login -->
                                     @endif
                                 </li>
+
                                 <li><a href="./categories.html">All <span class="arrow_carrot-down"></span></a>
                                     <ul class="dropdown">
                                         <li><a href="{{ route('list') }}">Anime Details</a></li>
@@ -90,26 +96,26 @@
                     </div>
                 </div>
                 <nav class="header__menu mobile-menu">
-                <div class="col-lg-2">
-                    <div class="header__right">
-                        <a href="#" class="search-switch"><span class="icon_search"></span></a>
-                        <a href="{{ route('login2') }}"><span class="icon_profile"></span></a>
-                        @auth()
-                            <div class="user-name">
-                                <li style="list-style: none; margin:0%; position:relative;">
-                                    <a href="javascript:void(0);">{{ auth()->user()->name }}</a>
-                                    <ul class="dropdown"
-                                        style="display:none; position:absolute; top:100%; left:0; background:#333; padding:10px 0; min-width:150px;">
-                                        <li><a href="#">Profile</a></li>
-                                        <li><a href="{{ route('logout') }}">Logout</a></li>
-                                    </ul>
-                                </li>
-                            </div>
-                        @endauth
+                    <div class="col-lg-2">
+                        <div class="header__right">
+                            <a href="#" class="search-switch"><span class="icon_search"></span></a>
+                            <a href="{{ route('login2') }}"><span class="icon_profile"></span></a>
+                            @auth()
+                                <div class="user-name">
+                                    <li style="list-style: none; margin:0%; position:relative;">
+                                        <a href="javascript:void(0);">{{ auth()->user()->name }}</a>
+                                        <ul class="dropdown"
+                                            style="display:none; position:absolute; top:100%; left:0; background:#333; padding:10px 0; min-width:150px;">
+                                            <li><a href="#">Profile</a></li>
+                                            <li><a href="{{ route('logout') }}">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                </div>
+                            @endauth
+                        </div>
                     </div>
-                </div>
             </div>
-            
+
             <div id="mobile-menu-wrap"></div>
         </div>
     </header>
@@ -118,35 +124,36 @@
 
     <style>
         .user-name .dropdown {
-    display: none;
-    position: absolute;
-    background-color: #333;
-    top: 100%;
-    left: 0;
-    padding: 10px 0;
-    min-width: 150px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-    z-index: 999;
-}
+            display: none;
+            position: absolute;
+            background-color: #333;
+            top: 100%;
+            left: 0;
+            padding: 10px 0;
+            min-width: 150px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
 
-.user-name .dropdown li {
-    margin: 0;
-}
+        .user-name .dropdown li {
+            margin: 0;
+        }
 
-.user-name .dropdown li a {
-    color: #fff;
-    padding: 10px 20px;
-    display: block;
-}
+        .user-name .dropdown li a {
+            color: #fff;
+            padding: 10px 20px;
+            display: block;
+        }
 
-.user-name .dropdown li a:hover {
-    background-color: #444;
-}
+        .user-name .dropdown li a:hover {
+            background-color: #444;
+        }
 
-/* Show dropdown on hover */
-.user-name:hover .dropdown {
-    display: block;
-}
+        /* Show dropdown on hover */
+        .user-name:hover .dropdown {
+            display: block;
+        }
+
         .header__right {
             display: flex;
             align-items: center;

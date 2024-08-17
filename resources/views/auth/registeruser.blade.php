@@ -72,6 +72,7 @@
     <div class="register-container">
         <h2>Register</h2>
         <form action="/register" method="POST">
+            @csrf
             <input type="text" name="username" placeholder="Username" required>
             <input type="email" name="email" placeholder="Email" required>
             <input type="password" name="password" placeholder="Password" required>
@@ -80,7 +81,7 @@
             <div class="login-link">
                 <a href="{{route('login2')}}">Already have an account? Login</a>
             </div>
-        </form>
+        </form>        
     </div>
 </body>
 </html>

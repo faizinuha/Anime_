@@ -48,4 +48,6 @@ class LoginController extends Controller
 
         return redirect()->route('Anim'); // Arahkan ke rute 'Anim'
     }
+
+    
 }

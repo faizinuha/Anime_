@@ -161,7 +161,6 @@
                         <th>Studio</th>
                         <th>Type</th>
                         <th>Synonyms</th>
-                        <th>Rating</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -187,7 +186,6 @@
                             <td>{{ $anime->studio }}</td>
                             <td>{{ $anime->type }}</td>
                             <td>{{ $anime->synonyms }}</td>
-                            <td>{{ $anime->rating }}</td>
                             <td>
                                 <a href="{{ route('animes.edit', $anime->id) }}" class="btn btn-warning btn-sm">Edit</a>
                                 <form action="{{ route('animes.destroy', $anime->id) }}" method="POST"

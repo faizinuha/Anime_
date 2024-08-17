@@ -13,12 +13,14 @@
 
                     <div class="form-group mb-3">
                         <label for="name">Nama Anime</label>
-                        <input type="text" id="name" name="name" class="form-control" value="{{ old('name') }}" required>
+                        <input type="text" id="name" name="name" class="form-control" value="{{ old('name') }}"
+                            required>
                     </div>
 
                     <div class="form-group mb-3">
                         <label for="release_date">Di Rilis Pada:</label>
-                        <input type="date" id="release_date" name="release_date" class="form-control" value="{{ old('release_date') }}" required>
+                        <input type="date" id="release_date" name="release_date" class="form-control"
+                            value="{{ old('release_date') }}" required>
                     </div>
 
                     <div class="form-group mb-3">
@@ -57,31 +59,6 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="rating">Rating</label>
-                        <input type="number" id="rating" name="rating" class="form-control" value="{{ old('rating') }}" min="0" max="10" step="0.1">
-                    </div>
-
-                    <div class="form-group mb-3">
-                        <label for="studio">Studio</label>
-                        <input type="text" id="studio" name="studio" class="form-control" value="{{ old('studio') }}">
-                    </div>
-
-                    <div class="form-group mb-3">
-                        <label for="episodes">Jumlah Episode</label>
-                        <input type="number" id="episodes" name="episodes" class="form-control" value="{{ old('episodes') }}">
-                    </div>
-
-                    <div class="form-group mb-3">
-                        <label for="trailer">Trailer</label>
-                        <input type="text" id="trailer" name="trailer" class="form-control" value="{{ old('trailer') }}">
-                    </div>
-
-                    <div class="form-group mb-3">
-                        <label for="popularity">Popularitas</label>
-                        <input type="number" id="popularity" name="popularity" class="form-control" value="{{ old('popularity') }}">
-                    </div>
-
-                    <div class="form-group mb-3">
                         <label for="type">Tipe</label>
                         <select id="type" name="type" class="form-control" required>
                             <option value="">-- Pilih Tipe --</option>
@@ -94,23 +71,36 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="aired_from">Ditayangkan Dari:</label>
-                        <input type="date" id="aired_from" name="aired_from" class="form-control" value="{{ old('aired_from') }}">
+                        <label for="studio">Studio</label>
+                        <input type="text" id="studio" name="studio" class="form-control"
+                            value="{{ old('studio') }}">
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="aired_to">Ditayangkan Hingga:</label>
-                        <input type="date" id="aired_to" name="aired_to" class="form-control" value="{{ old('aired_to') }}">
+                        <label for="episodes">Jumlah Episode</label>
+                        <input type="number" id="episodes" name="episodes" class="form-control"
+                            value="{{ old('episodes') }}">
                     </div>
+
+                    <div class="form-group mb-3">
+                        <label for="trailer">Trailer</label>
+                        <input type="text" id="trailer" name="trailer" class="form-control"
+                            value="{{ old('trailer') }}">
+                    </div>
+
+
+
 
                     <div class="form-group mb-3">
                         <label for="duration">Durasi (menit)</label>
-                        <input type="number" id="duration" name="duration" class="form-control" value="{{ old('duration') }}">
+                        <input type="number" id="duration" name="duration" class="form-control"
+                            value="{{ old('duration') }}">
                     </div>
 
                     <div class="form-group mb-3">
                         <label for="synonyms">Sinonim</label>
-                        <input type="text" id="synonyms" name="synonyms" class="form-control" value="{{ old('synonyms') }}">
+                        <input type="text" id="synonyms" name="synonyms" class="form-control"
+                            value="{{ old('synonyms') }}">
                     </div>
 
                     <button type="submit" class="btn btn-primary">Simpan</button>
