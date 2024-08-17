@@ -70,7 +70,8 @@ class AnimeController extends Controller
 
     public function show(Anime $anime)
     {
-        return view('animes.show', compact('anime'));
+        $anime = Anime::findOrFail($anime);
+    return view('Anim.category', compact('anime'));
     }
 
     public function edit(Anime $anime)
