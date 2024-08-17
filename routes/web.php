@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ProfileController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -35,7 +34,8 @@ Auth::routes(['verify' => true]);
 // ===============================[Bagian data akun]=============================================//
 Route::get('/', [HomeController::class, 'Anim'])->name('Anim');
 Route::get('/list', [dashboardController::class, 'list'])->name('list');
-Route::get('/genre', [dashboardController::class, 'genre'])->name('genre');
+Route::get('/genre/{categoryId}', [AnimeController::class, 'genre'])->name('genre');
+Route::get('/animes/{anime}', [DashboardController::class, 'show'])->name('animes.show');
 // ===============================[akhir]=============================================//
 
 // Rute yang dapat diakses tanpa login
@@ -50,10 +50,6 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/register2', [dashboardController::class, 'register2'])->name('register2');
 });
 
-// ========================[ Profile User Dan Admin] ==================================
-Route::get('/profile', [ProfileController::class, 'index'])->name('user.index');
-Route::post('/profile', [ProfileController::class, 'update'])->name('user.update');
-// 
 // Rute logout untuk pengguna yang sudah login
 Route::middleware(['auth'])->post('/logout', [LoginController::class, 'logout'])->name('logout');
 

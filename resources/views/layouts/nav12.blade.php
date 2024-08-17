@@ -63,7 +63,7 @@
                                 <li><a href="./categories.html">All <span class="arrow_carrot-down"></span></a>
                                     <ul class="dropdown">
                                         <li><a href="{{ route('list') }}">Anime Details</a></li>
-                                        <li><a href="{{ route('genre') }}">Categories</a></li>
+                                        <li><a href="#">Categories</a></li>
                                         <li><a href="./anime-watching.html">Anime Watching</a></li>
                                         <li><a href="./blog-details.html">Blog Details</a></li>
                                         <li><a href="./signup.html">Sign Up</a></li>

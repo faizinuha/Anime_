@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Anime;
@@ -67,13 +68,12 @@ class AnimeController extends Controller
         // Redirect dengan pesan sukses
         return redirect()->route('animes.index')->with('success', 'Anime berhasil ditambahkan.');
     }
-
+    
     public function show(Anime $anime)
     {
-        $anime = Anime::findOrFail($anime);
-    return view('Anim.category', compact('anime'));
+        return view('Anim.category', compact('anime'));
     }
-
+    
     public function edit(Anime $anime)
     {
         $categories = Category::all();
@@ -84,9 +84,9 @@ class AnimeController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'category_id' => 'required|exists:categories,id', 
+            'category_id' => 'required|exists:categories,id',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'video' => 'nullable|mimes:mp4,avi,mkv|max:10240', 
+            'video' => 'nullable|mimes:mp4,avi,mkv|max:10240',
             'release_date' => 'required|date',
             'description' => 'nullable|string',
             'status' => 'required|in:Ongoing,Completed,Upcoming',

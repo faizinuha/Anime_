@@ -2,8 +2,7 @@
 @section('content')
    <section class="anime-details spad">
         <div class="container">
-            <div class="anime__details__content">          
-                @foreach ($animes as $anime)
+            <div class="anime__details__content">
                 <div class="row mb-4">
                     <div class="col-lg-3">
                         <div class="anime__details__pic set-bg" data-setbg="{{ asset('storage/' . $anime->image) }}">
@@ -61,7 +60,6 @@
                         </div>
                     </div>
                 </div>
-            @endforeach            
                 <div class="row">
                     <div class="col-lg-8 col-md-8">
                         <div class="anime__details__review">

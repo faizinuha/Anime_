@@ -62,7 +62,7 @@
                           </div>
                       </div>
                       <div class="row">
-                      @foreach ($animes as $item)
+                        @foreach ($animes as $item)
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="{{ asset('storage/' . $item->image) }}">
@@ -74,11 +74,11 @@
                                     <ul>
                                         <li>{{ $item->category->name }}</li>
                                     </ul>
-                                    <h5><a href="{{route('genre')}}">{{ $item->name }}</a></h5>
+                                    <h5><a href="{{ route('animes.show', $item->id) }}">{{ $item->name }}</a></h5>
                                 </div>
                             </div>
                         </div>
-                    @endforeach                    
+                    @endforeach                                 
                           <div class="col-lg-4 col-md-6 col-sm-6">
                               <div class="product__item">
                                   <div class="product__item__pic set-bg" data-setbg="{{asset('assetanime/img/trending/trend-2.jpg')}}">
