@@ -187,13 +187,17 @@
                             <td>{{ $anime->type }}</td>
                             <td>{{ $anime->synonyms }}</td>
                             <td>
-                                <a href="{{ route('animes.edit', $anime->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                                <form action="{{ route('animes.destroy', $anime->id) }}" method="POST"
-                                    style="display:inline;" onsubmit="return confirm('Yakin ingin menghapus data ini?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                                </form>
+                                <div class="d-flex">
+                                    <!-- Tombol Edit dengan jarak di sebelah kanan -->
+                                    <a href="{{ route('animes.edit', $anime->id) }}" class="btn btn-warning btn-sm me-2">Edit</a>          
+                                    <!-- Form untuk menghapus data anime -->
+                                    <form action="{{ route('animes.destroy', $anime->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Yakin ingin menghapus data ini?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                    </form>
+                                </div>
+                                
                             </td>
                         </tr>
                     @endforeach

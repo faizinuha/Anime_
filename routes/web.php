@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\CategoryController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
-
+use App\Http\Controllers\ProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,8 +34,10 @@ Auth::routes(['verify' => true]);
 // ===============================[Bagian data akun]=============================================//
 Route::get('/', [HomeController::class, 'Anim'])->name('Anim');
 Route::get('/list', [dashboardController::class, 'list'])->name('list');
-Route::get('/genre/{categoryId}', [AnimeController::class, 'genre'])->name('genre');
-Route::get('/animes/{anime}', [DashboardController::class, 'show'])->name('animes.show');
+Route::get('/anime/{anime}', [DashboardController::class, 'show'])->name('animes.show');
+
+
+
 // ===============================[akhir]=============================================//
 
 // Rute yang dapat diakses tanpa login
@@ -49,20 +51,32 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/login2', [dashboardController::class, 'login2'])->name('login2');
     Route::get('/register2', [dashboardController::class, 'register2'])->name('register2');
 });
-
+//==============================================[user dan admin]===============================================
+Route::get('/animes', [AnimeController::class, 'index'])->name('animes.index');
+Route::get('/animes/create', [AnimeController::class, 'create'])->name('animes.create');
+Route::post('/animes', [AnimeController::class, 'store'])->name('animes.store');
+Route::get('/animes/{anime}', [AnimeController::class, 'show'])->name('animes.show');
+Route::get('/animes/{anime}/edit', [AnimeController::class, 'edit'])->name('animes.edit');
+Route::delete('/animes/{anime}', [AnimeController::class, 'destroy'])->name('animes.destroy');
+//==============================================[user dan admin]===============================================
 // Rute logout untuk pengguna yang sudah login
 Route::middleware(['auth'])->post('/logout', [LoginController::class, 'logout'])->name('logout');
-
+// Route::resource('animes', AnimeController::class);
 Route::middleware(['auth','role:is_admin'])->group(function () {
     Route::get('/home', [dashboardController::class, 'index'])->name('home');
     Route::get('/Data', [dashboardController::class, 'data'])->name('home.Dates');
-    Route::get('/user', [UserController::class, 'index'])->name('user');
     Route::resource('categories', CategoryController::class);
-    Route::resource('animes', AnimeController::class);
     Route::get('/table', [TableController::class, 'index'])->name('table');
 });
 // ========================[ Bagian crud]================================//
 // Route::resource('jadwals', JadwalController::class);
+
+
+Route::get('/user', [UserController::class, 'index'])->name('user');
+Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
 Route::resource('table', TableController::class);
 
 // // // Route untuk menampilkan formulir tambah data

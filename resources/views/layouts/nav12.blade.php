@@ -107,10 +107,15 @@
                                         <ul class="dropdown"
                                             style="display:none; position:absolute; top:100%; left:0; background:#333; padding:10px 0; min-width:150px;">
                                             <li><a href="#">Profile</a></li>
-                                            <li><a href="{{ route('logout') }}">Logout</a></li>
+                                            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                Logout
+                                            </a>
                                         </ul>
                                     </li>
                                 </div>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
                             @endauth
                         </div>
                     </div>

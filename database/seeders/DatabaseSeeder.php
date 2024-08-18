@@ -23,6 +23,15 @@ class DatabaseSeeder extends Seeder
                 // 'email_verified_at' => now(), // Menandai email sebagai verified
             ]
         );
+        DB::table('users')->updateOrInsert(
+            ['email' => 'rtxalham@gmail.com'], // Kondisi pencocokan
+            [
+                'name' => 'Zaki',
+                'password' => Hash::make('as'),
+                'role' => 'is_guest',
+                // 'email_verified_at' => now(), // Menandai email sebagai verified
+            ]
+        );
         $this->call([
             CategorySeeder::class,
             // AnimeSeeder::class,

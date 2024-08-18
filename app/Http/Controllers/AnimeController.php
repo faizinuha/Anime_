@@ -69,11 +69,6 @@ class AnimeController extends Controller
         return redirect()->route('animes.index')->with('success', 'Anime berhasil ditambahkan.');
     }
     
-    public function show(Anime $anime)
-    {
-        return view('Anim.category', compact('anime'));
-    }
-    
     public function edit(Anime $anime)
     {
         $categories = Category::all();
@@ -119,6 +114,12 @@ class AnimeController extends Controller
         $anime->save();
 
         return redirect()->route('animes.index')->with('success', 'Anime berhasil diperbarui.');
+    }
+
+    public function show(Anime $anime)
+    {
+       return view('Anim.anime', compact('anime'));
+       // dd($anime); 
     }
 
     public function destroy(Anime $anime)

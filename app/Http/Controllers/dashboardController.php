@@ -25,22 +25,21 @@ class dashboardController extends Controller
    }
 
 
+
    public function list()
    {
       $animes = Anime::all();
       return view('Anim.list', compact('animes'));
    }
-   
-   public function genre($categoryId)
-   {
-       $animes = Anime::where('category_id', $categoryId)->get();
-       return view('Anim.category', compact('animes'));
-   }
-    
+
+ 
+
+
+
    // function login
    public function login2()
    {
-      
+
       return view('Auth.loginUser');
       // return view('Auth.login2');
    }
