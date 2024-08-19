@@ -14,6 +14,13 @@ class dashboardController extends Controller
       $user = DB::table('users')->count();
       return view('home.index', compact('user'));
    }
+
+   public function show(Anime $anime)
+   {
+      return view('Anim.anime', compact('anime'));
+      // dd($anime); 
+   }
+   
    public function data()
    {
       // Menghitung jumlah Anime dan User
@@ -32,20 +39,6 @@ class dashboardController extends Controller
       return view('Anim.list', compact('animes'));
    }
 
- 
-
-
-
    // function login
-   public function login2()
-   {
 
-      return view('Auth.loginUser');
-      // return view('Auth.login2');
-   }
-   public function register2()
-   {
-      return view('Auth.registeruser');
-      // return view('Auth.register2');
-   }
 }

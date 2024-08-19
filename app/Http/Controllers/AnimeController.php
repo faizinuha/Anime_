@@ -116,11 +116,11 @@ class AnimeController extends Controller
         return redirect()->route('animes.index')->with('success', 'Anime berhasil diperbarui.');
     }
 
-    public function show(Anime $anime)
-    {
-       return view('Anim.anime', compact('anime'));
-       // dd($anime); 
-    }
+    // public function show(Anime $anime)
+    // {
+    //    return view('Anim.anime', compact('anime'));
+    //    // dd($anime); 
+    // }
 
     public function destroy(Anime $anime)
     {

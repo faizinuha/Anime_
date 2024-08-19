@@ -133,16 +133,22 @@
                             </form>
                         </div>
                     </div>
+                    @php
+                        $anime = App\Models\Anime::all();
+                        // $categories = App\Models\Category::all();
+                    @endphp
                     <div class="col-lg-4 col-md-4">
                         <div class="anime__details__sidebar">
                             <div class="section-title">
-                                <h5>you might like...</h5>
+                                <h5>you might anime...</h5>
                             </div>
-                            <div class="product__sidebar__view__item set-bg" data-setbg="{{asset('assetanime/img/sidebar/tv-1.jpg')}}">
-                                <div class="ep">18 / ?</div>
-                                <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                <h5><a href="#">Boruto: Naruto next generations</a></h5>
-                            </div>
+                          @foreach ($anime as $anime)
+                          <div class="product__sidebar__view__item set-bg" data-setbg="{{asset('storage/'.$anime->image)}}">
+                            <div class="ep">18 / ?</div>
+                            <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                            <h5><a href="{{ route('animes.show', ['anime' => $anime->name]) }}">{{ $anime->name }}</a></h5>
+                        </div>
+                          @endforeach
                             <div class="product__sidebar__view__item set-bg" data-setbg="{{asset('assetanime/img/sidebar/tv-2.jpg')}}">
                                 <div class="ep">18 / ?</div>
                                 <div class="view"><i class="fa fa-eye"></i> 9141</div>

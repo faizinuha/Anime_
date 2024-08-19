@@ -10,6 +10,10 @@ class Anime extends Model
 
     protected $dates = ['release_date', 'aired_from', 'aired_to'];
 
+    public function getRouteKeyName()
+    {
+        return 'name';
+    }
     // Menambahkan semua kolom yang dapat diisi
     protected $fillable = [
         'name',

@@ -38,7 +38,18 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-
+    public function login2()
+    {
+ 
+       return view('Auth.loginUser');
+       // return view('Auth.login2');
+    }
+    public function register2()
+    {
+       return view('Auth.registeruser');
+       // return view('Auth.register2');
+    }
+    
     public function logout(Request $request)
     {
         Auth::logout(); // Mengeluarkan pengguna dari sesi
