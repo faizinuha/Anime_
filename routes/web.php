@@ -35,6 +35,7 @@ Auth::routes(['verify' => true]);
 Route::get('/', [HomeController::class, 'Anim'])->name('Anim');
 Route::get('/list', [dashboardController::class, 'list'])->name('list');
 Route::get('/anime/{anime:name}', [DashboardController::class, 'show'])->name('animes.show');
+Route::get('/watch/{watch:name}', [DashboardController::class, 'watch'])->name('anime.watch');
 // ===============================[akhir]=============================================//
 
 // Rute yang dapat diakses tanpa login

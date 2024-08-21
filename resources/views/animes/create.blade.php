@@ -18,7 +18,7 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="release_date">Di Rilis Pada:</label>
+                        <label for="release_date">Di Publish Tanggal:</label>
                         <input type="date" id="release_date" name="release_date" class="form-control"
                             value="{{ old('release_date') }}" required>
                     </div>

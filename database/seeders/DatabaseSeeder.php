@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
         );
         $this->call([
             CategorySeeder::class,
+            AnimeSeeder::class
             // AnimeSeeder::class,
         ]);
     }

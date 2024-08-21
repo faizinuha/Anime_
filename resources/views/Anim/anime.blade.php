@@ -40,6 +40,7 @@
                                             <li><span>Date aired:</span> {{ \Carbon\Carbon::parse($anime->aired_from)->format('M d, Y') }} to {{ $anime->aired_to ? \Carbon\Carbon::parse($anime->aired_to)->format('M d, Y') : '?' }}</li>
                                             <li><span>Status:</span> {{ $anime->status }}</li>
                                             <li><span>Genre:</span> {{$anime->category->name}} </li>
+                                            <li><span>Genre:</span>{{ $anime->release_date}} </li>
                                         </ul>
                                     </div>
                                     <div class="col-lg-6 col-md-6">
@@ -55,7 +56,9 @@
                             </div>
                             <div class="anime__details__btn">
                                 <a href="#" class="follow-btn"><i class="fa fa-heart-o"></i> Follow</a>
-                                <a href="#" class="watch-btn"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
+                                <a href="{{ route('anime.watch', ['watch' => $anime->name]) }}" class="watch-btn">
+                                    <span>Watch Now</span> <i class="fa fa-angle-right"></i>
+                                </a>                                
                             </div>
                         </div>
                     </div>

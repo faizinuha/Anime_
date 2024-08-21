@@ -20,7 +20,11 @@ class dashboardController extends Controller
       return view('Anim.anime', compact('anime'));
       // dd($anime); 
    }
-   
+   public function watch(Anime $anime) {
+      
+      return view('Anim.watch', ['anime' => $anime]);
+  }
+  
    public function data()
    {
       // Menghitung jumlah Anime dan User
