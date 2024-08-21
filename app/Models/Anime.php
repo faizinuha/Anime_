@@ -22,7 +22,7 @@ class Anime extends Model
         'video',
         'category_id',
         'Tayang_id',
-        'release_date',
+        // 'release_date',
         'description',
         'status',
         'rating',
@@ -41,6 +41,6 @@ class Anime extends Model
     
     public function tayangHari()
     {   
-        return $this->belongsTo(Tayang_Hari::class, 'Tayang_id');
+        return $this->belongsTo(Tayang_hari::class, 'tayang_id');
     }
 }

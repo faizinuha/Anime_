@@ -8,7 +8,7 @@
 
         <div class="card">
             <div class="card-body">
-                <form action="{{ route('animes.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('anime.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <div class="form-group mb-3">
@@ -39,7 +39,7 @@
                     </div>
                     <div class="form-group mb-3">
                         <label for="Tayang_id">Tayang Hari</label>
-                        <select name="Tayang_id" id="Tayang_id" class="form-control" required>
+                        <select name="Tayang_id" id="Tayang_id" class="form-control">
                             <option value="">-- Pilih Hari --</option>
                             @foreach ($tayangHaris  as $tayangHaris )
                                 <option value="{{$tayangHaris->id}}"> {{$tayangHaris->nama}} </option>

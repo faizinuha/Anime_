@@ -7,14 +7,13 @@ use App\Models\Tayang_hari;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-// use Carbon\Carbon;
+use Carbon\Carbon;
 
 class AnimeController extends Controller
 {
     public function index()
     {
         // Memuat anime beserta kategori yang terkait
-        $animes = Anime::with('tayangHari')->get();
         $animes = Anime::with('category')->get();
         return view('animes.index', compact('animes'));
     }
@@ -23,8 +22,9 @@ class AnimeController extends Controller
     {
         $categories = Category::all();
         $tayangHaris  = Tayang_hari::all();
-        return view('animes.create', compact('categories','tayangHaris'));
+        return view('animes.create', compact('categories', 'tayangHaris'));
     }
+
 
     public function store(Request $request)
     {
@@ -34,8 +34,8 @@ class AnimeController extends Controller
             'category_id' => 'required|exists:categories,id',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'video' => 'nullable|mimes:mp4,avi,mkv,webp|max:9999',
-            'release_date' => 'required|date',
-            'Tayang_id' => 'required',
+            'release_date' => 'required|date_format:d-m-Y',
+            'Tayang_id' => 'required|exists:Tayang_hari,id', // Pastikan ini sesuai
             'description' => 'nullable|string',
             'status' => 'required|in:Ongoing,Completed,Upcoming',
             'studio' => 'nullable|string|max:255',
@@ -48,7 +48,11 @@ class AnimeController extends Controller
 
         // Buat objek anime baru
         $anime = new Anime();
-        $anime->fill($request->all());
+
+        // Konversi dan simpan tanggal
+        $anime->release_date = Carbon::createFromFormat('d-m-Y', $request->release_date);
+
+        $anime->fill($request->except('release_date')); // Jangan sertakan release_date di fill
 
         // Upload dan simpan gambar jika ada
         if ($request->hasFile('image')) {
@@ -70,15 +74,23 @@ class AnimeController extends Controller
         $anime->save();
 
         // Redirect dengan pesan sukses
-        return redirect()->route('animes.index')->with('success', 'Anime berhasil ditambahkan.');
+        return redirect()->route('anime.index')->with('success', 'Anime berhasil ditambahkan.');
     }
-    
-    public function edit(Anime $anime)
+
+
+    public function edit($id)
     {
+        // Mencari anime berdasarkan ID
+        $anime = Anime::findOrFail($id);
+
+        // Mendapatkan semua kategori untuk dropdown pada form edit
         $categories = Category::all();
-        $tayangHaris  = Tayang_hari::all();
-        return view('animes.edit', compact('anime', 'categories','tayangHaris'));
+        $tayangHaris = Tayang_hari::all();
+        // Mengarahkan ke view edit dengan data anime dan categories
+        return view('animes.edit', compact('anime', 'categories', 'tayangHaris'));
     }
+
+
 
     public function update(Request $request, Anime $anime)
     {
@@ -87,7 +99,7 @@ class AnimeController extends Controller
             'category_id' => 'required|exists:categories,id',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'video' => 'nullable|mimes:mp4,avi,mkv|max:10240',
-            'release_date' => 'required|date',
+            'release_date' => 'required|date_format:d-m-Y',
             'Tayang_id' => 'required|exists:Tayang_hari,id',
             'description' => 'nullable|string',
             'status' => 'required|in:Ongoing,Completed,Upcoming',
@@ -99,7 +111,10 @@ class AnimeController extends Controller
             'synonyms' => 'nullable|string|max:255',
         ]);
 
-        $anime->fill($request->all());
+        // Konversi dan simpan tanggal
+        $anime->release_date = Carbon::createFromFormat('d-m-Y', $request->release_date);
+
+        $anime->fill($request->except('release_date')); // Jangan sertakan release_date di fill
 
         if ($request->hasFile('image')) {
             if ($anime->image) {
@@ -119,8 +134,9 @@ class AnimeController extends Controller
 
         $anime->save();
 
-        return redirect()->route('animes.index')->with('success', 'Anime berhasil diperbarui.');
+        return redirect()->route('anime.index')->with('success', 'Anime berhasil diperbarui.');
     }
+
 
     // public function show(Anime $anime)
     // {
@@ -128,12 +144,25 @@ class AnimeController extends Controller
     //    // dd($anime); 
     // }
 
-    public function destroy(Anime $anime)
+    public function destroy($id)
     {
+        $anime = Anime::find($id); // Mencari anime berdasarkan ID
+
+        if (!$anime) {
+            return redirect()->route('anime.index')->with('error', 'Anime tidak ditemukan.');
+        }
+
+        // Debugging: Tampilkan objek anime yang ditemukan
+        // dd($anime);
+
+        // Hapus gambar dari storage jika ada
         if ($anime->image) {
             Storage::delete('public/' . $anime->image);
         }
+
+        // Hapus anime dari database
         $anime->delete();
-        return redirect()->route('animes.index')->with('success', 'Anime berhasil dihapus.');
+
+        return redirect()->route('anime.index')->with('success', 'Anime berhasil dihapus.');
     }
 }

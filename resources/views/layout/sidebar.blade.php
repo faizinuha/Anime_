@@ -102,7 +102,7 @@
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="{{ route('animes.index') }}" class="menu-link">
+                    <a href="{{ route('anime.index') }}" class="menu-link">
                         <div data-i18n="Under Maintenance">Data Anime</div>
                     </a>
                 </li>

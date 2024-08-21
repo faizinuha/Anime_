@@ -8,10 +8,12 @@
 
         <div class="card">
             <div class="card-body">
-                <form action="{{ route('animes.update', $anime->id) }}" method="POST" enctype="multipart/form-data">
+                
+                {{-- @dd($anime) --}}
+                <form action="{{ route('anime.update', $anime->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-
+                
                     <!-- Nama Anime -->
                     <div class="form-group mb-3">
                         <label for="name">Nama Anime</label>
@@ -62,8 +64,8 @@
                     <div class="form-group mb-3">
                         <label for="Tayang_id">Tayang Hari</label>
                         <select name="Tayang_id" id="Tayang_id" class="form-control" required>
-                            <option value="">-- Pilih Hari --</option>
                             @foreach ($tayangHaris  as $tayangHaris )
+                            <option value="">-- Pilih Hari --</option>
                                 <option value="{{$tayangHaris->id}}"> {{$tayangHaris->nama}} </option>
                             @endforeach
                         </select>
@@ -142,7 +144,7 @@
                     </div>
 
                     <!-- Tombol Submit -->
-                    <button type="submit" class="btn btn-primary">Perbarui</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
                 </form>
             </div>
         </div>

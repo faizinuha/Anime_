@@ -38,13 +38,22 @@ Route::get('/', [HomeController::class, 'Anim'])->name('Anim');
 Route::get('/list', [dashboardController::class, 'list'])->name('list');
 Route::get('/watch/{watch:name}', [DashboardController::class, 'watch'])->name('anime.watch');
 Route::get('/anime/{anime:name}', [DashboardController::class, 'show'])->name('animes.show');
+// Route::resource('anime', AnimeController::class);
+// Menampilkan daftar anime
+Route::get('/animes', [AnimeController::class, 'index'])->name('anime.index');
 
-Route::get('/animes', [AnimeController::class, 'index'])->name('animes.index');
-Route::get('/animes/create', [AnimeController::class, 'create'])->name('animes.create');
-Route::post('/animes', [AnimeController::class, 'store'])->name('animes.store');
-// Route::get('/animes/{anime}/edit', [AnimeController::class, 'edit'])->name('animes.edit');
-Route::get('/animes/{anime}/edit', [AnimeController::class, 'edit'])->name('animes.edit');
-Route::delete('/animes/{anime}', [AnimeController::class, 'destroy'])->name('animes.destroy');
+// Menampilkan form untuk membuat anime baru
+Route::get('/animes/create', [AnimeController::class, 'create'])->name('anime.create');
+
+// Menyimpan anime baru ke database
+Route::post('/animes', [AnimeController::class, 'store'])->name('anime.store');
+// Menampilkan form untuk mengedit anime tertentu
+Route::get('/animes/{id}/edit', [AnimeController::class, 'edit'])->name('anime.edit');
+// Memperbarui anime tertentu di database
+Route::put('/animes/{id}update', [AnimeController::class, 'update'])->name('anime.update');
+// Menghapus anime tertentu dari database
+Route::delete('/animes/{anime}', [AnimeController::class, 'destroy'])->name('anime.destroy');
+
 // ===============================[akhir]=============================================//
 
 // Rute yang dapat diakses tanpa login

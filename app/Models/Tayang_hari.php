@@ -8,11 +8,11 @@ class Tayang_hari extends Model
 {
     use HasFactory;
 
-    protected $table = '_hari'; // Menunjukkan nama tabel yang benar
+    protected $table = 'tayang_hari'; // Menunjukkan nama tabel yang benar
 
     protected $fillable = ['nama'];
 
-    public function anime()
+    public function animes()
     {
         return $this->hasMany(Anime::class, 'Tayang_id');
     }

@@ -134,7 +134,7 @@
             <span class="text-muted fw-light">Tables /</span> Daftar Anime
         </h4>
 
-        <a href="{{ route('animes.create') }}" class="btn btn-primary mb-3">Tambah</a>
+        <a href="{{ route('anime.create') }}" class="btn btn-primary mb-3">Tambah</a>
 
         <!-- Tabel Daftar Anime -->
         <div class="table-responsive">
@@ -170,9 +170,9 @@
                             <td>
                                 <div class="d-flex">
                                     <!-- Tombol Edit dengan jarak di sebelah kanan -->
-                                    <a href="{{ route('animes.edit', $anime->id) }}" class="btn btn-warning btn-sm me-2">Edit</a>          
+                                    <a href="{{ route('anime.edit', $anime->id) }}" class="btn btn-warning btn-sm me-2">Edit</a>          
                                     <!-- Form untuk menghapus data anime -->
-                                    <form action="{{ route('animes.destroy', $anime->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Yakin ingin menghapus data ini?');">
+                                    <form action="{{ route('anime.destroy', $anime->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Yakin ingin menghapus data ini?');">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
@@ -184,7 +184,7 @@
                         <tr>
                             <td colspan="6" class="text-start">
                                 {{-- <p>{{ $anime->tayangHari->nama }}</p> | --}}
-                                <strong>Hari:</strong> {{ $anime->tayangHari->nama }} |
+                                {{-- <strong>Hari:</strong> {{ $anime->tayangHari->namx }} | --}}
                                 <strong>Category:</strong> {{ $anime->category->name }} |
                                 <strong>Studio:</strong> {{ $anime->studio }} |
                                 <strong>Type:</strong> {{ $anime->type }} |
