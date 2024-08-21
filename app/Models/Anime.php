@@ -8,7 +8,7 @@ class Anime extends Model
 {
     use HasFactory;
 
-    protected $dates = ['release_date', 'aired_from', 'aired_to'];
+    protected $dates = ['release_date', 'created_at', 'updated_at'];
 
     public function getRouteKeyName()
     {
@@ -21,16 +21,15 @@ class Anime extends Model
         'image',
         'video',
         'category_id',
+        'Tayang_id',
+        'release_date',
         'description',
         'status',
         'rating',
         'studio',
         'episodes',
         'trailer',
-        'popularity',
         'type',
-        'aired_from',
-        'aired_to',
         'duration',
         'synonyms'
     ];
@@ -38,5 +37,10 @@ class Anime extends Model
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');
+    }
+    
+    public function tayangHari()
+    {   
+        return $this->belongsTo(Tayang_Hari::class, 'Tayang_id');
     }
 }

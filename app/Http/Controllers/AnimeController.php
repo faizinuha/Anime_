@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Anime;
+use App\Models\Tayang_hari;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -13,6 +14,7 @@ class AnimeController extends Controller
     public function index()
     {
         // Memuat anime beserta kategori yang terkait
+        $animes = Anime::with('tayangHari')->get();
         $animes = Anime::with('category')->get();
         return view('animes.index', compact('animes'));
     }
@@ -20,7 +22,8 @@ class AnimeController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('animes.create', compact('categories'));
+        $tayangHaris  = Tayang_hari::all();
+        return view('animes.create', compact('categories','tayangHaris'));
     }
 
     public function store(Request $request)
@@ -32,6 +35,7 @@ class AnimeController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'video' => 'nullable|mimes:mp4,avi,mkv,webp|max:9999',
             'release_date' => 'required|date',
+            'Tayang_id' => 'required',
             'description' => 'nullable|string',
             'status' => 'required|in:Ongoing,Completed,Upcoming',
             'studio' => 'nullable|string|max:255',
@@ -72,7 +76,8 @@ class AnimeController extends Controller
     public function edit(Anime $anime)
     {
         $categories = Category::all();
-        return view('animes.edit', compact('anime', 'categories'));
+        $tayangHaris  = Tayang_hari::all();
+        return view('animes.edit', compact('anime', 'categories','tayangHaris'));
     }
 
     public function update(Request $request, Anime $anime)
@@ -83,6 +88,7 @@ class AnimeController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'video' => 'nullable|mimes:mp4,avi,mkv|max:10240',
             'release_date' => 'required|date',
+            'Tayang_id' => 'required|exists:Tayang_hari,id',
             'description' => 'nullable|string',
             'status' => 'required|in:Ongoing,Completed,Upcoming',
             'studio' => 'nullable|string|max:255',
