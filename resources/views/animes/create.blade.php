@@ -22,6 +22,11 @@
                         <input type="date" id="release_date" name="release_date" class="form-control"
                             value="{{ old('release_date') }}" required>
                     </div>
+                    {{-- <div class="form-group mb-3">
+                        <label for="Tayang_Hari">tayang Hari:</label>
+                        <input type="text" id="Tayang_Hari" name="Tayang_Hari" class="form-control"
+                            value="{{ old('Tayang_Hari') }}" required>
+                    </div> --}}
 
                     <div class="form-group mb-3">
                         <label for="category_id">Kategori Anime</label>
@@ -32,7 +37,15 @@
                             @endforeach
                         </select>
                     </div>
-
+                    <div class="form-group mb-3">
+                        <label for="Tayang_id">Tayang Hari</label>
+                        <select name="Tayang_id" id="Tayang_id" class="form-control" required>
+                            <option value="">-- Pilih Hari --</option>
+                            @foreach ($tayangHaris  as $tayangHaris )
+                                <option value="{{$tayangHaris->id}}"> {{$tayangHaris->nama}} </option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="form-group mb-3">
                         <label for="image">Gambar Anime</label>
                         <input type="file" id="image" name="image" class="form-control">

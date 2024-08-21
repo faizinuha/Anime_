@@ -9,6 +9,7 @@ class Category extends Model
 {
     use HasFactory;
 
+    
     public function animes(){
         return $this->hasMany(Anime::class, 'category_id');
     }

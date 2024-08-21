@@ -40,7 +40,7 @@
                                             <li><span>Date aired:</span> {{ \Carbon\Carbon::parse($anime->aired_from)->format('M d, Y') }} to {{ $anime->aired_to ? \Carbon\Carbon::parse($anime->aired_to)->format('M d, Y') : '?' }}</li>
                                             <li><span>Status:</span> {{ $anime->status }}</li>
                                             <li><span>Genre:</span> {{$anime->category->name}} </li>
-                                            <li><span>Genre:</span>{{ $anime->release_date}} </li>
+                                            <li><span>Rilis:</span>{{ $anime->release_date}} </li>
                                         </ul>
                                     </div>
                                     <div class="col-lg-6 col-md-6">
@@ -50,6 +50,7 @@
                                             <li><span>Duration:</span> {{ $anime->duration }} min/ep</li>
                                             <li><span>Quality:</span>1040{{ $anime->quality }}</li>
                                             <li><span>Views:</span>240K{{ $anime->views_count }}</li>
+                                            <li><span>Hari:</span>{{ $anime->tayangHari->nama }}</li>
                                         </ul>
                                     </div>
                                 </div>

@@ -19,6 +19,7 @@ class CreateAnimesTable extends Migration
             $table->string('image')->nullable();
             $table->string('video')->nullable();
             $table->foreignId('category_id')->references('id')->on('categories')->onDelete('restrict')->onUpdate('cascade');
+            $table->foreignId('Tayang_id')->constrained('_hari')->onDelete('restrict')->onUpdate('cascade');
             $table->date('release_date');
             $table->text('description')->nullable();  // Deskripsi anime
             $table->enum('status', ['Ongoing', 'Completed', 'Upcoming'])->default('Upcoming');  // Status rilis

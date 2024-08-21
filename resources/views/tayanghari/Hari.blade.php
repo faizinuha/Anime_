@@ -134,7 +134,7 @@
             <span class="text-muted fw-light">Tables /</span> Daftar Anime
         </h4>
 
-        <a href="{{ route('animes.create') }}" class="btn btn-primary mb-3">Tambah</a>
+        <a href="{{ route('Tayanghari.create') }}" class="btn btn-primary mb-3">Tambah</a>
 
         <!-- Tabel Daftar Anime -->
         <div class="table-responsive">
@@ -143,36 +143,21 @@
                     <tr>
                         <th>No</th>
                         <th>Nama</th>
-                        <th>Img</th>
-                        <th>Media</th>
-                        <th>Rilis</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($animes as $index => $anime)
+                    @foreach ($hari as $index => $hari)
                         <tr>
                             <td>{{ $index + 1 }}</td>
-                            <td>{{ $anime->name }}</td>
-                            <td>
-                                @if ($anime->image)
-                                    <img src="{{ asset('storage/' . $anime->image) }}" alt="Gambar Anime" />
-                                @endif
-                            </td>
-                            <td>
-                                <div class="media-container">
-                                    @if ($anime->video)
-                                        <video src="{{ asset('storage/' . $anime->video) }}" controls></video>
-                                    @endif
-                                </div>
-                            </td>
-                            <td>{{ \Carbon\Carbon::parse($anime->release_date)->format('d-m-Y') }}</td>
+                            <td>{{ $hari->nama}}</td>
                             <td>
                                 <div class="d-flex">
-                                    <!-- Tombol Edit dengan jarak di sebelah kanan -->
-                                    <a href="{{ route('animes.edit', $anime->id) }}" class="btn btn-warning btn-sm me-2">Edit</a>          
-                                    <!-- Form untuk menghapus data anime -->
-                                    <form action="{{ route('animes.destroy', $anime->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Yakin ingin menghapus data ini?');">
+                                    <a href="{{ route('Tayanghari.edit', $hari->id) }}"
+                                        class="btn btn-warning btn-sm me-2">Edit</a>
+                                    <form action="{{ route('Tayanghari.destroy', $hari->id) }}" method="POST"
+                                        style="display:inline;"
+                                        onsubmit="return confirm('Yakin ingin menghapus data ini?');">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
@@ -180,17 +165,8 @@
                                 </div>
                             </td>
                         </tr>
-                        <!-- Tambahan Baris untuk Data Tambahan -->
-                        <tr>
-                            <td colspan="6" class="text-start">
-                                {{-- <p>{{ $anime->tayangHari->nama }}</p> | --}}
-                                <strong>Hari:</strong> {{ $anime->tayangHari->nama }} |
-                                <strong>Category:</strong> {{ $anime->category->name }} |
-                                <strong>Studio:</strong> {{ $anime->studio }} |
-                                <strong>Type:</strong> {{ $anime->type }} |
-                                <strong>Synonyms:</strong> {{ $anime->synonyms }} |
-                            </td>
-                        </tr>
+                </tbody>
+              
                     @endforeach
                 </tbody>
             </table>

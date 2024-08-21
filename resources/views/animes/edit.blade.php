@@ -59,7 +59,15 @@
                             @endforeach
                         </select>
                     </div>
-
+                    <div class="form-group mb-3">
+                        <label for="Tayang_id">Tayang Hari</label>
+                        <select name="Tayang_id" id="Tayang_id" class="form-control" required>
+                            <option value="">-- Pilih Hari --</option>
+                            @foreach ($tayangHaris  as $tayangHaris )
+                                <option value="{{$tayangHaris->id}}"> {{$tayangHaris->nama}} </option>
+                            @endforeach
+                        </select>
+                    </div>
                     <!-- Deskripsi -->
                     <div class="form-group mb-3">
                         <label for="description">Deskripsi</label>

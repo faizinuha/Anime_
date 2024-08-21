@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\Tayangharicontroller;
+
 // use App\Models\Anime;
 /*
 |--------------------------------------------------------------------------
@@ -34,8 +36,15 @@ Auth::routes(['verify' => true]);
 // ===============================[Bagian data akun]=============================================//
 Route::get('/', [HomeController::class, 'Anim'])->name('Anim');
 Route::get('/list', [dashboardController::class, 'list'])->name('list');
-Route::get('/anime/{anime:name}', [DashboardController::class, 'show'])->name('animes.show');
 Route::get('/watch/{watch:name}', [DashboardController::class, 'watch'])->name('anime.watch');
+Route::get('/anime/{anime:name}', [DashboardController::class, 'show'])->name('animes.show');
+
+Route::get('/animes', [AnimeController::class, 'index'])->name('animes.index');
+Route::get('/animes/create', [AnimeController::class, 'create'])->name('animes.create');
+Route::post('/animes', [AnimeController::class, 'store'])->name('animes.store');
+// Route::get('/animes/{anime}/edit', [AnimeController::class, 'edit'])->name('animes.edit');
+Route::get('/animes/{anime}/edit', [AnimeController::class, 'edit'])->name('animes.edit');
+Route::delete('/animes/{anime}', [AnimeController::class, 'destroy'])->name('animes.destroy');
 // ===============================[akhir]=============================================//
 
 // Rute yang dapat diakses tanpa login
@@ -52,17 +61,14 @@ Route::middleware(['guest'])->group(function () {
 });
 //==============================================[user dan admin]===============================================
 // Route::get('/animes/{anime:name}', [AnimeController::class, 'show'])->name('animes.show');
-Route::get('/animes', [AnimeController::class, 'index'])->name('animes.index');
-Route::get('/animes/create', [AnimeController::class, 'create'])->name('animes.create');
-Route::post('/animes', [AnimeController::class, 'store'])->name('animes.store');
-Route::get('/animes/{anime}/edit', [AnimeController::class, 'edit'])->name('animes.edit');
-Route::delete('/animes/{anime}', [AnimeController::class, 'destroy'])->name('animes.destroy');
+
 //==============================================[user dan admin]===============================================
 // Rute logout untuk pengguna yang sudah login
 Route::middleware(['auth'])->post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Route::resource('animes', AnimeController::class);
-Route::middleware(['auth','role:is_admin'])->group(function () {
+Route::middleware(['auth', 'role:is_admin'])->group(function () {
+
     Route::get('/home', [dashboardController::class, 'index'])->name('home');
     Route::get('/Data', [dashboardController::class, 'data'])->name('home.Dates');
     Route::resource('categories', CategoryController::class);
@@ -72,6 +78,8 @@ Route::middleware(['auth','role:is_admin'])->group(function () {
 Route::get('/user', [UserController::class, 'index'])->name('user');
 // ========================[ Bagian crud]================================//
 // Route::resource('jadwals', JadwalController::class);
+
+Route::resource('Tayanghari', Tayangharicontroller::class);
 Route::resource('table', TableController::class);
 
 // web search

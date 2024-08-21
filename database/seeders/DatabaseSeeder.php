@@ -33,8 +33,7 @@ class DatabaseSeeder extends Seeder
             ]
         );
         $this->call([
-            CategorySeeder::class,
-            AnimeSeeder::class
+            CategorySeeder::class
             // AnimeSeeder::class,
         ]);
     }
