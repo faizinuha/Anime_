@@ -22,30 +22,19 @@
                         <input type="date" id="release_date" name="release_date" class="form-control"
                             value="{{ old('release_date') }}" required>
                     </div>
-                    {{-- <div class="form-group mb-3">
-                        <label for="Tayang_Hari">tayang Hari:</label>
-                        <input type="text" id="Tayang_Hari" name="Tayang_Hari" class="form-control"
-                            value="{{ old('Tayang_Hari') }}" required>
-                    </div> --}}
 
-                    <div class="form-group mb-3">
-                        <label for="category_id">Kategori Anime</label>
-                        <select id="category_id" name="category_id" class="form-control" required>
-                            <option value="">-- Pilih Kategori --</option>
+                    <div class="form-group">
+                        <label for="category_id">Category</label>
+                        <select name="category_id" id="category_id" class="form-control">
                             @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                <option value="{{ $category->id }}"
+                                    {{ old('category_id', $anime->category_id ?? '') == $category->id ? 'selected' : '' }}>
+                                    {{ $category->name }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group mb-3">
-                        <label for="Tayang_id">Tayang Hari</label>
-                        <select name="Tayang_id" id="Tayang_id" class="form-control">
-                            <option value="">-- Pilih Hari --</option>
-                            @foreach ($tayangHaris  as $tayangHaris )
-                                <option value="{{$tayangHaris->id}}"> {{$tayangHaris->nama}} </option>
-                            @endforeach
-                        </select>
-                    </div>
+
                     <div class="form-group mb-3">
                         <label for="image">Gambar Anime</label>
                         <input type="file" id="image" name="image" class="form-control">

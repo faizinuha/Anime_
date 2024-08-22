@@ -131,10 +131,10 @@
 
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="fw-bold py-3 mb-4">
-            <span class="text-muted fw-light">Tables /</span> Daftar Anime
+            <span class="text-muted fw-light">Tabel /</span> Daftar Anime
         </h4>
 
-        <a href="{{ route('anime.create') }}" class="btn btn-primary mb-3">Tambah</a>
+        <a href="{{ route('anime.create') }}" class="btn btn-primary mb-3">Tambah Anime</a>
 
         <!-- Tabel Daftar Anime -->
         <div class="table-responsive">
@@ -143,10 +143,10 @@
                     <tr>
                         <th>No</th>
                         <th>Nama</th>
-                        <th>Img</th>
+                        <th>Gambar</th>
                         <th>Media</th>
                         <th>Rilis</th>
-                        <th>Actions</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -156,7 +156,7 @@
                             <td>{{ $anime->name }}</td>
                             <td>
                                 @if ($anime->image)
-                                    <img src="{{ asset('storage/' . $anime->image) }}" alt="Gambar Anime" />
+                                    <img src="{{ asset('storage/' .$anime->image) }}" alt="Gambar Anime" />
                                 @endif
                             </td>
                             <td>
@@ -169,9 +169,7 @@
                             <td>{{ \Carbon\Carbon::parse($anime->release_date)->format('d-m-Y') }}</td>
                             <td>
                                 <div class="d-flex">
-                                    <!-- Tombol Edit dengan jarak di sebelah kanan -->
-                                    <a href="{{ route('anime.edit', $anime->id) }}" class="btn btn-warning btn-sm me-2">Edit</a>          
-                                    <!-- Form untuk menghapus data anime -->
+                                    <a href="{{ route('anime.edit', $anime->id) }}" class="btn btn-warning btn-sm me-2">Edit</a>
                                     <form action="{{ route('anime.destroy', $anime->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Yakin ingin menghapus data ini?');">
                                         @csrf
                                         @method('DELETE')
@@ -183,12 +181,10 @@
                         <!-- Tambahan Baris untuk Data Tambahan -->
                         <tr>
                             <td colspan="6" class="text-start">
-                                {{-- <p>{{ $anime->tayangHari->nama }}</p> | --}}
-                                {{-- <strong>Hari:</strong> {{ $anime->tayangHari->namx }} | --}}
                                 <strong>Category:</strong> {{ $anime->category->name }} |
                                 <strong>Studio:</strong> {{ $anime->studio }} |
-                                <strong>Type:</strong> {{ $anime->type }} |
-                                <strong>Synonyms:</strong> {{ $anime->synonyms }} |
+                                <strong>Tipe:</strong> {{ $anime->type }} |
+                                <strong>Sinonim:</strong> {{ $anime->synonyms }} |
                             </td>
                         </tr>
                     @endforeach

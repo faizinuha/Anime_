@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SearchController;
-use App\Http\Controllers\Tayangharicontroller;
+// use App\Http\Controllers\Tayangharicontroller;
 
 // use App\Models\Anime;
 /*
@@ -38,22 +38,6 @@ Route::get('/', [HomeController::class, 'Anim'])->name('Anim');
 Route::get('/list', [dashboardController::class, 'list'])->name('list');
 Route::get('/watch/{watch:name}', [DashboardController::class, 'watch'])->name('anime.watch');
 Route::get('/anime/{anime:name}', [DashboardController::class, 'show'])->name('animes.show');
-// Route::resource('anime', AnimeController::class);
-// Menampilkan daftar anime
-Route::get('/animes', [AnimeController::class, 'index'])->name('anime.index');
-
-// Menampilkan form untuk membuat anime baru
-Route::get('/animes/create', [AnimeController::class, 'create'])->name('anime.create');
-
-// Menyimpan anime baru ke database
-Route::post('/animes', [AnimeController::class, 'store'])->name('anime.store');
-// Menampilkan form untuk mengedit anime tertentu
-Route::get('/animes/{id}/edit', [AnimeController::class, 'edit'])->name('anime.edit');
-// Memperbarui anime tertentu di database
-Route::put('/animes/{id}update', [AnimeController::class, 'update'])->name('anime.update');
-// Menghapus anime tertentu dari database
-Route::delete('/animes/{anime}', [AnimeController::class, 'destroy'])->name('anime.destroy');
-
 // ===============================[akhir]=============================================//
 
 // Rute yang dapat diakses tanpa login
@@ -70,7 +54,6 @@ Route::middleware(['guest'])->group(function () {
 });
 //==============================================[user dan admin]===============================================
 // Route::get('/animes/{anime:name}', [AnimeController::class, 'show'])->name('animes.show');
-
 //==============================================[user dan admin]===============================================
 // Rute logout untuk pengguna yang sudah login
 Route::middleware(['auth'])->post('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -88,17 +71,29 @@ Route::get('/user', [UserController::class, 'index'])->name('user');
 // ========================[ Bagian crud]================================//
 // Route::resource('jadwals', JadwalController::class);
 
-Route::resource('Tayanghari', Tayangharicontroller::class);
+// Route::resource('Tayanghari', Tayangharicontroller::class);
 Route::resource('table', TableController::class);
 
 // web search
 
 
 Route::get('/search', [SearchController::class, 'search'])->name('search');
+// use App\Http\Controllers\AnimeController;
 
-// Route::get('/search', function (Illuminate\Http\Request $request) {
-//     $query = $request->input('query');
-//     $results = Anime::where('name', 'LIKE', "%{$query}%")->get(); // Ganti 'name' dengan kolom yang sesuai
+// Menampilkan daftar anime
+Route::get('/animes', [AnimeController::class, 'index'])->name('anime.index');
 
-//     return view('src.search-results', compact('results'));
-// })->name('search');
+// Menampilkan form untuk membuat anime baru
+Route::get('/animes/create', [AnimeController::class, 'create'])->name('anime.create');
+
+// Menyimpan anime baru ke database
+Route::post('/animes', [AnimeController::class, 'store'])->name('anime.store');
+
+// Menampilkan form untuk mengedit anime tertentu
+Route::get('/animes/{id}/edit', [AnimeController::class, 'edit'])->name('anime.edit');
+
+// Memperbarui anime tertentu di database
+Route::put('/animes/{id}', [AnimeController::class, 'update'])->name('anime.update');
+
+// Menghapus anime tertentu dari database
+Route::delete('/animes/{id}', [AnimeController::class, 'destroy'])->name('anime.destroy');

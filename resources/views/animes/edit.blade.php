@@ -8,12 +8,10 @@
 
         <div class="card">
             <div class="card-body">
-                
-                {{-- @dd($anime) --}}
                 <form action="{{ route('anime.update', $anime->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-                
+
                     <!-- Nama Anime -->
                     <div class="form-group mb-3">
                         <label for="name">Nama Anime</label>
@@ -24,16 +22,16 @@
                     <!-- Tanggal Rilis -->
                     <div class="form-group mb-3">
                         <label for="release_date">Tanggal Rilis</label>
-                        <input type="text" id="release_date" name="release_date" class="form-control datepicker"
-                            value="{{ old('release_date', \Carbon\Carbon::parse($anime->release_date)->format('d-m-Y')) }}"
+                        <input type="date" id="release_date" name="release_date" class="form-control"
+                            value="{{ old('release_date', $anime->release_date ? \Carbon\Carbon::parse($anime->release_date)->format('Y-m-d') : '') }}"
                             required>
-                    </div>
+                    </div>                    
 
                     <!-- Gambar Anime -->
                     <div class="form-group mb-3">
                         <label for="image">Gambar Anime</label>
                         <input type="file" id="image" name="image" class="form-control mb-2"
-                            onchange="previewImage(event)">
+                            accept="image/*,.webp" onchange="previewImage(event)">
                         @if ($anime->image)
                             <img id="preview-image" src="{{ asset('storage/' . $anime->image) }}" alt="Gambar Anime"
                                 class="img-thumbnail" width="200">
@@ -61,15 +59,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group mb-3">
-                        <label for="Tayang_id">Tayang Hari</label>
-                        <select name="Tayang_id" id="Tayang_id" class="form-control" required>
-                            @foreach ($tayangHaris  as $tayangHaris )
-                            <option value="">-- Pilih Hari --</option>
-                                <option value="{{$tayangHaris->id}}"> {{$tayangHaris->nama}} </option>
-                            @endforeach
-                        </select>
-                    </div>
+
                     <!-- Deskripsi -->
                     <div class="form-group mb-3">
                         <label for="description">Deskripsi</label>
@@ -88,8 +78,6 @@
                                 Upcoming</option>
                         </select>
                     </div>
-
-
 
                     <!-- Studio -->
                     <div class="form-group mb-3">
@@ -112,68 +100,58 @@
                             value="{{ old('trailer', $anime->trailer) }}">
                     </div>
 
-
-
                     <!-- Tipe -->
                     <div class="form-group mb-3">
                         <label for="type">Tipe</label>
                         <select id="type" name="type" class="form-control" required>
                             <option value="TV" {{ old('type', $anime->type) == 'TV' ? 'selected' : '' }}>TV</option>
-                            <option value="Movie" {{ old('type', $anime->type) == 'Movie' ? 'selected' : '' }}>Movie
-                            </option>
+                            <option value="Movie" {{ old('type', $anime->type) == 'Movie' ? 'selected' : '' }}>Movie</option>
                             <option value="OVA" {{ old('type', $anime->type) == 'OVA' ? 'selected' : '' }}>OVA</option>
-                            <option value="ONA" {{ old('type', $anime->type) == 'ONA' ? 'selected' : '' }}>ONA</option>
-                            <option value="Special" {{ old('type', $anime->type) == 'Special' ? 'selected' : '' }}>Special
-                            </option>
                         </select>
                     </div>
 
+                    <!-- Popularitas -->
+                    <div class="form-group mb-3">
+                        <label for="popularity">Popularitas</label>
+                        <input type="number" id="popularity" name="popularity" class="form-control"
+                            value="{{ old('popularity', $anime->popularity) }}">
+                    </div>
+
+                    <!-- Tanggal Tayang -->
+                    <div class="form-group mb-3">
+                        <label for="aired_from">Tanggal Tayang</label>
+                        <input type="text" id="aired_from" name="aired_from" class="form-control datepicker"
+                            value="{{ old('aired_from', \Carbon\Carbon::parse($anime->aired_from)->format('d-m-Y')) }}"
+                            required>
+                        <input type="text" id="aired_to" name="aired_to" class="form-control datepicker mt-2"
+                            value="{{ old('aired_to', \Carbon\Carbon::parse($anime->aired_to)->format('d-m-Y')) }}">
+                    </div>
 
                     <!-- Durasi -->
                     <div class="form-group mb-3">
-                        <label for="duration">Durasi (menit)</label>
-                        <input type="number" id="duration" name="duration" class="form-control"
+                        <label for="duration">Durasi</label>
+                        <input type="text" id="duration" name="duration" class="form-control"
                             value="{{ old('duration', $anime->duration) }}">
                     </div>
 
-                    <!-- Sinonim -->
+                    <!-- Sinonyms -->
                     <div class="form-group mb-3">
-                        <label for="synonyms">Sinonim</label>
+                        <label for="synonyms">Sinonyms</label>
                         <input type="text" id="synonyms" name="synonyms" class="form-control"
                             value="{{ old('synonyms', $anime->synonyms) }}">
                     </div>
 
-                    <!-- Tombol Submit -->
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" class="btn btn-primary">Update Anime</button>
                 </form>
             </div>
         </div>
     </div>
-@endsection
-
-@section('scripts')
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.9.0/dist/js/bootstrap-datepicker.min.js"></script>
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.9.0/dist/css/bootstrap-datepicker.min.css">
 
     <script>
-        // Datepicker initialization
-        $('.datepicker').datepicker({
-            format: 'dd-mm-yyyy',
-            autoclose: true,
-            todayHighlight: true
-        });
-
-        // Preview Image Function
         function previewImage(event) {
-            var reader = new FileReader();
-            reader.onload = function() {
-                var output = document.getElementById('preview-image');
-                output.src = reader.result;
-                output.style.display = 'block'; // Show the image
-            }
-            reader.readAsDataURL(event.target.files[0]);
+            const preview = document.getElementById('preview-image');
+            preview.style.display = 'block';
+            preview.src = URL.createObjectURL(event.target.files[0]);
         }
     </script>
 @endsection

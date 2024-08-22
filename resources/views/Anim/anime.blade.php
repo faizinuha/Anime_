@@ -50,7 +50,7 @@
                                             <li><span>Duration:</span> {{ $anime->duration }} min/ep</li>
                                             <li><span>Quality:</span>1040{{ $anime->quality }}</li>
                                             <li><span>Views:</span>240K{{ $anime->views_count }}</li>
-                                            <li><span>Hari:</span>{{ $anime->tayangHari->nama }}</li>
+                                            {{-- <li><span>Hari:</span>{{ $anime->tayangHari->nama }}</li> --}}
                                         </ul>
                                     </div>
                                 </div>
