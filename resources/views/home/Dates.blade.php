@@ -10,7 +10,7 @@
       </p>
       {{-- <a href="javascript:;" id="data" class="btn btn-sm btn-outline-primary">lihat data</a> --}}
   </div>
-</div>
+</div>          
 
 <div class="row g-2"> <!-- Menambahkan gap antar card -->
     <!-- Card untuk Jumlah Anime -->

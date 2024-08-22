@@ -100,6 +100,7 @@ class AnimeController extends Controller
     public function destroy($id)
     {
         $anime = Anime::findOrFail($id);
+        // jika data tidak di temukan
         $anime->delete();
         return redirect()->route('anime.index')->with('success', 'Anime deleted successfully.');
     }

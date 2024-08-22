@@ -13,6 +13,7 @@
                                 </p>
                                 <a href="javascript:;" id="data" class="btn btn-sm btn-outline-primary">lihat data</a>
                             </div>
+                            
                         </div>
                         <script>
                             document.getElementById('data').addEventListener('click', function(event) {

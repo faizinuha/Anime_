@@ -1,3 +1,6 @@
+*{
+	scroll-behavior: smooth;
+}
 
 html,
 body {
@@ -295,7 +298,7 @@ ol {
 -----------------------*/
 
 .header {
-	background: #070720;
+	background: #0aa98a;
 }
 
 .header__logo {
@@ -319,6 +322,7 @@ ol {
 
 .header__menu ul li.active a {
 	background: #e53637;
+	border-radius: 20px;
 	color: #ffffff;
 }
 

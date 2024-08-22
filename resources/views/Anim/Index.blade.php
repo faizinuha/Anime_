@@ -1,5 +1,6 @@
 @extends('layouts.nav12')
 @section('content')
+
 <section class="hero">
   <div class="container">
     <div class="hero__slider owl-carousel">
