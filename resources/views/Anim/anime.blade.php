@@ -1,6 +1,6 @@
 @extends('layouts.nav12')
 @section('content')
-   <section class="anime-details spad">
+    <section class="anime-details spad">
         <div class="container">
             <div class="anime__details__content">
                 <div class="row mb-4">
@@ -24,7 +24,7 @@
                                     @if (floor($anime->rating) < $anime->rating)
                                         <a href="#"><i class="fa fa-star-half-o"></i></a>
                                     @endif
-                                    @for ($i = 0; $i < (5 - ceil($anime->rating)); $i++)
+                                    @for ($i = 0; $i < 5 - ceil($anime->rating); $i++)
                                         <a href="#"><i class="fa fa-star-o"></i></a>
                                     @endfor
                                 </div>
@@ -37,16 +37,21 @@
                                         <ul>
                                             <li><span>Type:</span> {{ $anime->type }}</li>
                                             <li><span>Studios:</span> {{ $anime->studio }}</li>
-                                            <li><span>Date aired:</span> {{ \Carbon\Carbon::parse($anime->aired_from)->format('M d, Y') }} to {{ $anime->aired_to ? \Carbon\Carbon::parse($anime->aired_to)->format('M d, Y') : '?' }}</li>
+                                            <li><span>Date aired:</span>
+                                                {{ \Carbon\Carbon::parse($anime->aired_from)->format('M d, Y') }} to
+                                                {{ $anime->aired_to ? \Carbon\Carbon::parse($anime->aired_to)->format('M d, Y') : '?' }}
+                                            </li>
                                             <li><span>Status:</span> {{ $anime->status }}</li>
-                                            <li><span>Genre:</span> {{$anime->category->name}} </li>
-                                            <li><span>Rilis:</span>{{ $anime->release_date}} </li>
+                                            <li><span>Genre:</span> {{ $anime->category->name }} </li>
+                                            <li><span>Rilis:</span>{{ $anime->release_date }} </li>
                                         </ul>
                                     </div>
                                     <div class="col-lg-6 col-md-6">
                                         <ul>
-                                            <li><span>Scores:</span> {{ $anime->scores }} / {{ $anime->scores_count }}</li>
-                                            <li><span>Rating:</span> {{ $anime->rating }} / {{ $anime->ratings_count }} times</li>
+                                            <li><span>Scores:</span> {{ $anime->scores }} / {{ $anime->scores_count }}
+                                            </li>
+                                            <li><span>Rating:</span> {{ $anime->rating }} / {{ $anime->ratings_count }}
+                                                times</li>
                                             <li><span>Duration:</span> {{ $anime->duration }} min/ep</li>
                                             <li><span>Quality:</span>1040{{ $anime->quality }}</li>
                                             <li><span>Views:</span>240K{{ $anime->views_count }}</li>
@@ -59,7 +64,7 @@
                                 <a href="#" class="follow-btn"><i class="fa fa-heart-o"></i> Follow</a>
                                 <a href="{{ route('anime.watch', ['watch' => $anime->name]) }}" class="watch-btn">
                                     <span>Watch Now</span> <i class="fa fa-angle-right"></i>
-                                </a>                                
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -72,17 +77,17 @@
                             </div>
                             <div class="anime__review__item">
                                 <div class="anime__review__item__pic">
-                                    <img src="{{asset('assetanime/img/anime/review-1.jpg')}}" alt="">
+                                    <img src="{{ asset('assetanime/img/anime/review-1.jpg') }}" alt="">
                                 </div>
                                 <div class="anime__review__item__text">
                                     <h6>Chris Curry - <span>1 Hour ago</span></h6>
                                     <p>whachikan Just noticed that someone categorized this as belonging to the genre
-                                    "demons" LOL</p>
+                                        "demons" LOL</p>
                                 </div>
                             </div>
                             <div class="anime__review__item">
                                 <div class="anime__review__item__pic">
-                                    <img src="{{asset('assetanime/img/anime/review-2.jpg')}}" alt="">
+                                    <img src="{{ asset('assetanime/img/anime/review-2.jpg') }}" alt="">
                                 </div>
                                 <div class="anime__review__item__text">
                                     <h6>Lewis Mann - <span>5 Hour ago</span></h6>
@@ -91,7 +96,7 @@
                             </div>
                             <div class="anime__review__item">
                                 <div class="anime__review__item__pic">
-                                    <img src="{{asset('assetanime/img/anime/review-3.jpg')}}" alt="">
+                                    <img src="{{ asset('assetanime/img/anime/review-3.jpg') }}" alt="">
                                 </div>
                                 <div class="anime__review__item__text">
                                     <h6>Louis Tyler - <span>20 Hour ago</span></h6>
@@ -100,12 +105,12 @@
                             </div>
                             <div class="anime__review__item">
                                 <div class="anime__review__item__pic">
-                                    <img src="{{asset('assetanime/img/anime/review-4.jpg')}}" alt="">
+                                    <img src="{{ asset('assetanime/img/anime/review-4.jpg') }}" alt="">
                                 </div>
                                 <div class="anime__review__item__text">
                                     <h6>Chris Curry - <span>1 Hour ago</span></h6>
                                     <p>whachikan Just noticed that someone categorized this as belonging to the genre
-                                    "demons" LOL</p>
+                                        "demons" LOL</p>
                                 </div>
                             </div>
                             <div class="anime__review__item">
@@ -131,10 +136,31 @@
                             <div class="section-title">
                                 <h5>Your Comment</h5>
                             </div>
-                            <form action="#">
-                                <textarea placeholder="Your Comment"></textarea>
-                                <button type="submit"><i class="fa fa-location-arrow"></i> Review</button>
-                            </form>
+                            <div class="">
+                                <div class="">
+                                    <h5></h5>
+                                </div>
+
+                                @if (Auth::check())
+                                    <form action="{{ route('comment.store') }}" method="POST">
+                                        @csrf
+                                        <textarea name="content" placeholder="Your Comment"></textarea>
+                                        <button type="submit" name="comment" id="comment"><i
+                                                class="fa fa-location-arrow"></i> Review</button>
+                                    </form>
+                                    @forelse ($comment as $item)
+                                        <div class="comment-item">
+                                            <strong>{{ $item->user->name }}</strong>
+                                            <p>{{ $item->content }}</p>
+                                        </div>
+                                    @empty
+                                        <span>Not Found Comment</span>
+                                    @endforelse
+                                @else
+                                    <span>Please login to comment. <a href="{{ route('login2') }}">Login</a></span>
+                                @endif
+                            </div>
+
                         </div>
                     </div>
                     @php
@@ -146,24 +172,30 @@
                             <div class="section-title">
                                 <h5>you might anime...</h5>
                             </div>
-                          @foreach ($anime as $anime)
-                          <div class="product__sidebar__view__item set-bg" data-setbg="{{asset('storage/'.$anime->image)}}">
-                            <div class="ep">18 / ?</div>
-                            <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                            <h5><a href="{{ route('animes.show', ['anime' => $anime->name]) }}">{{ $anime->name }}</a></h5>
-                        </div>
-                          @endforeach
-                            <div class="product__sidebar__view__item set-bg" data-setbg="{{asset('assetanime/img/sidebar/tv-2.jpg')}}">
+                            @foreach ($anime as $anime)
+                                <div class="product__sidebar__view__item set-bg"
+                                    data-setbg="{{ asset('storage/' . $anime->image) }}">
+                                    <div class="ep">18 / ?</div>
+                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                    <h5><a
+                                            href="{{ route('animes.show', ['anime' => $anime->name]) }}">{{ $anime->name }}</a>
+                                    </h5>
+                                </div>
+                            @endforeach
+                            <div class="product__sidebar__view__item set-bg"
+                                data-setbg="{{ asset('assetanime/img/sidebar/tv-2.jpg') }}">
                                 <div class="ep">18 / ?</div>
                                 <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                 <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
                             </div>
-                            <div class="product__sidebar__view__item set-bg" data-setbg="{{asset('assetanime/img/sidebar/tv-3.jpg')}}">
+                            <div class="product__sidebar__view__item set-bg"
+                                data-setbg="{{ asset('assetanime/img/sidebar/tv-3.jpg') }}">
                                 <div class="ep">18 / ?</div>
                                 <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                 <h5><a href="#">Sword art online alicization war of underworld</a></h5>
                             </div>
-                            <div class="product__sidebar__view__item set-bg" data-setbg="{{asset('assetanime/img/sidebar/tv-4.jpg')}}">
+                            <div class="product__sidebar__view__item set-bg"
+                                data-setbg="{{ asset('assetanime/img/sidebar/tv-4.jpg') }}">
                                 <div class="ep">18 / ?</div>
                                 <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                 <h5><a href="#">Fate/stay night: Heaven's Feel I. presage flower</a></h5>
@@ -172,5 +204,5 @@
                     </div>
                 </div>
             </div>
-        </section>
+    </section>
 @endsection

@@ -98,10 +98,12 @@ body {
 <body>
     <div class="login-container" id="loginContainer">
         <h2>Login</h2>
+        <svg id="sw-js-blob-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" version="1.1">                    <defs>                         <linearGradient id="sw-gradient" x1="0" x2="1" y1="1" y2="0">                            <stop id="stop1" stop-color="rgba(248, 117, 55, 1)" offset="0%"></stop>                            <stop id="stop2" stop-color="rgba(251, 168, 31, 1)" offset="100%"></stop>                        </linearGradient>                    </defs>                <path fill="url(#sw-gradient)" d="M14.6,-24.8C16.8,-24,14.9,-15.8,17.8,-10.4C20.6,-5,28.1,-2.5,31.1,1.7C34.2,6,32.7,12,27.7,13.7C22.8,15.4,14.4,12.9,9.2,17.2C4,21.5,2,32.7,-1.6,35.4C-5.1,38.2,-10.2,32.4,-14.7,27.6C-19.1,22.9,-22.8,19.1,-25.5,14.6C-28.3,10.2,-30,5.1,-26.8,1.8C-23.6,-1.4,-15.5,-2.8,-14.4,-10.1C-13.3,-17.3,-19.1,-30.3,-17.9,-31.7C-16.7,-33.1,-8.3,-22.9,-1.1,-21C6.2,-19.2,12.4,-25.7,14.6,-24.8Z" width="100%" height="100%" transform="translate(50 50)" stroke-width="0" style="transition: 0.3s;" stroke="url(#sw-gradient)"></path>              </svg>
         <form action="/login" method="POST">
             @csrf
             <input type="email" id="email" name="email" placeholder="Email" required>
             <input type="password" id="password" name="password" placeholder="Password" required>
+
             <button type="submit">Login</button>
             <div class="register-link">
                 <a href="{{route('register2')}}">Don't have an account? Register</a>

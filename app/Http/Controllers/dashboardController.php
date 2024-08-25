@@ -6,7 +6,7 @@ use App\Models\Anime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
-
+use App\Models\Comment;
 class dashboardController extends Controller
 {
    public function index()
@@ -17,11 +17,12 @@ class dashboardController extends Controller
 
    public function show(Anime $anime)
    {
-      return view('Anim.anime', compact('anime'));
+      // $anime = Anime::findOrFail($anime->id);
+      $comment = Comment::all();
+      return view('Anim.anime', compact('anime','comment'));
       // dd($anime); 
    }
    public function watch(Anime $anime) {
-      
       return view('Anim.watch', ['anime' => $anime]);
   }
   
