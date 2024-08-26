@@ -1,5 +1,6 @@
 @extends('layouts.nav12')
 @section('content')
+
     <section class="anime-details spad">
         <div class="container">
             <div class="anime__details__content">
@@ -75,62 +76,28 @@
                             <div class="section-title">
                                 <h5>Reviews</h5>
                             </div>
+                            @forelse ($anime->comments as $item)
                             <div class="anime__review__item">
                                 <div class="anime__review__item__pic">
                                     <img src="{{ asset('assetanime/img/anime/review-1.jpg') }}" alt="">
                                 </div>
                                 <div class="anime__review__item__text">
-                                    <h6>Chris Curry - <span>1 Hour ago</span></h6>
-                                    <p>whachikan Just noticed that someone categorized this as belonging to the genre
-                                        "demons" LOL</p>
+                                    {{-- <h2>{{ $item->user->name }} <span>1 Menit Yang? Lalu..</span></h2> --}}
+                                    <h6>{{$item->user->name}} - <span>1 Hour ago</span></h6>
+                                    <p>Pesan:{{ $item->content }}</p>
+                                    <form action="{{ route('comment.destroy', $item->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" name="delete" class="btn btn-secondary d-flex justify-content-start align-items-start p-1" id="delete">
+                                            <i class="fa fa-trash"></i> 
+                                        </button>
+                                    </form>                                                                      
                                 </div>
+                            @empty
+                                <span>Not Found Comment</span>
+                            @endforelse
                             </div>
-                            <div class="anime__review__item">
-                                <div class="anime__review__item__pic">
-                                    <img src="{{ asset('assetanime/img/anime/review-2.jpg') }}" alt="">
-                                </div>
-                                <div class="anime__review__item__text">
-                                    <h6>Lewis Mann - <span>5 Hour ago</span></h6>
-                                    <p>Finally it came out ages ago</p>
-                                </div>
-                            </div>
-                            <div class="anime__review__item">
-                                <div class="anime__review__item__pic">
-                                    <img src="{{ asset('assetanime/img/anime/review-3.jpg') }}" alt="">
-                                </div>
-                                <div class="anime__review__item__text">
-                                    <h6>Louis Tyler - <span>20 Hour ago</span></h6>
-                                    <p>Where is the episode 15 ? Slow update! Tch</p>
-                                </div>
-                            </div>
-                            <div class="anime__review__item">
-                                <div class="anime__review__item__pic">
-                                    <img src="{{ asset('assetanime/img/anime/review-4.jpg') }}" alt="">
-                                </div>
-                                <div class="anime__review__item__text">
-                                    <h6>Chris Curry - <span>1 Hour ago</span></h6>
-                                    <p>whachikan Just noticed that someone categorized this as belonging to the genre
-                                        "demons" LOL</p>
-                                </div>
-                            </div>
-                            <div class="anime__review__item">
-                                <div class="anime__review__item__pic">
-                                    <img src="{{ asset('assetanime/img/anime/review-5.jpg') }}" alt="">
-                                </div>
-                                <div class="anime__review__item__text">
-                                    <h6>Lewis Mann - <span>5 Hour ago</span></h6>
-                                    <p>Finally it came out ages ago</p>
-                                </div>
-                            </div>
-                            <div class="anime__review__item">
-                                <div class="anime__review__item__pic">
-                                    <img src="{{ asset('assetanime/img/anime/review-6.jpg') }}" alt="">
-                                </div>
-                                <div class="anime__review__item__text">
-                                    <h6>Louis Tyler - <span>20 Hour ago</span></h6>
-                                    <p>Where is the episode 15 ? Slow update! Tch</p>
-                                </div>
-                            </div>
+                        </div>
                         </div>
                         <div class="anime__details__form">
                             <div class="section-title">
@@ -144,18 +111,10 @@
                                 @if (Auth::check())
                                     <form action="{{ route('comment.store') }}" method="POST">
                                         @csrf
+                                        <input type="hidden" name="anime_id" value="{{ $anime->id }}">
                                         <textarea name="content" placeholder="Your Comment"></textarea>
-                                        <button type="submit" name="comment" id="comment"><i
-                                                class="fa fa-location-arrow"></i> Review</button>
+                                        <button type="submit" name="comment" id="comment"><i class="fa fa-location-arrow"></i> Review</button>
                                     </form>
-                                    @forelse ($comment as $item)
-                                        <div class="comment-item">
-                                            <strong>{{ $item->user->name }}</strong>
-                                            <p>{{ $item->content }}</p>
-                                        </div>
-                                    @empty
-                                        <span>Not Found Comment</span>
-                                    @endforelse
                                 @else
                                     <span>Please login to comment. <a href="{{ route('login2') }}">Login</a></span>
                                 @endif

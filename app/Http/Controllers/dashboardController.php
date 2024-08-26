@@ -18,10 +18,12 @@ class dashboardController extends Controller
    public function show(Anime $anime)
    {
       // $anime = Anime::findOrFail($anime->id);
-      $comment = Comment::all();
+      // $comment = Comment::all();
+      $comment = Comment::where('anime_id', $anime->id)->get();
       return view('Anim.anime', compact('anime','comment'));
       // dd($anime); 
    }
+   
    public function watch(Anime $anime) {
       return view('Anim.watch', ['anime' => $anime]);
   }

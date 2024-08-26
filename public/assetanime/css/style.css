@@ -737,6 +737,9 @@ ol {
 .product__sidebar__view .filter__controls li:last-child {
 	margin-right: 0;
 }
+.anime__details__sidebar {
+	padding-top: 50px;
+}
 
 .product__sidebar__view__item {
 	height: 190px;
@@ -782,7 +785,6 @@ ol {
 	font-weight: 700;
 	line-height: 26px;
 }
-
 .product__sidebar__comment {
 	margin-bottom: 35px;
 }
@@ -1102,6 +1104,7 @@ ol {
 }
 
 .anime__review__item__text {
+	margin:4px;
 	overflow: hidden;
 	background: #1d1e39;
 	padding: 18px 30px 16px 20px;
@@ -1115,6 +1118,7 @@ ol {
 }
 
 .anime__review__item__text h6 span {
+	
 	color: #b7b7b7;
 	font-weight: 400;
 }
@@ -1685,221 +1689,6 @@ ol {
 }
 
 /*---------------------
-  Login
------------------------*/
-
-.login {
-	padding-top: 130px;
-	padding-bottom: 120px;
-}
-
-.login__form {
-	position: relative;
-	padding-left: 145px;
-}
-
-.login__form:after {
-	position: absolute;
-	right: -14px;
-	top: -40px;
-	height: 330px;
-	width: 1px;
-	background: rgba(255, 255, 255, 0.2);
-	content: "";
-}
-
-.login__form h3 {
-	color: #ffffff;
-	font-weight: 700;
-	font-family: "Oswald", sans-serif;
-	margin-bottom: 30px;
-}
-
-.login__form form .input__item {
-	position: relative;
-	width: 370px;
-	margin-bottom: 20px;
-}
-
-.login__form form .input__item:before {
-	position: absolute;
-	left: 50px;
-	top: 10px;
-	height: 30px;
-	width: 1px;
-	background: #b7b7b7;
-	content: "";
-}
-
-.login__form form .input__item input {
-	height: 50px;
-	width: 100%;
-	font-size: 15px;
-	color: #b7b7b7;
-	background: #ffffff;
-	border: none;
-	padding-left: 76px;
-}
-
-.login__form form .input__item input::-webkit-input-placeholder {
-	color: #b7b7b7;
-}
-
-.login__form form .input__item input::-moz-placeholder {
-	color: #b7b7b7;
-}
-
-.login__form form .input__item input:-ms-input-placeholder {
-	color: #b7b7b7;
-}
-
-.login__form form .input__item input::-ms-input-placeholder {
-	color: #b7b7b7;
-}
-
-.login__form form .input__item input::placeholder {
-	color: #b7b7b7;
-}
-
-.login__form form .input__item span {
-	color: #b7b7b7;
-	font-size: 20px;
-	position: absolute;
-	left: 15px;
-	top: 13px;
-}
-
-.login__form form button {
-	border-radius: 0;
-	margin-top: 10px;
-}
-
-.login__form .forget_pass {
-	font-size: 15px;
-	color: #ffffff;
-	display: inline-block;
-	position: absolute;
-	right: 60px;
-	bottom: 12px;
-}
-
-.login__register {
-	padding-left: 30px;
-}
-
-.login__register h3 {
-	color: #ffffff;
-	font-weight: 700;
-	font-family: "Oswald", sans-serif;
-	margin-bottom: 30px;
-}
-
-.login__register .primary-btn {
-	background: #e53637;
-	padding: 12px 42px;
-}
-
-.login__social {
-	padding-top: 52px;
-}
-
-.login__social__links {
-	text-align: center;
-}
-
-.login__social__links span {
-	color: #ffffff;
-	display: block;
-	font-size: 13px;
-	font-weight: 700;
-	letter-spacing: 2px;
-	text-transform: uppercase;
-	margin-bottom: 30px;
-}
-
-.login__social__links ul li {
-	list-style: none;
-	margin-bottom: 15px;
-}
-
-.login__social__links ul li:last-child {
-	margin-bottom: 0;
-}
-
-.login__social__links ul li a {
-	color: #ffffff;
-	display: block;
-	font-size: 13px;
-	font-weight: 700;
-	letter-spacing: 2px;
-	text-transform: uppercase;
-	width: 460px;
-	padding: 14px 0;
-	position: relative;
-	margin: 0 auto;
-}
-
-.login__social__links ul li a.facebook {
-	background: #4267b2;
-}
-
-.login__social__links ul li a.google {
-	background: #ff4343;
-}
-
-.login__social__links ul li a.twitter {
-	background: #1da1f2;
-}
-
-.login__social__links ul li a i {
-	font-size: 20px;
-	position: absolute;
-	left: 32px;
-	top: 14px;
-}
-
-/*---------------------
-  Sign Up
------------------------*/
-
-.signup {
-	padding-top: 130px;
-	padding-bottom: 150px;
-}
-
-.signup .login__form:after {
-	height: 450px;
-}
-
-.signup .login__form h5 {
-	font-size: 15px;
-	color: #ffffff;
-	margin-top: 36px;
-}
-
-.signup .login__form h5 a {
-	color: #e53637;
-	font-weight: 700;
-}
-
-.signup .login__social__links {
-	text-align: left;
-	padding-left: 40px;
-}
-
-.signup .login__social__links h3 {
-	color: #ffffff;
-	font-weight: 700;
-	font-family: "Oswald", sans-serif;
-	margin-bottom: 30px;
-}
-
-.signup .login__social__links ul li a {
-	margin: 0;
-	text-align: center;
-}
-
-/*---------------------
   Footer
 -----------------------*/
 
@@ -2083,8 +1872,10 @@ ol {
 	.anime__details__pic {
 		margin-bottom: 40px;
 	}
+
 	.anime__details__sidebar {
-		padding-top: 50px;
+		display:block;
+		padding-top: 80px;
 	}
 	.login__form {
 		padding-left: 0;
@@ -2190,8 +1981,10 @@ ol {
 		margin-bottom: 40px;
 	}
 	.anime__details__sidebar {
-		padding-top: 50px;
+		display: block;
+		padding-top: 80px;
 	}
+
 	.btn__all {
 		text-align: left;
 	}
@@ -2306,6 +2099,7 @@ ol {
 		margin-right: 10px;
 	}
 	.anime__review__item__text h6 span {
+		
 		font-size: 12px;
 	}
 	.anime__review__item__text {
