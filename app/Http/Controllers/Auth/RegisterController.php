@@ -8,11 +8,11 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-
+use App\Notifications\WelcomeEmail; // Pastikan ini ada di bagian atas
 class RegisterController extends Controller
 {
     use RegistersUsers;
-
+    // use Queueable;
     /**
      * Where to redirect users after registration.
      *
@@ -53,11 +53,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    
+        // Kirim notifikasi email setelah registrasi
+        $user->notify(new WelcomeEmail());
+    
+        return $user;
     }
 
     /**
@@ -69,6 +74,8 @@ class RegisterController extends Controller
      */
     protected function registered(Request $request, $user)
     {
+        session()->flash('notification', "Selamat datang, {$user->name}! Anda telah berhasil mendaftar.");
+        
         return redirect('/auth/verify'); // URL harus sesuai dengan route yang ada
     }
 }
