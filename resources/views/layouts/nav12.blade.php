@@ -99,7 +99,7 @@
                     <div class="col-lg-2">
                         <div class="header__right">
                             <a href="#" class="search-switch"><span class="icon_search"></span></a>
-                            <a href="{{ route('login2') }}"><span class="icon_profile"></span></a>
+                            <a href="{{ route('login') }}"><span class="icon_profile"></span></a>
                             @auth()
                                 <div class="user-name">
                                     <li style="list-style: none; margin:0%; position:relative;">

@@ -24,14 +24,16 @@ class TableController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:6|confirmed',
-            'role' => 'required|string'
+            'role' => 'required|string',
+            'status' => 'required|in:FrontEnd,Backend,Server,UI/UX,Service,Mobile,Database,Network,Security,AI',
         ]);
 
         User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password), // Encrypt password
-            'role' => $request->role
+            'role' => $request->role,
+            'status' => $request->status,
         ]);
 
         return redirect()->route('table.index')->with('success', 'Berhasil Tambah User');
@@ -49,7 +51,8 @@ class TableController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $id,
             'password' => 'nullable|string|min:8|confirmed', // Password tidak wajib diubah
-            'role' => 'required|string'
+            'role' => 'required|string',
+            'status' => 'required|string'
         ]);
 
         $user = User::findOrFail($id);
@@ -57,7 +60,8 @@ class TableController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password ? bcrypt($request->password) : $user->password, // Hanya update password jika diisi
-            'role' => $request->role
+            'role' => $request->role,
+            'status' => $request->status
         ]);
 
         return redirect()->route('table.index')->with('success', 'Berhasil Update User');

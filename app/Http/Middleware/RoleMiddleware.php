@@ -18,7 +18,7 @@ class RoleMiddleware
          // Periksa apakah pengguna terotentikasi dan memiliki peran yang sesuai
          if (!Auth::check() || Auth::user()->role !== $role) {
             // Redirect atau abort jika pengguna tidak memiliki peran yang sesuai
-            return redirect('/'); // Ganti dengan rute yang sesuai
+            return redirect()->route('home');  // Ganti dengan rute yang sesuai
         }
         return $next($request);
     }

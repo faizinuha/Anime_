@@ -38,8 +38,10 @@ Auth::routes(['verify' => true]);
 // ===============================[Bagian data akun]=============================================//
 Route::get('/', [HomeController::class, 'Anim'])->name('Anim');
 Route::get('/list', [dashboardController::class, 'list'])->name('list');
-// Route::get('/watch/{watch:name}', [WatchController::class, 'show'])->name('anime.show');
-Route::get('/watch/{name}', [WatchController::class, 'show'])->name('anime.show');
+
+Route::get('/watch/{watch:name}', [WatchController::class, 'show'])->name('anime.show');
+// Route::get('/watch/{name}', [WatchController::class, 'show'])->name('anime.show');
+
 Route::get('/anime/{anime:name}', [DashboardController::class, 'show'])->name('animes.show');
 Route::post('/comment', [CommentController::class, 'store'])->name('comment.store');
 Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->name('comment.destroy');

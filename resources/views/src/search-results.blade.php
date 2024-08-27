@@ -13,7 +13,7 @@
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #f0f4f8;
+            background-color: #0b0c2a;
             color: #333;
         }
 

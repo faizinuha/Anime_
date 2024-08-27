@@ -113,6 +113,7 @@
                             <th>No</th>
                             <th>Nama</th>
                             <th>Email</th>
+                            {{-- <th>Password</th> --}}
                             <th>Avatar</th>
                             <th>Roles</th>
                             <th>Status</th>
@@ -125,6 +126,7 @@
                                 <td>{{ $no++ }}</td>
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->email }}</td>
+                                {{-- <td>{{ $item->password}} </td> --}}
                                 <td>
                                     <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
                                         <li data-bs-toggle="tooltip" data-bs-placement="top"
@@ -137,8 +139,8 @@
                                 <td>{{ $item->role }}</td>
                                 <td>
                                     <span
-                                        class="{{ $item->is_admin ? 'badge bg-label-primary me-1' : 'badge bg-label-success me-1' }}">
-                                        {{ $item->is_admin ? 'Admin' : 'Member' }}
+                                        class="{{ $item->status ? 'badge bg-label-primary me-1' : 'badge bg-label-success me-1' }}">
+                                        {{ $item->status ? 'Admin' : 'Member' }}
                                     </span>
                                 </td>
                                 <td class="w-1">

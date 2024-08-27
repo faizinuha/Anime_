@@ -18,6 +18,23 @@
                       <option value="is_guest">Guest</option>
                   </select>
               </div>
+              <div class="mb-3">
+                <label for="status" class="form-label">Status Member</label>
+                <select name="status" id="status" class="form-control" required>
+                    <option value="" disabled selected>Pilih Status</option>
+                    <option value="FrontEnd">FrontEnd</option>
+                    <option value="Backend">Backend</option>
+                    <option value="Server">Server</option>
+                    <option value="UI/UX">UI/UX</option>
+                    <option value="Service">Service</option>
+                    <option value="Mobile">Mobile</option>
+                    <option value="Database">Database</option>
+                    <option value="Network">Network</option>
+                    <option value="Security">Security</option>
+                    <option value="AI">AI</option>
+                </select>
+            </div>
+            
               
               <div class="mb-3">
                   <label for="name" class="form-label">Nama</label>

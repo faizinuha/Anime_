@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->enum('role', ['is_admin', 'is_member', 'is_guest'])->default('is_guest'); // Menggunakan ENUM untuk role
+            $table->enum('status', ['FrontEnd', 'Backend', 'Server','UI/UX','Service','Mobile','Database','Network','Security','AI','']);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

@@ -1,7 +1,6 @@
 @extends('kerangka.master')
 @section('title','Dates')
 @section('content')
-
 <div class="col-sm-7">
   <div class="card-body">
       <h5 class="card-title text-primary">Selamat Datang {{ Auth::user()->name }} 🎉</h5>
