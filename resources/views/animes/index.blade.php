@@ -146,6 +146,7 @@
                         <th>Gambar</th>
                         <th>Media</th>
                         <th>Rilis</th>
+                        <th>Episode</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -185,6 +186,7 @@
                                 <strong>Studio:</strong> {{ $anime->studio }} |
                                 <strong>Tipe:</strong> {{ $anime->type }} |
                                 <strong>Sinonim:</strong> {{ $anime->synonyms }} |
+                                <strong>Episode:</strong> {{ $anime->episodes}} |
                             </td>
                         </tr>
                     @endforeach

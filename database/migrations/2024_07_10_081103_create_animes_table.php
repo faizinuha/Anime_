@@ -23,7 +23,7 @@ class CreateAnimesTable extends Migration
             $table->text('description')->nullable();  // Deskripsi anime
             $table->enum('status', ['Ongoing', 'Completed', 'Upcoming'])->default('Upcoming');  // Status rilis
             $table->string('studio')->nullable();  // Studio produksi
-            $table->integer('episodes')->nullable();  // Jumlah episode
+            $table->integer('episodes')->nullable();  // Jumlah episodeb
             $table->string('trailer')->nullable();  // URL trailer
             $table->enum('type', ['TV', 'Movie', 'OVA', 'ONA', 'Special'])->default('TV');  // Tipe anime
             $table->integer('duration')->nullable();  // Durasi tiap episode
