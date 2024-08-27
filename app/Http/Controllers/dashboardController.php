@@ -23,10 +23,11 @@ class dashboardController extends Controller
       return view('Anim.anime', compact('anime','comment'));
       // dd($anime); 
    }
-   
-   public function watch(Anime $anime) {
-      return view('Anim.watch', ['anime' => $anime]);
-  }
+
+//    public function watch(Anime $anime) {
+      
+//       return view('Anim.watch', ['anime' => $anime]);
+//   }
   
    public function data()
    {

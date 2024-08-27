@@ -40,7 +40,6 @@ class Anime extends Model
     {
         return $this->hasMany(Comment::class);
     }
-    
 
 
 }

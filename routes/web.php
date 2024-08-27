@@ -12,6 +12,7 @@ use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\SearchController;
+use App\Http\controllers\watchController;
 // use App\Http\Controllers\Tayangharicontroller;
 
 // use App\Models\Anime;
@@ -37,7 +38,8 @@ Auth::routes(['verify' => true]);
 // ===============================[Bagian data akun]=============================================//
 Route::get('/', [HomeController::class, 'Anim'])->name('Anim');
 Route::get('/list', [dashboardController::class, 'list'])->name('list');
-Route::get('/watch/{watch:name}', [DashboardController::class, 'watch'])->name('anime.watch');
+// Route::get('/watch/{watch:name}', [WatchController::class, 'show'])->name('anime.show');
+Route::get('/watch/{name}', [WatchController::class, 'show'])->name('anime.show');
 Route::get('/anime/{anime:name}', [DashboardController::class, 'show'])->name('animes.show');
 Route::post('/comment', [CommentController::class, 'store'])->name('comment.store');
 Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->name('comment.destroy');
