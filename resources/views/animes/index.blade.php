@@ -146,7 +146,7 @@
                         <th>Gambar</th>
                         <th>Media</th>
                         <th>Rilis</th>
-                        <th>Episode</th>
+                        {{-- <th>Episode</th> --}}
                         <th>Aksi</th>
                     </tr>
                 </thead>

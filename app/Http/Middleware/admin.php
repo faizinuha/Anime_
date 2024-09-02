@@ -19,7 +19,7 @@ class admin
     {
         if (!Auth::check() || Auth::user()->is_admin == false) {
 
-            return Redirect::route('dashboard');
+            return Redirect::route('home');
         }
         return $next($request);
     }

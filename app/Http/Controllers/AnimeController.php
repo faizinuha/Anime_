@@ -83,6 +83,7 @@ class AnimeController extends Controller
         if ($request->hasFile('image')) {
             $anime->image = $request->file('image')->store('images', ['disk' => 'public']);
         }
+                
         if ($request->hasFile('video')) {
             $anime->video = $request->file('video')->store('videos', ['disk' => 'public']);
         }
@@ -100,8 +101,28 @@ class AnimeController extends Controller
     public function destroy($id)
     {
         $anime = Anime::findOrFail($id);
-        // jika data tidak di temukan
+    
+        // Hapus gambar jika ada
+        if ($anime->image) {
+            $imagePath = public_path('storage') . '/' . $anime->image;
+            // dd($imagePath);
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+        }
+    
+        // Hapus video jika ada
+        if ($anime->video) {
+            $videoPath = public_path('videos') . '/' . $anime->video;
+            if (file_exists($videoPath)) {
+                unlink($videoPath);
+            }
+        }
+    
+        // Hapus data Anime dari database
         $anime->delete();
+    
         return redirect()->route('anime.index')->with('success', 'Anime deleted successfully.');
     }
+    
 }

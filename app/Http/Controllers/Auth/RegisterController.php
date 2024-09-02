@@ -74,8 +74,9 @@ class RegisterController extends Controller
      */
     protected function registered(Request $request, $user)
     {
-        session()->flash('notification', "Selamat datang, {$user->name}! Anda telah berhasil mendaftar.");
-        
-        return redirect('/auth/verify'); // URL harus sesuai dengan route yang ada
+        session()->flash('notification', "Wah, selamat datang {$user->name}! Terima kasih telah mendaftar di aplikasi kami. Silakan verifikasi email Anda untuk melanjutkan.");
+    
+        return redirect('/auth/verify'); // Sesuaikan URL dengan route yang ada
     }
+    
 }
