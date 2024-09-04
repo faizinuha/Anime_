@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,10 +12,10 @@ return new class extends Migration
     {
         Schema::create('episodes', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('video_url');
-            $table->foreign('anime_id')->references('animes');
-            $table->integer('episode_number');
+            $table->string('video');
+            $table->string('episode');
+            $table->unsignedBigInteger('anime_id'); // Tambahkan kolom anime_id
+            $table->foreign('anime_id')->references('id')->on('animes'); // Atur foreign key yang benar
             $table->timestamps();
         });
     }

@@ -32,19 +32,17 @@
                                             class="w-px-40 h-auto rounded-circle" />
                                     </div>
                                 </div>
-                                <div class="flex-grow-1">
-                                    @if (Auth::check())
-                                        <span class="fw-semibold d-block">{{ Auth::user()->name }}</span>
-                                    @else
-                                        <span class="fw-semibold d-block">Guest</span>
-                                    @endif
-
-                                    {{-- <small class="text-muted"> 
-                  @if (Auth::user())
-                    
-                  @endif
-                </small> --}}
-                                </div>
+                                @php
+                                $user = Auth::user(); // Ambil pengguna yang sedang login
+                            @endphp
+                            <div class="flex-grow-1">
+                                @if ($user)
+                                    <span class="fw-semibold d-block">{{ $user->name }}</span>
+                                    <span class="fw-semibold d-block">{{ $user->role }}</span> <!-- Perbaiki akses role -->
+                                @else
+                                    <span class="fw-semibold d-block">Guest</span>
+                                @endif
+                            </div>                            
                             </div>
                         </a>
                     </li>

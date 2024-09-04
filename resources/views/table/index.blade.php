@@ -140,7 +140,7 @@
                                 <td>
                                     <span
                                         class="{{ $item->status ? 'badge bg-label-primary me-1' : 'badge bg-label-success me-1' }}">
-                                        {{ $item->status ? 'Admin' : 'Member' }}
+                                        {{ $item->status }}
                                     </span>
                                 </td>
                                 <td class="w-1">

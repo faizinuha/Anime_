@@ -13,6 +13,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\SearchController;
 use App\Http\controllers\watchController;
+use App\Http\Controllers\EpisodeController;
 // use App\Http\Controllers\Tayangharicontroller;
 
 // use App\Models\Anime;
@@ -99,3 +100,19 @@ Route::get('/animes/{id}/edit', [AnimeController::class, 'edit'])->name('anime.e
 Route::put('/animes/{id}', [AnimeController::class, 'update'])->name('anime.update');
 // Menghapus anime tertentu dari database
 Route::delete('/animes/{id}', [AnimeController::class, 'destroy'])->name('anime.destroy');
+
+
+
+
+
+
+
+
+
+
+
+// bagian episode
+Route::get('/episodes', [EpisodeController::class, 'index'])->name('episodes.index');
+Route::get('/episodes/create', [EpisodeController::class, 'create'])->name('episodes.create');
+Route::post('/episodes', [EpisodeController::class, 'store'])->name('episodes.store');
+Route::delete('/episodes/{id}', [EpisodeController::class, 'destroy'])->name('episodes.destroy');

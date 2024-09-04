@@ -184,7 +184,7 @@
                             <td colspan="6" class="text-start">
                                 <strong>Category:</strong> {{ $anime->category->name }} |
                                 <strong>Studio:</strong> {{ $anime->studio }} |
-                                <strong>Tipe:</strong> {{ $anime->type }} |
+                               <strong>Tipe:</strong> {{ $anime->type }} |
                                 <strong>Sinonim:</strong> {{ $anime->synonyms }} |
                                 <strong>Episode:</strong> {{ $anime->episodes}} |
                             </td>

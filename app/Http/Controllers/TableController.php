@@ -52,7 +52,7 @@ class TableController extends Controller
             'email' => 'required|email|unique:users,email,' . $id,
             'password' => 'nullable|string|min:8|confirmed', // Password tidak wajib diubah
             'role' => 'required|string',
-            'status' => 'required|string'
+            'status' => 'required|in:FrontEnd,Backend,Server,UI/UX,Service,Mobile,Database,Network,Security,AI',
         ]);
 
         $user = User::findOrFail($id);

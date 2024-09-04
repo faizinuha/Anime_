@@ -106,7 +106,7 @@
                                         <a href="javascript:void(0);">{{ auth()->user()->name }}</a>
                                         <ul class="dropdown"
                                             style="display:none; position:absolute; top:100%; left:0; background:#333; padding:10px 0; min-width:150px;">
-                                            <li><a href="#">Profile</a></li>
+                                            {{-- <li><a href="#">Profile</a></li> --}}
                                             <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                                 Logout
                                             </a>

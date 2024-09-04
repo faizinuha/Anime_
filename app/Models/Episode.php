@@ -9,7 +9,7 @@ class Episode extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'video_url', 'episode_number', 'anime_id'];
+    protected $fillable = ['video', 'episode', 'anime_id'];
 
     // Relationship dengan model Anime
     public function anime()
