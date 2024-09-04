@@ -41,7 +41,7 @@
       <!-- /Left Text -->
       <div class="d-none d-lg-flex col-lg-7 col-xl-8 align-items-center p-5">
         <div class="w-100 d-flex justify-content-center">
-          <img src="{{ asset('assets/img/sneat2.png') }}" class="img-fluid" alt="Login image" width="700">
+          <img src="{{ asset('Img1/character-serika.972be2ff.png') }}" class="img-fluid" alt="Login image" width="450">
         </div>
       </div>
       <!-- /Left Text -->
@@ -55,13 +55,13 @@
               <span class="app-brand-logo demo">
                 <!-- Logo SVG -->
               </span>
-              <span class="app-brand-text demo text-body fw-bold">AppName</span>
+              <span class="app-brand-text demo text-body fw-bold">Animehub</span>
             </a>
           </div>
           <!-- /Logo -->
 
-          <h4 class="mb-2">Adventure starts here 🚀</h4>
-          <p class="mb-4">Make your app management easy and fun!</p>
+          <h4 class="mb-2">Register Segera Dan Dapatkan Anime Terbaru  🚀</h4>
+          <p class="mb-4">Tahap Beta!</p>
 
           <form id="formAuthentication" class="mb-3" method="POST" action="{{ route('register') }}">
             @csrf

@@ -52,7 +52,7 @@
             <!-- /Left Text -->
             <div class="d-none d-lg-flex col-lg-7 col-xl-8 align-items-center p-5">
                 <div class="w-100 d-flex justify-content-center">
-                    <img src="{{ asset('/assets/img/sneat.png') }}" class="img-fluid" alt="Login image" width="700"
+                    <img src="{{ asset('Img1/character-shiroko.admin.png') }}" alt="Login image" width="400"
                         data-app-dark-img="illustrations/boy-with-rocket-dark.png"
                         data-app-light-img="illustrations/boy-with-rocket-light.png">
                 </div>
@@ -156,7 +156,7 @@
                         </div>
                         <div class="mb-3">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="remember-me">
+                                <input class="form-check-input" type="checkbox" id="remember-me" a >
                                 <label class="form-check-label" for="remember-me">
                                     Remember Me
                                 </label>
@@ -181,7 +181,7 @@
                             </a>
                         @endif
                         <a href="#" data-bs-toggle="modal" class="p-5" data-bs-target="#exampleModal">
-                            Account
+                            MultiAccount
                         </a>
                     </p>
                     <hr>
@@ -216,10 +216,6 @@
                     <link rel="stylesheet"
                         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>
