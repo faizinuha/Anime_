@@ -11,7 +11,18 @@ class AnimeController extends Controller
 {
     public function index()
     {
-        $animes = Anime::all();
+        // $animes = Anime::all();
+        // $animes = Anime::with(['animeEpisodes' => function ($q) {
+        //     $q->orderBy('episode', 'desc')->limit(1);
+        // }])->get();
+
+        $animes = Anime::with([
+            'animeEpisodes' => function ($query) {
+                $query->orderBy('episode', 'desc');
+            }])->get();
+        // $animes = Anime::with('animeEpisodes')->get();
+        
+        // dd($animes);
         return view('animes.index', compact('animes'));
     }
 

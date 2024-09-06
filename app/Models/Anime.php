@@ -40,8 +40,8 @@ class Anime extends Model
     {
         return $this->hasMany(Comment::class);
     }
-    public function episodes()
+    public function animeEpisodes()
     {
-        return $this->hasMany(Episode::class)->count(); // Benar menggunakan hasMany
+        return $this->hasMany(Episode::class, 'anime_id'); // Benar menggunakan hasMany
     }
 }

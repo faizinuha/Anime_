@@ -40,7 +40,7 @@ Auth::routes(['verify' => true]);
 Route::get('/', [HomeController::class, 'Anim'])->name('Anim');
 Route::get('/list', [dashboardController::class, 'list'])->name('list');
 
-Route::get('/watch/{watch:name}', [WatchController::class, 'show'])->name('anime.show');
+Route::get('/watch/{watch:name}-{episode}', [WatchController::class, 'show'])->name('anime.show');
 // Route::get('/watch/{name}', [WatchController::class, 'show'])->name('anime.show');
 
 Route::get('/anime/{anime:name}', [DashboardController::class, 'show'])->name('animes.show');
@@ -116,3 +116,6 @@ Route::get('/episodes', [EpisodeController::class, 'index'])->name('episodes.ind
 Route::get('/episodes/create', [EpisodeController::class, 'create'])->name('episodes.create');
 Route::post('/episodes', [EpisodeController::class, 'store'])->name('episodes.store');
 Route::delete('/episodes/{id}', [EpisodeController::class, 'destroy'])->name('episodes.destroy');
+
+Route::get('/NewEps', [EpisodeController::class, 'newEps'])->name('episode.newEps');
+Route::post('/neweps/create', [EpisodeController::class, 'createEps'])->name('episodes.createEps');

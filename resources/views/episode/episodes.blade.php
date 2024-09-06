@@ -29,11 +29,11 @@
             <tbody>
                 @foreach($episodes as $episode)
                     <tr>
-                        <td>{{ $episode->id }}</td>
+                        <td>{{ $loop->iteration }}</td>
                         <td>
                             <div class="media-container">
                                 @if ($episode->video)
-                                    <video src="{{ asset('storage/' . $episode->video) }}" controls width="200"></video>
+                                    <video src="{{ asset('storage/' . $episode->video) }}" controls width="100"></video>
                                 @else
                                     <span>No Video Available</span>
                                 @endif
@@ -43,7 +43,7 @@
                         <td>{{ $episode->anime->name }}</td>
                         <td>
                             <!-- Tautan untuk edit dan delete -->
-                            <a href="#" class="btn btn-warning btn-sm">Tambah Episode</a>
+                            <a href="{{ route('episode.newEps')}}" class="btn btn-warning btn-sm">Tambah Episode</a>
                             <form action="{{ route('episodes.destroy', $episode->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')

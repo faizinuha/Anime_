@@ -1,10 +1,12 @@
-<?php 
+<?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Episode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\models\Anime;
+
 class EpisodeController extends Controller
 {
     /**
@@ -39,16 +41,51 @@ class EpisodeController extends Controller
         $videoPath = $request->file('video')->store('videos', 'public');
 
         // // Simpan episode baru
-        
-        // Episode::create([
-        //     'video' => $videoPath,
-        //     'episode' => $request->episode,
-        //     'anime_id' => $request->anime_id,
-        // ]);
+
+        $episode = Episode::create([
+            'video' => $videoPath,
+            'episode' => $request->episode,
+            'anime_id' => $request->anime_id,
+        ]);
+
+        if($episode) {
+            $anime = $episode->anime;
+            $episode->anime()->update([
+                'episodes' => $anime->animeEpisodes->count()
+            ]);
+        }
 
         return redirect()->route('episodes.index')->with('success', 'Episode created successfully.');
     }
 
+    public function newEps()
+    {
+        // Ambil semua anime untuk dropdown
+        $animes = Anime::all();
+        return view('episode.neweps', compact('animes'));
+    }
+    public function createEps(Request $request)
+    {
+        $request->validate([
+            'video' => 'required|file|mimes:mp4,avi,mkv|max:20480', // Maksimal 20MB
+            'episode' => 'required|string',
+            'anime_id' => 'required|exists:animes,id',
+        ]);
+        $videopath = $request->file('video')->store('videos', 'public');
+        $episode = Episode::create([
+            'video' => $videopath,
+            'episode' => $request->episode,
+            'anime_id' => $request->anime_id,
+        ]);
+
+        if ($episode) {
+            $anime = Anime::find($request->anime_id); // Find the associated anime
+            $anime->update([
+                'episodes' => $anime->animeEpisodes()->count() // Update the episodes count field
+            ]);
+        }    
+        return redirect()->route('episodes.index')->with('success', 'Episode Berhasil Tambah');
+    }
     /**
      * Remove the specified episode from storage.
      */

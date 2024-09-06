@@ -180,13 +180,14 @@
                             </td>
                         </tr>
                         <!-- Tambahan Baris untuk Data Tambahan -->
+                        {{-- @dd($anime->animeEpisodes) --}}
                         <tr>
                             <td colspan="6" class="text-start">
                                 <strong>Category:</strong> {{ $anime->category->name }} |
                                 <strong>Studio:</strong> {{ $anime->studio }} |
                                <strong>Tipe:</strong> {{ $anime->type }} |
                                 <strong>Sinonim:</strong> {{ $anime->synonyms }} |
-                                <strong>Episode:</strong> {{ $anime->episodes}} |
+                                <strong>Episode:</strong> {{ count($anime->animeEpisodes) > 0 ? $anime->animeEpisodes->first()->episode : 0 }} |
                             </td>
                         </tr>
                     @endforeach

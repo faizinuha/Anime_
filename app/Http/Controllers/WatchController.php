@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Anime;
 use App\Models\Comment;
+use App\Models\Episode;
 use Illuminate\Http\Request;
 
 class WatchController extends Controller
 {
-    public function show($name)
+    public function show($name, Episode $episode)
     {
         // Ambil anime berdasarkan nama
         $anime = Anime::where('name', $name)->first();
@@ -19,7 +20,7 @@ class WatchController extends Controller
         }
 
         $comments = Comment::where('anime_id', $anime->id)->get();
-        return view('Anim.watch', compact('anime', 'comments'));
+        return view('Anim.watch', compact('anime', 'comments', 'episode'));
     }
 
     public function store(Request $request)
@@ -34,7 +35,7 @@ class WatchController extends Controller
         Comment::create([
             'anime_id' => $request->anime_id,
             'user_id' => auth()->id(),
-            'content' => $request->content,
+            'content' => $request->content
         ]);
 
         return redirect()->back()->with('success', 'Komentar berhasil ditambahkan!');

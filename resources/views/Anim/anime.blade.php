@@ -62,7 +62,7 @@
                             </div>
                             <div class="anime__details__btn">
                                 <a href="#" class="follow-btn"><i class="fa fa-heart-o"></i> Follow</a>
-                                <a href="{{ route('anime.show', ['watch' => $anime->name]) }}" class="watch-btn">
+                                <a href="{{ route('anime.show', ['watch' => $anime->name, 'episode' => $anime->animeEpisodes->first()->id]) }}" class="watch-btn">
                                     <span>Watch Now</span> <i class="fa fa-angle-right"></i>
                                 </a>
                             </div>
@@ -76,11 +76,16 @@
                                 <h5>Episodes</h5>
                             </div>
                             <div class="episode-cards">
-                                @for ($i = 1; $i <= $anime->episodes; $i++)
+                                {{-- @for ($i = 1; $i <= $anime->episodes; $i++)
                                     <div class="episode-card">
                                         <a href="#episode-{{ $i }}">Ep: {{ $i }}</a>
                                     </div>
-                                @endfor
+                                    @endfor --}}
+
+                                @forelse ($anime->animeEpisodes as $index => $episode)
+                                    <a href="{{ route('anime.show', ['watch' => $anime->name, 'episode' => $episode->id]) }}">Ep: {{ $episode->episode }}</a>
+                                @empty
+                                @endforelse
                             </div>
                         </div>
 

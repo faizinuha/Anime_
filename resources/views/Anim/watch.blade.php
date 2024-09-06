@@ -6,7 +6,7 @@
           <div class="col-lg-12">
               <div class="anime__video__player">
                   <video id="player" playsinline controls data-poster="{{asset('assetanime/./videos/anime-watch.jpg')}}">
-                      <source src="{{asset('assetanime/videos/1.mp4')}}" type="video/mp4" />
+                      <source src="{{asset('storage/'.$episode->video)}}" type="video/mp4" />
                       <!-- Captions are optional -->
                       <track kind="captions" label="English captions" src="#" srclang="en" default />
                   </video>
