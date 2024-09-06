@@ -38,7 +38,10 @@ class EpisodeController extends Controller
         ]);
 
         // Simpan file video
-        $videoPath = $request->file('video')->store('videos', 'public');
+        $anime = Anime::findOrFail($request->anime_id);
+        $animeFolder = 'videos/' . ($anime->name); 
+        $videoPath = $request->file('video')->store($animeFolder, 'public');
+    
 
         // // Simpan episode baru
 
@@ -71,9 +74,12 @@ class EpisodeController extends Controller
             'episode' => 'required|string',
             'anime_id' => 'required|exists:animes,id',
         ]);
-        $videopath = $request->file('video')->store('videos', 'public');
+        $anime = Anime::findOrFail($request->anime_id);
+        $animeFolder = 'videos/' . ($anime->name); 
+        $videoPath = $request->file('video')->store($animeFolder, 'public');
+
         $episode = Episode::create([
-            'video' => $videopath,
+            'video' => $videoPath,
             'episode' => $request->episode,
             'anime_id' => $request->anime_id,
         ]);

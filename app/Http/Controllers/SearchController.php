@@ -10,7 +10,12 @@ class SearchController extends Controller
     public function search(Request $request)
     {
         $query = $request->input('query');
-        $results = Anime::where('name', 'LIKE', "%{$query}%")->get();
+        
+        $results = Anime::where('name', 'LIKE', "%{$query}%")
+        ->orWhereHas('category', function($q) use ($query) {
+            $q->where('name', 'LIKE', "%{$query}%");
+        })
+        ->get();
 
         return view('src.search-results', compact('results'));
     }
