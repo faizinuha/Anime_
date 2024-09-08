@@ -56,6 +56,7 @@
                                             <li><span>Quality:</span>1040{{ $anime->quality }}</li>
                                             <li><span>Views:</span>240K{{ $anime->views_count }}</li>
                                             <li><span>Episode:</span>{{ $anime->episodes }}</li>
+                                            {{-- <li><span>Episode:</span>{{ $anime->episodes }}</li> --}}
                                         </ul>
                                     </div>
                                 </div>

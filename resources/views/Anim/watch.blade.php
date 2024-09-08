@@ -2,23 +2,27 @@
 @section('content')
 <section class="anime-details spad">
   <div class="container">
+
       <div class="row">
           <div class="col-lg-12">
               <div class="anime__video__player">
-                  <video id="player" playsinline controls data-poster="{{asset('assetanime/./videos/anime-watch.jpg')}}">
-                      <source src="{{asset('storage/'.$episode->video)}}" type="video/mp4" />
-                      <!-- Captions are optional -->
-                      <track kind="captions" label="English captions" src="#" srclang="en" default />
-                  </video>
-              </div>
+                <video id="player" playsinline controls data-poster="{{asset('assetanime/./videos/anime-watch.jpg')}}">
+                    <source src="{{asset('storage/'.$episode->video)}}" type="video/mp4" />
+                    <track kind="captions" label="English captions" src="#" srclang="en" default />
+                    <track kind="captions" label="Jepang" src="#" srclang="jp" default />
+                </video>
+                <button id="pipButton" class="btn btn-primary" aria-keyshortcuts="i">
+                    <img src="{{asset('assetanime/img/image.png')}}" sizes="10" alt="Miniplayer(i)">
+                </button>
+            </div>            
               <div class="anime__details__episodes">
                   <div class="section-title">
-                      <h5>List Name</h5>
+                      <h5>Eps</h5>
                   </div>
-                 
               </div>
           </div>
       </div>
+
       <div class="row">
           <div class="col-lg-8">
               <div class="anime__details__review">

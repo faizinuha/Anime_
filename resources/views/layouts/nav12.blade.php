@@ -63,18 +63,12 @@
                                 <li><a href="./categories.html">All <span class="arrow_carrot-down"></span></a>
                                     <ul class="dropdown">
                                         <li><a href="{{ route('list') }}">Anime Details</a></li>
-                                        <li><a href="#">Categories</a></li>
-                                        <li><a href="./anime-watching.html">Anime Watching</a></li>
-                                        <li><a href="./blog-details.html">Blog Details</a></li>
-                                        <li><a href="./signup.html">Sign Up</a></li>
                                         {{-- <li><a href="{{route('login2')}}">Login</a></li> --}}
                                     </ul>
                                 </li>
-                                <li><a href="./blog.html">Our Blog</a></li>
-                                <li><a href="#">Contacts</a></li>
-
-
-                                <li>
+                                <li><a href="#" id="nobar" >Nobar</a></li>
+                                <li><a href="#">Customer</a></li>
+                                {{-- <li> --}}
                                     {{-- <a href="#">Categories <span class="arrow_carrot-down"></span></a> --}}
                                     {{-- @php
                                         $categories = App\Models\Category::all();
@@ -89,7 +83,7 @@
                                             </li>
                                         @endforeach
                                     </ul> --}}
-                                </li>
+                                {{-- </li> --}}
 
                             </ul>
                         </nav>
@@ -139,7 +133,8 @@
     <style>
         .user-name .dropdown {
             display: none;
-            position: absolute;
+            text-align: center;
+            position: relative;
             background-color: #333;
             top: 100%;
             left: 0;
@@ -149,9 +144,9 @@
             z-index: 999;
         }
 
-        .user-name .dropdown li {
+        /* .user-name .dropdown li {
             margin: 0;
-        }
+        } */
 
         .user-name .dropdown li a {
             color: #fff;
@@ -165,6 +160,8 @@
 
         /* Show dropdown on hover */
         .user-name:hover .dropdown {
+            content: '';
+            text-decoration: underline;
             display: block;
         }
 
@@ -175,7 +172,8 @@
         }
 
         .header__right .user-name p {
-            color: blue margin-left: 10px;
+            color: blue;
+            margin-left: 10px;
             /* Jarak antara ikon profil dan nama user */
             margin-bottom: 0;
             /* Menghilangkan margin bawah pada paragraf */
@@ -199,6 +197,29 @@
                 });
             });
         });
+
+        // minta notit
+        document.addEventListener('DOMContentLoaded', function() {
+            if (Notification.permission === 'granted') {
+            new Notification('Selamat Datang!', {
+                body: '{{ session('notification') }}',
+                icon: 'path/to/icon.png' // Ganti dengan path ikon Anda
+            });
+        }
+        })
+        Notification.requestPermission().then(function(permission) {
+            if (permission === 'granted') {
+                console.log('Izin notifikasi diberikan.');
+            } else {
+                console.log('Izin notifikasi ditolak.');
+            }
+        });
+
+
+        document.getElementById('nobar').addEventListener('click',function(event){
+            event.preventDefault();
+            alert('Maaf dalam tahap Beta')
+        })
     </script>
     <!-- Js Plugins -->
     <script src="{{ asset('assetanime/js/jquery-3.3.1.min.js') }}"></script>

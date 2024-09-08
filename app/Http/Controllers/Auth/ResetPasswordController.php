@@ -33,7 +33,7 @@ class ResetPasswordController extends Controller
     public function resetpassword(Request $request, User $user)
     {
         // Kirim notifikasi kustom
-        // $user->notify(new \App\Notifications\CustomPasswordResetNotification());
+         $user->notify(new CustomPasswordResetNotification());
     
         // Flash notifikasi ke sesi dengan pesan unik
         session()->flash('notification', "Halo, {$user->name}! Sepertinya kamu lupa password ya? Jangan khawatir, kita semua pernah kok. Yuk, reset sekarang sebelum kamu lupa lagi!");

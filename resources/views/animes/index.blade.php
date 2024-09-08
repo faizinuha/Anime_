@@ -185,8 +185,9 @@
                             <td colspan="6" class="text-start">
                                 <strong>Category:</strong> {{ $anime->category->name }} |
                                 <strong>Studio:</strong> {{ $anime->studio }} |
-                               <strong>Tipe:</strong> {{ $anime->type }} |
+                                <strong>Tipe:</strong> {{ $anime->type }} |
                                 <strong>Sinonim:</strong> {{ $anime->synonyms }} |
+                                <strong>TotalEps:</strong> {{ $anime->episodes }} |
                                 <strong>Episode:</strong> {{ count($anime->animeEpisodes) > 0 ? $anime->animeEpisodes->first()->episode : 0 }} |
                             </td>
                         </tr>

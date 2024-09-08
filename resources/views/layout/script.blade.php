@@ -23,7 +23,23 @@
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 <script>new DataTable('#example');</script>
-
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    if (Notification.permission === 'granted') {
+        new Notification('Selamat Datang!', {
+            body: '{{ session('notification') }}',
+            icon: 'path/to/icon.png' 
+        });
+    }
+})
+Notification.requestPermission().then(function(permission) {
+            if (permission === 'granted') {
+                console.log('Izin notifikasi diberikan.');
+            } else {
+                console.log('Izin notifikasi ditolak.');
+            }
+        });
+</script>
 {{-- <!-- Tambahkan jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 

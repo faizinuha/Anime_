@@ -32,7 +32,7 @@ class EpisodeController extends Controller
     {
         // Validasi input
         $request->validate([
-            'video' => 'required|file|mimes:mp4,avi,mkv|max:20480', // Maksimal 20MB
+            'video' => 'required|file|mimes:mp4,avi,mkv|max:99999', // Maksimal 20MB
             'episode' => 'required|string',
             'anime_id' => 'required|exists:animes,id',
         ]);
@@ -70,7 +70,7 @@ class EpisodeController extends Controller
     public function createEps(Request $request)
     {
         $request->validate([
-            'video' => 'required|file|mimes:mp4,avi,mkv|max:20480', // Maksimal 20MB
+            'video' => 'required|file|mimes:mp4,avi,mkv|max:99999', // Maksimal infinitty
             'episode' => 'required|string',
             'anime_id' => 'required|exists:animes,id',
         ]);
