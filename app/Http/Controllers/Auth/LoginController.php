@@ -40,16 +40,35 @@ class LoginController extends Controller
     }
     public function login2()
     {
- 
-       return view('Auth.loginUser');
-       // return view('Auth.login2');
+
+        return view('Auth.loginUser');
+        // return view('Auth.login2');
     }
     public function register2()
     {
-       return view('Auth.registeruser');
-       // return view('Auth.register2');
+        return view('Auth.registeruser');
+        // return view('Auth.register2');
     }
-    
+    public function login(Request $request)
+    {
+        // Validasi input
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        // Coba login dengan remember me
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
+            // Redirect ke halaman yang sesuai jika login berhasil
+            return redirect()->intended($this->redirectPath()); // menggunakan fungsi redirectPath() agar dinamis
+        }
+
+        // Kembalikan ke halaman login jika gagal
+        return back()->withInput($request->only('email', 'remember')) // Menyimpan input sebelumnya
+            ->withErrors([
+                'email' => 'These credentials do not match our records.',
+            ]);
+    }
     public function logout(Request $request)
     {
         Auth::logout(); // Mengeluarkan pengguna dari sesi
@@ -59,6 +78,4 @@ class LoginController extends Controller
 
         return redirect()->route('Anim'); // Arahkan ke rute 'Anim'
     }
-
-    
 }

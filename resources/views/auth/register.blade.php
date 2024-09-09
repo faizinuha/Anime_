@@ -111,7 +111,7 @@
               </div>
             </div>
 
-            <div class="mb-3">
+            {{-- <div class="mb-3">
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="terms-conditions" name="terms">
                 <label class="form-check-label" for="terms-conditions">
@@ -119,8 +119,15 @@
                   <a href="javascript:void(0);">privacy policy & terms</a>
                 </label>
               </div>
-            </div>
-
+            </div> --}}
+            <div class="mb-3">
+              <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="remember" name="remember" required  >
+                  <label class="form-check-label" for="remember"  >
+                      Remember Me
+                  </label>
+              </div>
+          </div>
             <button type="submit" class="btn btn-primary d-grid w-100">Sign up</button>
           </form>
 

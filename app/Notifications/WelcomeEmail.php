@@ -21,7 +21,12 @@ class WelcomeEmail extends Notification
     {
         return ['mail'];
     }
-
+    public  $token;
+    public function __construct($token)
+    {
+        //
+        $this->token = $token;
+    }
     /**
      * Get the mail representation of the notification.
      *
@@ -31,9 +36,10 @@ class WelcomeEmail extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->greeting('Selamat Datang!')
-            ->line('Terima kasih telah mendaftar.')
-            ->action('Kunjungi Website', url('/'))
-            ->line('Jika Anda memiliki pertanyaan, silakan hubungi kami.');
+            ->greeting('Yokoso! Selamat Datang di Dunia Kami!')
+            ->line('Arigatou gozaimasu, telah mendaftar di dunia kami yang penuh petualangan dan kejutan!')
+            ->action('Jelajahi Dunia Baru', url('/'))
+            ->line('Jika ada pertanyaan atau bantuan, jangan ragu untuk memanggil kami—seperti seorang protagonis memanggil sekutu dalam pertempuran!')
+            ->salutation('Salam hangat, Tim Anime Fantasi!');
     }
 }

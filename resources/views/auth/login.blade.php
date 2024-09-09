@@ -156,12 +156,18 @@
                         </div>
                         <div class="mb-3">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="remember-me" a >
-                                <label class="form-check-label" for="remember-me">
+                                <input class="form-check-input" type="checkbox" id="remember" name="remember" required  >
+                                <label class="form-check-label" for="remember"  >
                                     Remember Me
                                 </label>
                             </div>
                         </div>
+                        {{-- <div class="form-check">
+                            <input type="checkbox" name="remember" class="form-check-input" id="remember">
+                            <label class="form-check-label" for="remember">
+                                Remember Me
+                            </label>
+                        </div> --}}
                         @if (session('error'))
                             <div class="alert alert-danger" role="alert">
                                 {{ session('error') }}
