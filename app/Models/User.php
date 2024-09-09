@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Notifications\CustomPasswordResetNotification;
 
 class User extends Authenticatable implements  MustVerifyEmail
 {
@@ -15,6 +16,7 @@ class User extends Authenticatable implements  MustVerifyEmail
 
     /**
      * The attributes that are mass assignable.
+     * 
      *
      * @var array<int, string>
      */
@@ -23,7 +25,8 @@ class User extends Authenticatable implements  MustVerifyEmail
         'email',
         'password',
         'role',
-        'status'
+        'status',
+        'foto'
     ];
 
     /**
@@ -48,5 +51,9 @@ class User extends Authenticatable implements  MustVerifyEmail
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new CustomPasswordResetNotification($token));
     }
 }

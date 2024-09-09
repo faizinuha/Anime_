@@ -25,6 +25,7 @@
         });
     </script>
 @endif
+
 @section('content')
     <style>
         .toast {

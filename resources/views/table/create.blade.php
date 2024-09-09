@@ -1,6 +1,30 @@
 @extends('kerangka.master')
 @section('title', 'Tambah User')
 @section('content')
+@if ($errors->has('name'))
+<div class="bs-toast toast fade show bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+        <i class="bx bx-bell me-2"></i>
+        <div class="me-auto fw-semibold">Anime</div>
+        <small></small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+       {{ $errors->first('name') }}
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var toastElList = [].slice.call(document.querySelectorAll('.toast'));
+        var toastList = toastElList.map(function(toastEl) {
+            return new bootstrap.Toast(toastEl, {
+                delay: 3000
+            });
+        });
+        toastList.forEach(toast => toast.show());
+    });
+</script>
+@endif
 <div class="container-xxl flex-grow-1 container-p-y">
   <h4 class="fw-bold py-3 mb-4">Tambah User</h4>
 

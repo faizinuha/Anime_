@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('email')->unique();
+            $table->string('foto');
             $table->enum('role', ['is_admin', 'is_member', 'is_guest'])->default('is_guest'); // Menggunakan ENUM untuk role
             $table->enum('status', ['FrontEnd', 'Backend', 'Server','UI/UX','Service','Mobile','Database','Network','Security','AI','']);
             $table->timestamp('email_verified_at')->nullable();
@@ -30,5 +31,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('users');
+        
     }
 };

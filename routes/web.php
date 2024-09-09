@@ -8,7 +8,6 @@ use App\Http\Controllers\AnimeController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\SearchController;
@@ -68,14 +67,16 @@ Route::middleware(['auth'])->post('/logout', [LoginController::class, 'logout'])
 
 // Route::resource('animes', AnimeController::class);
 Route::middleware(['auth', 'role:is_admin'])->group(function () {
-
     Route::get('/home', [dashboardController::class, 'index'])->name('home');
     Route::get('/Data', [dashboardController::class, 'data'])->name('home.Dates');
     Route::resource('categories', CategoryController::class);
     Route::get('/table', [TableController::class, 'index'])->name('table');
 });
 
+
 Route::get('/user', [UserController::class, 'index'])->name('user');
+Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
+Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
 // ========================[ Bagian crud]================================//
 // Route::resource('jadwals', JadwalController::class);
 

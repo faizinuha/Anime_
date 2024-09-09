@@ -20,15 +20,17 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Zaki',
                 'password' => Hash::make('as'),
                 'role' => 'is_admin',
+                'foto'=> 'default(0)'
                 // 'email_verified_at' => now(), // Menandai email sebagai verified
             ]
         );
         DB::table('users')->updateOrInsert(
             ['email' => 'rtxalham@gmail.com'], // Kondisi pencocokan
             [
-                'name' => 'Zaki',
+                'name' => 'Facades',
                 'password' => Hash::make('as'),
                 'role' => 'is_guest',
+                'foto'=> 'default(0)'
                 // 'email_verified_at' => now(), // Menandai email sebagai verified
             ]
         );
