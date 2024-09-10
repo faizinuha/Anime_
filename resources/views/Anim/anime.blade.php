@@ -63,9 +63,13 @@
                             </div>
                             <div class="anime__details__btn">
                                 <a href="#" class="follow-btn"><i class="fa fa-heart-o"></i> Follow</a>
+                                @if ($anime->animeEpisodes->isNotEmpty())
                                 <a href="{{ route('anime.show', ['watch' => $anime->name, 'episode' => $anime->animeEpisodes->first()->id]) }}" class="watch-btn">
                                     <span>Watch Now</span> <i class="fa fa-angle-right"></i>
                                 </a>
+                            @else
+                                <p>No episodes available</p>
+                            @endif
                             </div>
                         </div>
                     </div>
@@ -83,8 +87,21 @@
                                     </div>
                                     @endfor --}}
 
+                                    {{-- @if ($anime->animeEpisodes->isNotEmpty())
+                                        @forelse ($anime->animeEpisodes as $index => $episode)
+                                        <a href="{{ route('anime.show', ['watch' => $anime->name, 'episode' => $episode->id]) }}">Ep: {{ $episode->episode }}</a>
+                                        @empty
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <p>Episode Tidak ada</p>
+                                                </div>
+                                            </div>
+                                        @endforelse
+                                    @endif --}}
                                 @forelse ($anime->animeEpisodes as $index => $episode)
-                                    <a href="{{ route('anime.show', ['watch' => $anime->name, 'episode' => $episode->id]) }}">Ep: {{ $episode->episode }}</a>
+                                    <div class="episode-card">
+                                        <a href="{{ route('anime.show', ['watch' => $anime->name, 'episode' => $episode->id]) }}">Ep: {{ $episode->episode }}</a>
+                                    </div>
                                 @empty
                                 @endforelse
                             </div>

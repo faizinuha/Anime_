@@ -32,16 +32,16 @@ class EpisodeController extends Controller
     {
         // Validasi input
         $request->validate([
-            'video' => 'required|file|mimes:mp4,avi,mkv|max:99999', // Maksimal 20MB
-            'episode' => 'required|string',
-            'anime_id' => 'required|exists:animes,id',
+            'video' => 'required|file|mimes:mp4,avi,mkv|max:20480', // Maksimal 20MB
+            'episode' => 'required|string|unique:episodes,episode,NULL,id,anime_id,' . $request->anime_id, // Kombinasi episode dan anime_id harus unik
+            'anime_id' => 'required|exists:animes,id', // Pastikan anime_id valid
         ]);
 
         // Simpan file video
         $anime = Anime::findOrFail($request->anime_id);
-        $animeFolder = 'videos/' . ($anime->name); 
+        $animeFolder = 'videos/' . ($anime->name);
         $videoPath = $request->file('video')->store($animeFolder, 'public');
-    
+
 
         // // Simpan episode baru
 
@@ -51,7 +51,7 @@ class EpisodeController extends Controller
             'anime_id' => $request->anime_id,
         ]);
 
-        if($episode) {
+        if ($episode) {
             $anime = $episode->anime;
             $episode->anime()->update([
                 'episodes' => $anime->animeEpisodes->count()
@@ -75,7 +75,7 @@ class EpisodeController extends Controller
             'anime_id' => 'required|exists:animes,id',
         ]);
         $anime = Anime::findOrFail($request->anime_id);
-        $animeFolder = 'videos/' . ($anime->name); 
+        $animeFolder = 'videos/' . ($anime->name);
         $videoPath = $request->file('video')->store($animeFolder, 'public');
 
         $episode = Episode::create([
@@ -89,7 +89,7 @@ class EpisodeController extends Controller
             $anime->update([
                 'episodes' => $anime->animeEpisodes()->count() // Update the episodes count field
             ]);
-        }    
+        }
         return redirect()->route('episodes.index')->with('success', 'Episode Berhasil Tambah');
     }
     /**
@@ -99,11 +99,19 @@ class EpisodeController extends Controller
     {
         $episode = Episode::findOrFail($id);
 
-        // Hapus file video dari storage
+        // Pastikan episode memiliki file video yang tersimpan
         if ($episode->video) {
+            // Hapus file video dari folder berdasarkan path yang ada di database
             Storage::disk('public')->delete($episode->video);
-        }
 
+            $animeFolder = dirname($episode->video);
+            // Jika folder kosong, hapus folder
+            if (empty(Storage::disk('public')->allFiles($animeFolder))) {
+                Storage::disk('public')->deleteDirectory($animeFolder);
+            }
+        }
+       // Cek jika folder kosong setelah penghapusan video, lalu hapus folder
+       
         // Hapus episode dari database
         $episode->delete();
 

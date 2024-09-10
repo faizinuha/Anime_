@@ -111,21 +111,21 @@
                     </div>
 
                     <!-- Popularitas -->
-                    <div class="form-group mb-3">
+                    {{-- <div class="form-group mb-3">
                         <label for="popularity">Popularitas</label>
                         <input type="number" id="popularity" name="popularity" class="form-control"
                             value="{{ old('popularity', $anime->popularity) }}">
-                    </div>
+                    </div> --}}
 
                     <!-- Tanggal Tayang -->
-                    <div class="form-group mb-3">
+                    {{-- <div class="form-group mb-3">
                         <label for="aired_from">Tanggal Tayang</label>
                         <input type="text" id="aired_from" name="aired_from" class="form-control datepicker"
                             value="{{ old('aired_from', \Carbon\Carbon::parse($anime->aired_from)->format('d-m-Y')) }}"
                             required>
-                        <input type="text" id="aired_to" name="aired_to" class="form-control datepicker mt-2"
-                            value="{{ old('aired_to', \Carbon\Carbon::parse($anime->aired_to)->format('d-m-Y')) }}">
-                    </div>
+                        {{-- <input type="text" id="aired_to" name="aired_to" class="form-control datepicker mt-2"
+                            value="{{ old('aired_to', \Carbon\Carbon::parse($anime->aired_to)->format('d-m-Y')) }}"> 
+                    </div> --}}
 
                     <!-- Durasi -->
                     <div class="form-group mb-3">

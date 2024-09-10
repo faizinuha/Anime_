@@ -26,6 +26,7 @@ class CreateAnimesTable extends Migration
             $table->enum('type', ['TV', 'Movie', 'OVA', 'ONA', 'Special'])->default('TV');  // Tipe anime
             $table->string('studio')->nullable();  // Studio produksi
             $table->integer('episodes')->nullable();  // Jumlah episodeb
+            $table->integer('TotalEps')->nullable();  // total episodeb
             $table->integer('duration')->nullable();  // Durasi tiap episode
             $table->string('synonyms')->nullable();  // Nama sinonim
             $table->timestamps();
