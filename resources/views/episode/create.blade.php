@@ -27,10 +27,10 @@
 
             <div class="mb-3">
                 <label for="anime_id" class="form-label">Anime</label>
-                <select class="form-select" id="anime_id" name="anime_id" required>
+                <select class="form-select" id="anime_id" name="anime_id" required >
                     <option value="">Select Anime</option>
                     @foreach($animes as $anime)
-                        <option value="{{ $anime->id }}">{{ $anime->name }}</option>
+                        <option   value="{{ old('anime_id',$anime->id) }}">{{ $anime->name }}</option>
                     @endforeach
                 </select>
             </div>

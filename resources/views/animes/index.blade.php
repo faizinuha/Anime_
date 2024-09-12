@@ -144,7 +144,7 @@
                         <th>No</th>
                         <th>Nama</th>
                         <th>Gambar</th>
-                        <th>Media</th>
+                        <th>Pv</th>
                         <th>Rilis</th>
                         {{-- <th>Episode</th> --}}
                         <th>Aksi</th>
@@ -187,7 +187,7 @@
                                 <strong>Studio:</strong> {{ $anime->studio }} |
                                 <strong>Tipe:</strong> {{ $anime->type }} |
                                 <strong>Sinonim:</strong> {{ $anime->synonyms }} |
-                                <strong>TotalEps:</strong> {{ $anime->episodes }} |
+                                <strong>TotalEps:</strong> {{ $anime->TotalEps }} |
                                 <strong>Episode:</strong> {{ count($anime->animeEpisodes) > 0 ? $anime->animeEpisodes->first()->episode : 0 }} |
                             </td>
                         </tr>

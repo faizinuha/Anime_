@@ -42,7 +42,7 @@
 
                     <!-- Video Anime -->
                     <div class="form-group mb-3">
-                        <label for="video">Video Anime (optional)</label>
+                        <label for="video">Pv</label>
                         <input type="file" name="video" class="form-control" accept="video/*">
                     </div>
 
@@ -88,17 +88,22 @@
 
                     <!-- Jumlah Episode -->
                     <div class="form-group mb-3">
+                        <label for="TotalEps">Jumlah Episode</label>
+                        <input type="number" id="TotalEps" name="TotalEps" class="form-control"
+                            value="{{ old('TotalEps', $anime->TotalEps) }}">
+                    </div>
+                    {{-- <div class="form-group mb-3">
                         <label for="episodes">Jumlah Episode</label>
                         <input type="number" id="episodes" name="episodes" class="form-control"
                             value="{{ old('episodes', $anime->episodes) }}">
-                    </div>
+                    </div> --}}
 
                     <!-- Trailer -->
-                    <div class="form-group mb-3">
+                    {{-- <div class="form-group mb-3">
                         <label for="trailer">Trailer</label>
                         <input type="text" id="trailer" name="trailer" class="form-control"
                             value="{{ old('trailer', $anime->trailer) }}">
-                    </div>
+                    </div> --}}
 
                     <!-- Tipe -->
                     <div class="form-group mb-3">
@@ -110,23 +115,7 @@
                         </select>
                     </div>
 
-                    <!-- Popularitas -->
-                    {{-- <div class="form-group mb-3">
-                        <label for="popularity">Popularitas</label>
-                        <input type="number" id="popularity" name="popularity" class="form-control"
-                            value="{{ old('popularity', $anime->popularity) }}">
-                    </div> --}}
-
-                    <!-- Tanggal Tayang -->
-                    {{-- <div class="form-group mb-3">
-                        <label for="aired_from">Tanggal Tayang</label>
-                        <input type="text" id="aired_from" name="aired_from" class="form-control datepicker"
-                            value="{{ old('aired_from', \Carbon\Carbon::parse($anime->aired_from)->format('d-m-Y')) }}"
-                            required>
-                        {{-- <input type="text" id="aired_to" name="aired_to" class="form-control datepicker mt-2"
-                            value="{{ old('aired_to', \Carbon\Carbon::parse($anime->aired_to)->format('d-m-Y')) }}"> 
-                    </div> --}}
-
+            
                     <!-- Durasi -->
                     <div class="form-group mb-3">
                         <label for="duration">Durasi</label>

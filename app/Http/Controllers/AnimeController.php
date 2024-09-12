@@ -96,8 +96,13 @@ class AnimeController extends Controller
         }
                 
         if ($request->hasFile('video')) {
-            $anime->video = $request->file('video')->store('videos', ['disk' => 'public']);
+            // Buat folder berdasarkan nama anime
+            $animeFolder = 'videos/' . $anime->name;
+            // Simpan video ke folder tersebut
+            $videoPath = $request->file('video')->store($animeFolder, 'public');
+            $anime->video = $videoPath; // Simpan path video di database
         }
+        
         if ($request->hasFile('trailer')) {
             $anime->trailer = $request->file('trailer')->store('trailers', ['disk' => 'public']);
         }

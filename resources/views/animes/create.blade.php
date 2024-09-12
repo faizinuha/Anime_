@@ -41,7 +41,7 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="video">Video Anime (optional)</label>
+                        <label for="video">Pv (optional)</label>
                         <input type="file" id="video" name="video" class="form-control" accept="video/*">
                     </div>
 
@@ -79,19 +79,21 @@
                     </div>
 
                     <div class="form-group mb-3">
+                        <label for="TotalEps">Jumlah Episode</label>
+                        <input type="number" id="TotalEps" name="TotalEps" class="form-control"
+                            value="{{ old('TotalEps') }}">
+                    </div>
+                    {{-- <div class="form-group mb-3">
                         <label for="episodes">Jumlah Episode</label>
                         <input type="number" id="episodes" name="episodes" class="form-control"
                             value="{{ old('episodes') }}">
-                    </div>
+                    </div> --}}
 
-                    <div class="form-group mb-3">
+                    {{-- <div class="form-group mb-3">
                         <label for="trailer">Trailer</label>
                         <input type="text" id="trailer" name="trailer" class="form-control"
                             value="{{ old('trailer') }}">
-                    </div>
-
-
-
+                    </div> --}}
 
                     <div class="form-group mb-3">
                         <label for="duration">Durasi (menit)</label>

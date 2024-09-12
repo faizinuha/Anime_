@@ -26,6 +26,7 @@ class Anime extends Model
         'rating',
         'studio',
         'episodes',
+        'TotalEps',
         'trailer',
         'type',
         'duration',

@@ -35,7 +35,7 @@ class WatchController extends Controller
         Comment::create([
             'anime_id' => $request->anime_id,
             'user_id' => auth()->id(),
-            'content' => $request->content
+            'content' => $request->content()
         ]);
 
         return redirect()->back()->with('success', 'Komentar berhasil ditambahkan!');

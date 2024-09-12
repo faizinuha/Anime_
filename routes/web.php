@@ -15,18 +15,6 @@ use App\Http\controllers\watchController;
 use App\Http\Controllers\EpisodeController;
 // use App\Http\Controllers\Tayangharicontroller;
 
-// use App\Models\Anime;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 // Rute untuk halaman verifikasi email
 // Ganti nama route ini untuk menghindari konflik
 Route::get('/auth/verify', function () {
@@ -100,11 +88,6 @@ Route::get('/animes/{id}/edit', [AnimeController::class, 'edit'])->name('anime.e
 Route::put('/animes/{id}', [AnimeController::class, 'update'])->name('anime.update');
 // Menghapus anime tertentu dari database
 Route::delete('/animes/{id}', [AnimeController::class, 'destroy'])->name('anime.destroy');
-
-
-
-
-
 
 
 
