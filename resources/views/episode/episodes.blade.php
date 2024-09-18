@@ -33,7 +33,7 @@
                         <td>
                             <div class="media-container">
                                 @if ($episode->video)
-                                    <video src="{{ asset('storage/' . $episode->video) }}" controls width="100"></video>
+                                    <video src="{{ asset('storage/' . $episode->video) }}" controls width="100" min="1"></video>
                                 @else
                                     <span>No Video Available</span>
                                 @endif

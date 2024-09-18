@@ -16,13 +16,21 @@ use App\Http\Controllers\EpisodeController;
 // use App\Http\Controllers\Tayangharicontroller;
 
 // Rute untuk halaman verifikasi email
+
 // Ganti nama route ini untuk menghindari konflik
 Route::get('/auth/verify', function () {
     return view('auth.verify');
 })->name('custom.verification.notice'); // Mengganti nama route
 // Otentikasi dengan verifikasi email diaktifkan
 Auth::routes(['verify' => true]);
+// offline
 
+Route::get('Jaringandown', function () {
+    return view('errors.Jaringandown');
+});
+
+
+// online
 // ===============================[Bagian data akun]=============================================//
 Route::get('/', [HomeController::class, 'Anim'])->name('Anim');
 Route::get('/list', [dashboardController::class, 'list'])->name('list');
