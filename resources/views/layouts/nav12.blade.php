@@ -99,8 +99,9 @@
                             <div class="auth-links">
                                 @auth
                                     <div class="user-name">
-                                        <a href="javascript:void(0);">{{ auth()->user()->name }}</a>
-                                        <ul class="dropdown">
+                                        {{-- <a href="#">{{ auth()->user()->name }}</a> --}}
+                                         <button onclick="myFunction()" class="dropbtn"> {{ auth()->user()->name  }} </button>
+                                        <ul  id="myDropdown" class="dropdown-menu">
                                             <li>
                                                 <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                                     Logout
@@ -213,6 +214,24 @@
             event.preventDefault();
             alert('Maaf dalam tahap Beta')
         })
+
+        function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+    var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
     </script>
     <!-- Js Plugins -->
     <script src="{{ asset('assetanime/js/jquery-3.3.1.min.js') }}"></script>
