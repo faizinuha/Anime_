@@ -37,8 +37,8 @@ class AnimeController extends Controller
         $request->validate([
             'name' => 'required',
             'release_date' => 'required|date',
-            'status' => 'required',
-            'type' => 'required',
+            'status' => 'required|in:Ongoing,Completed,Upcoming,FINISHED', // Hanya tiga status yang diizinkan
+            'type' => 'required|in:TV,Movie,OVA,ONA,Special',
             'category_id' => 'required|exists:categories,id'
         ]);
 
@@ -77,9 +77,9 @@ class AnimeController extends Controller
         // Validasi input
         $request->validate([
             'name' => 'required',
-            'release_date' => 'required|date_format:Y-m-d', // Validasi format tanggal
-            'status' => 'required',
-            'type' => 'required',
+            'release_date' => 'required|date_format:Y-m-d',
+            'status' => 'required|in:Ongoing,Completed,Upcoming,FINISHED', // Hanya tiga status yang diizinkan
+            'type' => 'required|in:TV,Movie,OVA,ONA,Special',
             'category_id' => 'required|exists:categories,id'
         ]);
     

@@ -12,6 +12,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
+        $schedule->command('anime:update-from-anilist')->dailyAt('03:00');
         // $schedule->command('inspire')->hourly();
     }
 
