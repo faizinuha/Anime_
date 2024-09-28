@@ -1,79 +1,91 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+AnimeHub
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+┌───────────────────────────────────────────────────────────┐
+┌───────────────────────────────────────────────────────────┐
+│ Tentang AnimeHub │
+│ AnimeHub adalah platform streaming dan informasi anime │
+│ modern yang dibuat menggunakan Laravel, dirancang untuk │
+│ para penggemar anime. Platform ini menampilkan antarmuka │
+│ yang elegan dan responsif, serta menawarkan fitur-fitur │
+│ unggulan seperti: │
+│ - Mesin pencarian anime cepat berdasarkan kategori │
+│ dan popularitas. │
+│ - Profil pengguna dan Watchlist untuk personalisasi konten. │
+│ - Notifikasi episode terbaru secara real-time. │
+│ - Komunitas diskusi terintegrasi. │
+│ AnimeHub bertujuan untuk menghadirkan pengalaman terbaik │
+│ bagi pecinta anime di seluruh dunia. │
+└───────────────────────────────────────────────────────────┘
+└───────────────────────────────────────────────────────────┘
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+┌───────────────────────────────────────────────────────────┐
+┌───────────────────────────────────────────────────────────┐
+│ Fitur Utama │
+│ 1. Cari & Jelajah Anime: Temukan ribuan anime berdasarkan │
+│ genre, popularitas, atau jadwal rilis. │
+│ 2. Profil & Watchlist: Simpan anime favorit dan dapatkan │
+│ notifikasi ketika episode baru dirilis. │
+│ 3. Pengingat Episode Baru: Dapatkan notifikasi otomatis │
+│ setiap kali episode terbaru dari anime favorit Anda │
+│ dirilis. │
+│ 4. Integrasi Komunitas: Diskusikan anime dengan komunitas │
+│ melalui fitur komentar dan forum. │
+└───────────────────────────────────────────────────────────┘
+└───────────────────────────────────────────────────────────┘
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-## langkah-langkah 
-ketikan perintah berikut ini
-```bash
-$ composer install 
-$ composer update 
-$ php artisan migrate:fresh --seed 
-$ php artisan serv 
-selamat anda bisa akses laravel nya ok 
-```
 
-untuk usernya 
-midas@gmail.com
-12345678
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+┌───────────────────────────────────────────────────────────┐
+┌───────────────────────────────────────────────────────────┐
+│ Instalasi & Penggunaan │
+│ Ikuti langkah-langkah berikut untuk memulai dengan AnimeHub:│
+│ 1. Clone repository: │
+│ git clone https://github.com/AnimeHub/AnimeHub.git │
+│ 2. Install dependencies: │
+│ composer install │
+│ 3. Update dependencies: │
+│ composer update │
+│ 4. Jalankan migrasi database dan seed: │
+│ php artisan migrate
+--seed │
+│ 5. Jalankan server: │
+│ php artisan serve │
+│ 6. Akses AnimeHub di: http://localhost:8000 │
+└───────────────────────────────────────────────────────────┘
+└───────────────────────────────────────────────────────────┘
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
+┌───────────────────────────────────────────────────────────┐
+┌───────────────────────────────────────────────────────────┐
+│ Integrasi API │
+│ AnimeHub menggunakan GuzzleHttp untuk mengambil data anime │
+│ dari API eksternal. Install Guzzle dengan perintah berikut: │
+│ composer require guzzlehttp/guzzle │
+│ Setelah itu, Anda dapat mengkonfigurasi API untuk mengakses │
+│ jadwal rilis anime, karakter, dan detail lainnya │
+│ secara real-time. │
+└───────────────────────────────────────────────────────────┘
+└───────────────────────────────────────────────────────────┘
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+┌───────────────────────────────────────────────────────────┐
+┌───────────────────────────────────────────────────────────┐
+│ Berkontribusi │
+│ Kami mengapresiasi setiap kontribusi yang ingin menjadikan │
+│ AnimeHub lebih baik. Silakan merujuk ke panduan kontribusi │
+│ di dokumentasi kami. │
+└───────────────────────────────────────────────────────────┘
+└───────────────────────────────────────────────────────────┘
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Code of Conduct
+┌───────────────────────────────────────────────────────────┐
+│ Lisensi │
+│ AnimeHub dilisensikan di bawah MIT License. │
+└───────────────────────────────────────────────────────────┘
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
