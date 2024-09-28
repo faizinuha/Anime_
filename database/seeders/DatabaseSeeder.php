@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Zaki',
                 'password' => Hash::make('as'),
                 'role' => 'is_admin',
-                'foto'=> 'default(0)'
+                'foto'=> 'default(0)',
+                'status' => 'FrontEnd'
                 // 'email_verified_at' => now(), // Menandai email sebagai verified
             ]
         );
@@ -34,6 +35,16 @@ class DatabaseSeeder extends Seeder
                 // 'email_verified_at' => now(), // Menandai email sebagai verified
             ]
         );
+        DB::table('users')->updateOrInsert(
+            ['email' => 'Hamzahxou@gmail.com'],
+            [
+                'name' => 'Hamzahxou',
+                'password' => Hash::make('hamzah'),
+                'role' => 'is_admin',
+                'foto' => 'default(0)',
+                'status' => 'Backend'
+            ]
+        );        
         $this->call([
             CategorySeeder::class,
             AnimeSeeder::class,
