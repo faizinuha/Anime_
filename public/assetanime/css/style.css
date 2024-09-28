@@ -302,7 +302,7 @@ ol {
 }
 
 .header__logo {
-	padding: 20px 0 17px;
+	padding: 10px 0 17px;
 }
 
 .header__logo a {
@@ -1829,16 +1829,6 @@ ol {
 	.hero {
 		overflow: hidden;
 	}
-	.login__form {
-		position: relative;
-		padding-left: 32px;
-	}
-	.login__social__links ul li a {
-		width: 380px;
-	}
-	.blog__item__text {
-		padding: 0 50px;
-	}
 }
 
 /* Tablet Device = 768px */
@@ -2045,27 +2035,8 @@ ol {
 		width: calc(50% - 10px);
 		float: left;
 	}
-	.login__form {
-		padding-left: 0;
-		margin-bottom: 40px;
-	}
-	.login__form:after {
-		display: none;
-	}
-	.login__form form .input__item {
-		width: auto;
-	}
-	.signup .login__social__links {
-		padding-left: 0;
-	}
-	.login__social__links ul li a {
-		width: auto;
-	}
 	.blog__item__text {
 		padding: 0 30px;
-	}
-	.login__register {
-		padding-left: 0;
 	}
 	.product__sidebar__view .filter__controls li {
 		margin-right: 2px;
@@ -2128,15 +2099,6 @@ ol {
 	}
 	.blog__details__comment__item__text a {
 		margin-right: 6px;
-	}
-	.login__social__links ul li a i {
-		left: 20px;
-	}
-	.login__form .forget_pass {
-		position: relative;
-		left: 0;
-		bottom: 0;
-		margin-top: 25px;
 	}
 	.header__right a {
 		margin-right: 10px;

@@ -66,11 +66,15 @@
                                         {{-- <li><a href="{{route('login2')}}">Login</a></li> --}}
                                     </ul>
                                 </li>
-                                <li><a href="#" id="nobar" >Nobar</a></li>
+                                <li><a href="#" id="nobar">Nobar</a></li>
                                 <li><a href="#">Customer</a></li>
+                                <li>
+                    <a href="#" class="search-switch"><span class="icon_search"></span></a>
+
+                                </li>
                                 {{-- <li> --}}
-                                    {{-- <a href="#">Categories <span class="arrow_carrot-down"></span></a> --}}
-                                    {{-- @php
+                                {{-- <a href="#">Categories <span class="arrow_carrot-down"></span></a> --}}
+                                {{-- @php
                                         $categories = App\Models\Category::all();
                                     @endphp
 
@@ -90,95 +94,84 @@
                     </div>
                 </div>
                 <nav class="header__menu mobile-menu">
-                    <div class="col-lg-2">
+                    <div class="col-lg-12">
                         <div class="header__right">
-                            <a href="#" class="search-switch"><span class="icon_search"></span></a>
-                            <a href="{{ route('login') }}"><span class="icon_profile"></span></a>
-                            @auth()
-                                <div class="user-name">
-                                    <li style="list-style: none; margin:0%; position:relative;">
+                            <div class="auth-links">
+                                @auth
+                                    <div class="user-name">
                                         <a href="javascript:void(0);">{{ auth()->user()->name }}</a>
-                                        <ul class="dropdown"
-                                            style="display:none; position:absolute; top:100%; left:0; background:#333; padding:10px 0; min-width:150px;">
-                                            {{-- <li><a href="#">Profile</a></li> --}}
-                                            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                                Logout
-                                            </a>
+                                        <ul class="dropdown">
+                                            <li>
+                                                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                    Logout
+                                                </a>
+                                            </li>
                                         </ul>
-                                    </li>
-                                </div>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                            @endauth
+                                    </div>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                @else
+                                    <a href="{{ route('login') }}">Login</a>
+                                    <a href="{{ route('register') }}">Register</a>
+                                @endauth
+                            </div>
                         </div>
-                    </div>
+                    </div>                    
+                </nav>                
             </div>
 
             <div id="mobile-menu-wrap"></div>
         </div>
     </header>
     <!-- Search model Begin -->
-<div class="search-model">
-    <div class="h-100 d-flex align-items-center justify-content-center">
-        <div class="search-close-switch"><i class="icon_close"></i></div>
-        <form class="search-model-form" action="{{ route('search') }}">
-            <input type="text" id="search-input" name="query" placeholder="Search here.....">
-        </form>
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch"><i class="icon_close"></i></div>
+            <form class="search-model-form" action="{{ route('search') }}">
+                <input type="text" id="search-input" name="query" placeholder="Search here.....">
+            </form>
+        </div>
     </div>
-  </div>
     <!-- Header End -->
     @yield('content')
 
     <style>
-        .user-name .dropdown {
-            display: none;
-            text-align: center;
-            position: relative;
-            background-color: #333;
-            top: 100%;
-            left: 0;
-            padding: 10px 0;
-            min-width: 150px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-            z-index: 999;
-        }
-
         /* .user-name .dropdown li {
             margin: 0;
         } */
 
-        .user-name .dropdown li a {
-            color: #fff;
-            padding: 10px 20px;
-            display: block;
-        }
-
-        .user-name .dropdown li a:hover {
-            background-color: #444;
-        }
-
-        /* Show dropdown on hover */
-        .user-name:hover .dropdown {
-            content: '';
-            text-decoration: underline;
-            display: block;
-        }
-
-        .header__right {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-        }
-
-        .header__right .user-name p {
-            color: blue;
-            margin-left: 10px;
-            /* Jarak antara ikon profil dan nama user */
-            margin-bottom: 0;
-            /* Menghilangkan margin bawah pada paragraf */
+        /* CSS untuk Dropdown User Name */
+        .user-name a {
+            color: white;
             font-weight: 600;
-            /* Memberikan penekanan pada nama user */
+            padding: 5px 10px;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .user-name:hover .dropdown {
+            display: block;
+        }
+
+        .user-name .dropdown {
+            background: #333;
+            position: absolute;
+            display: none;
+            list-style-type: none;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .user-name .dropdown a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 5px 0;
+        }
+
+        .user-name .dropdown a:hover {
+            background-color: #444;
         }
     </style>
     <script>
@@ -201,11 +194,11 @@
         // minta notit
         document.addEventListener('DOMContentLoaded', function() {
             if (Notification.permission === 'granted') {
-            new Notification('Selamat Datang!', {
-                body: '{{ session('notification') }}',
-                icon: 'path/to/icon.png' // Ganti dengan path ikon Anda
-            });
-        }
+                new Notification('Selamat Datang!', {
+                    body: '{{ session('notification') }}',
+                    icon: 'path/to/icon.png' // Ganti dengan path ikon Anda
+                });
+            }
         })
         Notification.requestPermission().then(function(permission) {
             if (permission === 'granted') {
@@ -216,7 +209,7 @@
         });
 
 
-        document.getElementById('nobar').addEventListener('click',function(event){
+        document.getElementById('nobar').addEventListener('click', function(event) {
             event.preventDefault();
             alert('Maaf dalam tahap Beta')
         })
