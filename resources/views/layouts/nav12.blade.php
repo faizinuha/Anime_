@@ -69,7 +69,7 @@
                                 <li><a href="#" id="nobar">Nobar</a></li>
                                 <li><a href="#">Customer</a></li>
                                 <li>
-                    <a href="#" class="search-switch"><span class="icon_search"></span></a>
+                                    <a href="#" class="search-switch"><span class="icon_search"></span></a>
 
                                 </li>
                                 {{-- <li> --}}
@@ -100,16 +100,19 @@
                                 @auth
                                     <div class="user-name">
                                         {{-- <a href="#">{{ auth()->user()->name }}</a> --}}
-                                         <button onclick="myFunction()" class="dropbtn"> {{ auth()->user()->name  }} </button>
-                                        <ul  id="myDropdown" class="dropdown-menu">
+                                        <button onclick="myFunction()" class="dropbtn"> {{ auth()->user()->name }}
+                                        </button>
+                                        <ul id="myDropdown" class="dropdown-menu">
                                             <li>
-                                                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                <a href="#"
+                                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                                     Logout
                                                 </a>
                                             </li>
                                         </ul>
                                     </div>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        style="display: none;">
                                         @csrf
                                     </form>
                                 @else
@@ -118,8 +121,8 @@
                                 @endauth
                             </div>
                         </div>
-                    </div>                    
-                </nav>                
+                    </div>
+                </nav>
             </div>
 
             <div id="mobile-menu-wrap"></div>
@@ -216,22 +219,22 @@
         })
 
         function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
 
-// Close the dropdown menu if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-    var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-}
+        // Close the dropdown menu if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
     </script>
     <!-- Js Plugins -->
     <script src="{{ asset('assetanime/js/jquery-3.3.1.min.js') }}"></script>
