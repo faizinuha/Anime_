@@ -175,6 +175,5 @@
                 </div>
             </div>
     </section>
-
     <script id="dsq-count-scr" src="//laranime.disqus.com/count.js" async></script>
 @endsection
