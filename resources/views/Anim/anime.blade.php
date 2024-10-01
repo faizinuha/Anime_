@@ -64,12 +64,13 @@
                             <div class="anime__details__btn">
                                 <a href="#" class="follow-btn"><i class="fa fa-heart-o"></i> Follow</a>
                                 @if ($anime->animeEpisodes->isNotEmpty())
-                                <a href="{{ route('anime.show', ['watch' => $anime->name, 'episode' => $anime->animeEpisodes->first()->id]) }}" class="watch-btn">
-                                    <span>Watch Now</span> <i class="fa fa-angle-right"></i>
-                                </a>
-                            @else
-                                <p>No episodes available</p>
-                            @endif
+                                    <a href="{{ route('anime.show', ['watch' => $anime->name, 'episode' => $anime->animeEpisodes->first()->id]) }}"
+                                        class="watch-btn">
+                                        <span>Watch Now</span> <i class="fa fa-angle-right"></i>
+                                    </a>
+                                @else
+                                    <p>No episodes available</p>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -87,7 +88,7 @@
                                     </div>
                                     @endfor --}}
 
-                                    {{-- @if ($anime->animeEpisodes->isNotEmpty())
+                                {{-- @if ($anime->animeEpisodes->isNotEmpty())
                                         @forelse ($anime->animeEpisodes as $index => $episode)
                                         <a href="{{ route('anime.show', ['watch' => $anime->name, 'episode' => $episode->id]) }}">Ep: {{ $episode->episode }}</a>
                                         @empty
@@ -100,7 +101,9 @@
                                     @endif --}}
                                 @forelse ($anime->animeEpisodes as $index => $episode)
                                     <div class="episode-card">
-                                        <a href="{{ route('anime.show', ['watch' => $anime->name, 'episode' => $episode->id]) }}">Ep: {{ $episode->episode }}</a>
+                                        <a
+                                            href="{{ route('anime.show', ['watch' => $anime->name, 'episode' => $episode->id]) }}">Ep:
+                                            {{ $episode->episode }}</a>
                                     </div>
                                 @empty
                                 @endforelse
@@ -146,7 +149,32 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-12">
+                        <div id="disqus_thread"></div>
+                        <script>
+                            /**
+                             *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                             *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+                            /*
+                            var disqus_config = function () {
+                            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                            };
+                            */
+                            (function() { // DON'T EDIT BELOW THIS LINE
+                                var d = document,
+                                    s = d.createElement('script');
+                                s.src = 'https://laranime.disqus.com/embed.js';
+                                s.setAttribute('data-timestamp', +new Date());
+                                (d.head || d.body).appendChild(s);
+                            })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments
+                                powered by Disqus.</a></noscript>
+                    </div>
                 </div>
             </div>
     </section>
+
+    <script id="dsq-count-scr" src="//laranime.disqus.com/count.js" async></script>
 @endsection
