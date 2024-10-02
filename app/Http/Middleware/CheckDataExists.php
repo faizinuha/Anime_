@@ -1,9 +1,11 @@
 <?php
+
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\DB; // Correct namespace for DB
+use Illuminate\Support\Facades\Log; // Correct namespace for Log
 use Illuminate\Support\Facades\Auth;
-use App\Models\Anime;
 
 class CheckDataExists
 {
@@ -16,12 +18,18 @@ class CheckDataExists
      */
     public function handle($request, Closure $next)
     {
-        // Cek apakah data anime ada
-        if (Anime::count() == 0) {
-            return redirect()->route('login'); // Arahkan ke halaman login jika data tidak ada
+        try {
+            // Test database connection
+            DB::connection()->getPdo();
+            Log::info('Database is connected.');
+        } catch (\Exception $e) {
+            Log::error('Database connection failed: ' . $e->getMessage());
+
+            // Redirect to an error page or return a specific response
+            return redirect()->route('errors.no_connection')
+                ->with('error', 'Database connection failed.');
         }
 
-        return $next($request);
+        return $next($request); // Proceed to the next middleware or request
     }
 }
-

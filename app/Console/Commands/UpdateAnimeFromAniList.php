@@ -57,7 +57,7 @@ class UpdateAnimeFromAniList extends Command
             'query' => $query,
             'variables' => [
                 'page' => 1,
-                'perPage' => 10,
+                'perPage' => 4,
             ],
         ]);
 
@@ -102,8 +102,8 @@ class UpdateAnimeFromAniList extends Command
                 // Other fields
                 $anime->description = isset($animeData['description']) ? strip_tags($animeData['description']) : 'No description available';
                 $anime->release_date = $this->formatDate($animeData['startDate'] ?? null);
-                $anime->episodes = $animeData['episodes'] ?? 0;
-                $anime->duration = $animeData['duration'] ?? 0;
+                $anime->episodes = $animeData['episodes'] ?? 500;
+                $anime->duration = $animeData['duration'] ?? 20;
                 $anime->studio = $animeData['studios']['nodes'][0]['name'] ?? 'Unknown Studio';
                 $anime->type = $animeData['format'] ?? 'Unknown';
                 $anime->status = $animeData['status'] ?? 'Unknown';

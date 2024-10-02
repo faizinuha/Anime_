@@ -149,7 +149,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12">
+                    {{-- not  found --}}
+                    {{-- <div class="col-12">
                         <div id="disqus_thread"></div>
                         <script>
                             /**
@@ -171,9 +172,10 @@
                         </script>
                         <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments
                                 powered by Disqus.</a></noscript>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
     </section>
-    <script id="dsq-count-scr" src="//laranime.disqus.com/count.js" async></script>
+    {{-- not found --}}
+    {{-- <script id="dsq-count-scr" src="//laranime.disqus.com/count.js" async></script> --}}
 @endsection

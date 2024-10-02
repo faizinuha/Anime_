@@ -15,11 +15,11 @@
                             <img src="{{ asset('assetanime/img/image.png') }}" sizes="10" alt="Miniplayer(i)">
                         </button>
                     </div>
-                    <div class="anime__details__episodes">
+                    {{-- <div class="anime__details__episodes">
                         <div class="section-title">
                             <h5>Eps</h5>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
 
@@ -36,8 +36,8 @@
                                 </div>
                                 <div class="anime__review__item__text">
                                     {{-- <h2>{{ $item->user->name }} <span>1 Menit Yang? Lalu..</span></h2> --}}
-                                    <h6>{{ $item->user->name }} - <span>1 Hour ago</span></h6>
                                     <p>Pesan:{{ $item->content }}</p>
+                                    <small style="color: white;">Posted by {{ $item->user->name }} on {{ $item->created_at }}</small>
                                     <form action="{{ route('comment.destroy', $item->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
@@ -63,21 +63,15 @@
                     <form action="{{ route('comment.store') }}" method="POST">
                         @csrf
                         <input type="hidden" name="anime_id" value="{{ $anime->id }}">
-                        <textarea name="content" placeholder="Your Comment"></textarea>
+                        <textarea name="content" placeholder="Your Comment" required></textarea>
                         <button type="submit">Review</button>
                     </form>
                 @else
                     <span>Please login to comment. <a href="{{ route('login2') }}">Login</a></span>
                 @endif
-                <button class="btn btn-red" onclick="back()">Back</button>
-            </div>
+                <button class="btn btn-danger mt-3 d-flex" onclick="back()">Back</button>
+            </div>       
         </div>
-        </div>
-        <script>
-            function back() {
-                window.history.back();
-            }
-        </script>
         </div>
     </section>
 @endsection

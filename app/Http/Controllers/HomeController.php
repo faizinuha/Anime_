@@ -20,20 +20,36 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function Anim()
-    {
-        try {
-            // MeCoba lakukan query untuk cek koneksi database
-            DB::connection()->getPdo(); // Test koneksi ke database
-            $animes = Anime::all();
-            return view('Anim.index', compact('animes')); 
-        } catch (Exception $e) {
-            // Jika ada exception (koneksi gagal), tampilkan halaman khusus
-            if ($e->getCode() == 2002) {
-                return view('errors.no_connection'); // Tampilkan halaman periksa koneksi internet
-            }
-            return view('errors.generic_error', ['message' => $e->getMessage()]); // Untuk error lainnya
+{
+    try {
+        // Coba lakukan query untuk mengecek koneksi database
+        DB::connection()->getPdo(); // Cek koneksi database
+        $animes = Anime::all();
+        return view('Anim.index', compact('animes'));
+    } catch (\Exception $e) {
+        // Jika ada exception (koneksi gagal), tampilkan halaman khusus
+        if ($e->getCode() == 2002) {
+            return view('errors.no_connection'); // Tampilkan halaman error koneksi
+        } else {
+            return view('errors.Jaringandown', ['message' => $e->getMessage()]);
         }
     }
+}
+    // public function Anim()
+    // {
+    //     try {
+    //         // MeCoba lakukan query untuk cek koneksi database
+    //         DB::connection()->getPdo(); // Test koneksi ke database
+    //         $animes = Anime::all();
+    //         return view('Anim.index', compact('animes')); 
+    //     } catch (Exception $e) {
+    //         // Jika ada exception (koneksi gagal), tampilkan halaman khusus
+    //         if ($e->getCode() == 2002) {
+    //             return view('errors.no_connection'); // Tampilkan halaman periksa koneksi internet
+    //         }
+    //         return view('errors.Jaringandown', ['message' => $e->getMessage()]); // Untuk error lainnya
+    //     }
+    // }
     
 
     public function index()
