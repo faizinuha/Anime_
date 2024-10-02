@@ -37,7 +37,8 @@
                                 <div class="anime__review__item__text">
                                     {{-- <h2>{{ $item->user->name }} <span>1 Menit Yang? Lalu..</span></h2> --}}
                                     <p>Pesan:{{ $item->content }}</p>
-                                    <small style="color: white;">Posted by {{ $item->user->name }} on {{ $item->created_at }}</small>
+                                    <small style="color: white;">Posted by {{ $item->user->name }} on
+                                        {{ $item->created_at }}</small>
                                     <form action="{{ route('comment.destroy', $item->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
@@ -71,6 +72,32 @@
                 @endif
                 <button class="btn btn-danger mt-3 d-flex" onclick="back()">Back</button>
             </div>       
+
+            {{-- <div class="col-12">
+                <div id="disqus_thread"></div>
+                <script>
+                    /**
+                     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+                    /*
+                    var disqus_config = function () {
+                    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                    };
+                    */
+                    (function() { // DON'T EDIT BELOW THIS LINE
+                        var d = document,
+                            s = d.createElement('script');
+                        s.src = 'https://laranime.disqus.com/embed.js';
+                        s.setAttribute('data-timestamp', +new Date());
+                        (d.head || d.body).appendChild(s);
+                    })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments
+                        powered by Disqus.</a></noscript>
+            </div>
+
+            <script id="dsq-count-scr" src="//laranime.disqus.com/count.js" async></script> --}}
         </div>
         </div>
     </section>
