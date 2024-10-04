@@ -21,7 +21,7 @@ class AnimeSeeder extends Seeder
                 'description' => 'Sequel to Naruto, follows the journey of Naruto Uzumaki in his quest to become Hokage.',
                 'status' => 'Completed',
                 'studio' => 'Studio Pierrot',
-                'episodes' => 500,
+                'episodes' => '300',
                 'trailer' => 'https://example.com/trailer/naruto_shippuden',
                 'type' => 'TV',
                 'duration' => 23,

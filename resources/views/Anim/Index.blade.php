@@ -1,5 +1,8 @@
 @extends('layouts.nav12')
 @section('content')
+<style>
+    
+</style>
     <section class="hero">
         <div class="container">
             <div class="hero__slider owl-carousel">
@@ -69,7 +72,7 @@
                                         <div class="product__item__pic set-bg"
                                             data-setbg="{{ asset('storage/' . $item->image) }}">
                                             <div class="ep">18 / 18</div>
-                                            <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                            <div class="comment"><i class="fa fa-comments"></i> {{ $item->comments->count() }} </div>
                                             <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                         </div>
                                         <div class="product__item__text">
@@ -83,86 +86,6 @@
                                     </div>
                                 </div>
                             @endforeach
-                            {{-- <div class="col-lg-4 col-md-6 col-sm-6">
-                              <div class="product__item">
-                                  <div class="product__item__pic set-bg" data-setbg="{{asset('assetanime/img/trending/trend-2.jpg')}}">
-                                      <div class="ep">18 / 18</div>
-                                      <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                      <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                  </div>
-                                  <div class="product__item__text">
-                                      <ul>
-                                          <li>Active</li>
-                                          <li>Movie</li>
-                                      </ul>
-                                      <h5><a href="#">Gintama Movie 2: Kanketsu-hen - Yorozuya yo Eien</a></h5>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="col-lg-4 col-md-6 col-sm-6">
-                              <div class="product__item">
-                                  <div class="product__item__pic set-bg" data-setbg="{{ asset('assetanime/img/trending/trend-3.jpg') }}">
-                                      <div class="ep">18 / 18</div>
-                                      <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                      <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                  </div>
-                                  <div class="product__item__text">
-                                      <ul>
-                                          <li>Active</li>
-                                          <li>Movie</li>
-                                      </ul>
-                                      <h5><a href="#">Shingeki no Kyojin Season 3 Part 2</a></h5>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="col-lg-4 col-md-6 col-sm-6">
-                              <div class="product__item">
-                                  <div class="product__item__pic set-bg" data-setbg="{{ asset('assetanime/img/trending/trend-4.jpg') }}">
-                                      <div class="ep">18 / 18</div>
-                                      <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                      <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                  </div>
-                                  <div class="product__item__text">
-                                      <ul>
-                                          <li>Active</li>
-                                          <li>Movie</li>
-                                      </ul>
-                                      <h5><a href="#">Fullmetal Alchemist: Brotherhood</a></h5>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="col-lg-4 col-md-6 col-sm-6">
-                              <div class="product__item">
-                                  <div class="product__item__pic set-bg" data-setbg="{{ asset('assetanime/img/trending/trend-5.jpg') }}">
-                                      <div class="ep">18 / 18</div>
-                                      <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                      <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                  </div>
-                                  <div class="product__item__text">
-                                      <ul>
-                                          <li>Active</li>
-                                          <li>Movie</li>
-                                      </ul>
-                                      <h5><a href="#">Shiratorizawa Gakuen Koukou</a></h5>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="col-lg-4 col-md-6 col-sm-6">
-                              <div class="product__item">
-                                  <div class="product__item__pic set-bg" data-setbg="{{ asset('assetanime/img/trending/trend-6.jpg') }}">
-                                      <div class="ep">18 / 18</div>
-                                      <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                      <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                  </div>
-                                  <div class="product__item__text">
-                                      <ul>
-                                          <li>Active</li>
-                                          <li>Movie</li>
-                                      </ul>
-                                      <h5><a href="#">Code Geass: Hangyaku no Lelouch R2</a></h5>
-                                  </div>
-                              </div>
-                          </div> --}}
                         </div>
                     </div>
                     <div class="popular__product">
@@ -227,57 +150,6 @@
                                             <li>Movie</li>
                                         </ul>
                                         <h5><a href="#">Shirogane Tamashii hen Kouhan sen</a></h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="product__item">
-                                    <div class="product__item__pic set-bg"
-                                        data-setbg="{{ asset('assetanime/img/popular/popular-4.jpg') }}">
-                                        <div class="ep">18 / 18</div>
-                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    </div>
-                                    <div class="product__item__text">
-                                        <ul>
-                                            <li>Active</li>
-                                            <li>Movie</li>
-                                        </ul>
-                                        <h5><a href="#">Rurouni Kenshin: Meiji Kenkaku Romantan</a></h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="product__item">
-                                    <div class="product__item__pic set-bg"
-                                        data-setbg="{{ asset('assetanime/img/popular/popular-5.jpg') }}">
-                                        <div class="ep">18 / 18</div>
-                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    </div>
-                                    <div class="product__item__text">
-                                        <ul>
-                                            <li>Active</li>
-                                            <li>Movie</li>
-                                        </ul>
-                                        <h5><a href="#">Mushishi Zoku Shou 2nd Season</a></h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="product__item">
-                                    <div class="product__item__pic set-bg"
-                                        data-setbg="{{ asset('assetanime/img/popular/popular-6.jpg') }}">
-                                        <div class="ep">18 / 18</div>
-                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    </div>
-                                    <div class="product__item__text">
-                                        <ul>
-                                            <li>Active</li>
-                                            <li>Movie</li>
-                                        </ul>
-                                        <h5><a href="#">Monogatari Series: Second Season</a></h5>
                                     </div>
                                 </div>
                             </div>
@@ -348,57 +220,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="product__item">
-                                    <div class="product__item__pic set-bg"
-                                        data-setbg="{{ asset('assetanime/img/recent/recent-4.jpg') }}">
-                                        <div class="ep">18 / 18</div>
-                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    </div>
-                                    <div class="product__item__text">
-                                        <ul>
-                                            <li>Active</li>
-                                            <li>Movie</li>
-                                        </ul>
-                                        <h5><a href="#">Fate/Zero 2nd Season</a></h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="product__item">
-                                    <div class="product__item__pic set-bg"
-                                        data-setbg="{{ asset('assetanime/img/recent/recent-5.jpg') }}">
-                                        <div class="ep">18 / 18</div>
-                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    </div>
-                                    <div class="product__item__text">
-                                        <ul>
-                                            <li>Active</li>
-                                            <li>Movie</li>
-                                        </ul>
-                                        <h5><a href="#">Kizumonogatari II: Nekket su-hen</a></h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="product__item">
-                                    <div class="product__item__pic set-bg"
-                                        data-setbg="{{ asset('assetanime/img/recent/recent-6.jpg') }}">
-                                        <div class="ep">18 / 18</div>
-                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    </div>
-                                    <div class="product__item__text">
-                                        <ul>
-                                            <li>Active</li>
-                                            <li>Movie</li>
-                                        </ul>
-                                        <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <div class="live__product">
@@ -466,57 +287,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="product__item">
-                                    <div class="product__item__pic set-bg"
-                                        data-setbg="{{ asset('assetanime/img/live/live-4.jpg') }}">
-                                        <div class="ep">18 / 18</div>
-                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    </div>
-                                    <div class="product__item__text">
-                                        <ul>
-                                            <li>Active</li>
-                                            <li>Movie</li>
-                                        </ul>
-                                        <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="product__item">
-                                    <div class="product__item__pic set-bg"
-                                        data-setbg="{{ asset('assetanime/img/live/live-5.jpg') }}">
-                                        <div class="ep">18 / 18</div>
-                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    </div>
-                                    <div class="product__item__text">
-                                        <ul>
-                                            <li>Active</li>
-                                            <li>Movie</li>
-                                        </ul>
-                                        <h5><a href="#">Fate/stay night Movie: Heaven's Feel - II. Lost</a></h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="product__item">
-                                    <div class="product__item__pic set-bg"
-                                        data-setbg="{{ asset('assetanime/img/live/live-6.jpg') }}">
-                                        <div class="ep">18 / 18</div>
-                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    </div>
-                                    <div class="product__item__text">
-                                        <ul>
-                                            <li>Active</li>
-                                            <li>Movie</li>
-                                        </ul>
-                                        <h5><a href="#">Kizumonogatari II: Nekketsu-hen</a></h5>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -532,13 +303,29 @@
                                 <li data-filter=".month">Month</li>
                                 <li data-filter=".years">Years</li>
                             </ul>
+                            @php
+                            $animeList = App\Models\Anime::all();
+                        @endphp
                             <div class="filter__gallery">
+                                @foreach ($animeList as $anime)
                                 <div class="product__sidebar__view__item set-bg mix day years"
-                                    data-setbg="{{ asset('assetanime/img/sidebar/tv-1.jpg') }}">
-                                    <div class="ep">18 / ?</div>
+                                    data-setbg="{{ asset('storage/' . $anime->image) }}">
+                                    <div class="ep"> {{$anime->TotalEps}} </div>
+                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                    <h5><a
+                                            href="{{ route('animes.show', ['anime' => $anime->name]) }}">{{ $anime->name }}</a>
+                                    </h5>
+                                </div>
+                            @endforeach
+                                {{-- @forelse ($animeList as $p )
+                                <div class="product__sidebar__view__item set-bg mix day years"
+                                    data-setbg="{{ asset('storage/', $p->image) }}">
+                                    <div class="ep">{{ $p->TotalEps }}</div>
                                     <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                     <h5><a href="#">Boruto: Naruto next generations</a></h5>
-                                </div>
+                                </div>                         
+                                @empty      
+                                @endforelse --}}
                                 <div class="product__sidebar__view__item set-bg mix month week"
                                     data-setbg="{{ asset('assetanime/img/sidebar/tv-2.jpg') }}">
                                     <div class="ep">18 / ?</div>
@@ -608,19 +395,7 @@
                                     <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
                                 </div>
                             </div>
-                            <div class="product__sidebar__comment__item">
-                                <div class="product__sidebar__comment__item__pic">
-                                    <img src="{{ asset('assetanime/img/sidebar/comment-4.jpg') }}" alt="">
-                                </div>
-                                <div class="product__sidebar__comment__item__text">
-                                    <ul>
-                                        <li>Active</li>
-                                        <li>Movie</li>
-                                    </ul>
-                                    <h5><a href="#">Monogatari Series: Second Season</a></h5>
-                                    <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
-                                </div>
-                            </div>
+                           
                         </div>
                     </div>
                 </div>

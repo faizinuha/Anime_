@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Storage;
 
 class UpdateAnimeFromAniList extends Command
 {
-    protected $signature = 'anime:update-from-anilist';
-    protected $description = 'Update anime data from AniList API';
+    protected $signature = 'anime:update {--random}';
+    protected $description = 'Perbarui data anime dari API Jikan';
 
     public function __construct()
     {
@@ -19,108 +19,107 @@ class UpdateAnimeFromAniList extends Command
 
     public function handle()
     {
-        $query = <<<'GRAPHQL'
-        query ($page: Int, $perPage: Int) {
-            Page(page: $page, perPage: $perPage) {
-                media(type: ANIME, sort: POPULARITY_DESC) {
-                    id
-                    title {
-                        romaji
-                        english
-                    }
-                    coverImage {
-                        large
-                    }
-                    description
-                    startDate {
-                        year
-                        month
-                        day
-                    }
-                    episodes
-                    duration
-                    studios {
-                        nodes {
-                            name
-                        }
-                    }
-                    genres
-                    format
-                    status
-                }
-            }
-        }
-        GRAPHQL;
-
-        // Send GraphQL query
-        $response = Http::post('https://graphql.anilist.co', [
-            'query' => $query,
-            'variables' => [
-                'page' => 1,
-                'perPage' => 4,
-            ],
-        ]);
-
-        // Validate the response
-        if ($response->failed()) {
-            $this->error('Failed to fetch data from AniList API.');
+        if ($this->option('random')) {
+            $this->getRandomAnime();
             return;
         }
 
-        $data = $response->json()['data']['Page']['media'] ?? [];
+        // API Jikan for popular anime list
+        $this->updatePopularAnimes();
+    }
+
+    private function updatePopularAnimes()
+    {
+        $response = Http::get('https://api.jikan.moe/v4/top/anime', ['page' => 5]);
+
+        if ($response->failed()) {
+            $this->error('Gagal mengambil data dari API Jikan.');
+            return;
+        }
+
+        $data = $response->json()['data'] ?? [];
 
         foreach ($data as $animeData) {
-            $existingAnime = Anime::where('name', $animeData['title']['romaji'])->first();
-
-            if (!$existingAnime) {
-                $anime = new Anime();
-                $anime->name = $animeData['title']['romaji'] ?? 'Unknown Title';
-
-                // Handle image download
-                $imageUrl = $animeData['coverImage']['large'] ?? null;
-
-                if ($imageUrl) {
-                    $imageResponse = Http::get($imageUrl);
-
-                    if ($imageResponse->successful()) {
-                        $imageContents = $imageResponse->body();
-                        $imageExtension = $this->getImageExtension($imageResponse);
-                        $imageName = 'anime_' . $animeData['id'] . '.' . $imageExtension;
-
-                        // Save image to storage
-                        Storage::put('public/images/' . $imageName, $imageContents);
-                        $anime->image = 'images/' . $imageName; // Path yang disimpan di database
-
-                    } else {
-                        $this->error("Failed to fetch image for anime: " . $animeData['title']['romaji']);
-                        $anime->image = null;
-                    }
-                } else {
-                    $anime->image = null;
-                }
-
-                // Other fields
-                $anime->description = isset($animeData['description']) ? strip_tags($animeData['description']) : 'No description available';
-                $anime->release_date = $this->formatDate($animeData['startDate'] ?? null);
-                $anime->episodes = $animeData['episodes'] ?? 500;
-                $anime->duration = $animeData['duration'] ?? 20;
-                $anime->studio = $animeData['studios']['nodes'][0]['name'] ?? 'Unknown Studio';
-                $anime->type = $animeData['format'] ?? 'Unknown';
-                $anime->status = $animeData['status'] ?? 'Unknown';
-
-                try {
-                    $anime->save();
-                    $this->info("Added new anime: " . $animeData['title']['romaji']);
-                } catch (\Exception $e) {
-                    $this->error("Failed to save anime: " . $animeData['title']['romaji'] . ". Error: " . $e->getMessage());
-                }
-            } else {
-                $this->info("Anime already exists: " . $animeData['title']['romaji']);
-            }
+            $this->processAnimeData($animeData);
         }
     }
 
-    // Helper function to determine image extension
+    private function processAnimeData($animeData)
+    {
+        $existingAnime = Anime::where('name', $animeData['title'])->first();
+    
+        if (!$existingAnime) {
+            $anime = new Anime();
+            $anime->name = $animeData['title'] ?? 'Judul Tidak Dikenal';
+    
+            // Handle image download
+            $anime->image = $this->downloadImage($animeData['images']['jpg']['image_url'] ?? null, $animeData['mal_id']);
+    
+            // Other fields
+            $anime->description = $animeData['synopsis'] ?? 'Tidak ada deskripsi tersedia';
+            $anime->release_date = $animeData['aired']['from'] ?? null;
+            $anime->episodes = $animeData['episodes'] ?? 0;
+            $anime->studio = $animeData['studios'][0]['name'] ?? 'Studio Tidak Dikenal';
+            $anime->type = $animeData['type'] ?? 'Tidak Dikenal';
+            $anime->status = $animeData['status'] ?? 'Tidak Dikenal';
+    
+            // Menyimpan sinonim dan total episode
+            $synonyms = array_column($animeData['titles'] ?? [], 'title'); // Ambil title dari titles array
+            $anime->synonyms = implode(', ', $synonyms); // Gabungkan sinonim menjadi string
+            $anime->TotalEps = $animeData['episodes'] ?? 0; // Menyimpan total episode (gunakan episodes yang sudah ada)
+    
+            try {
+                $anime->save();
+                $this->info("Menambahkan anime baru: " . $animeData['title'] . ", Sinonim: " . $anime->synonyms . ", Total Episode: " . $anime->TotalEps);
+            } catch (\Exception $e) {
+                $this->error("Gagal menyimpan anime: " . $animeData['title'] . ". Kesalahan: " . $e->getMessage());
+            }
+        } else {
+            $this->info("Anime sudah ada: " . $animeData['title']);
+        }
+    }
+    
+
+    private function getRandomAnime()
+    {
+        $response = Http::get('https://api.jikan.moe/v4/random/anime');
+
+        if ($response->failed()) {
+            $this->error('Gagal mengambil data anime acak dari API.');
+            return;
+        }
+
+        $animeData = $response->json()['data'] ?? null;
+
+        if ($animeData) {
+            $this->processAnimeData($animeData);
+        } else {
+            $this->error('Tidak ada data anime yang ditemukan.');
+        }
+    }
+
+    private function downloadImage($imageUrl, $malId)
+    {
+        if (!$imageUrl) {
+            return null;
+        }
+
+        $imageResponse = Http::get($imageUrl);
+
+        if ($imageResponse->successful()) {
+            $imageContents = $imageResponse->body();
+            $imageExtension = $this->getImageExtension($imageResponse);
+            $imageName = 'anime_' . $malId . '.' . $imageExtension;
+
+            // Save image to storage
+            Storage::put('public/images/' . $imageName, $imageContents);
+            return 'images/' . $imageName; // Path stored in the database
+        }
+
+        $this->error("Gagal mengambil gambar untuk anime dengan ID: " . $malId);
+        return null;
+    }
+
     private function getImageExtension($response)
     {
         $mimeType = $response->header('Content-Type');
@@ -133,17 +132,5 @@ class UpdateAnimeFromAniList extends Command
 
         return 'jpg'; // Default to jpg if mime type is unclear
     }
-
-    // Helper function to format the date
-    private function formatDate($startDate)
-    {
-        if (isset($startDate['year'])) {
-            $year = $startDate['year'];
-            $month = isset($startDate['month']) ? str_pad($startDate['month'], 2, '0', STR_PAD_LEFT) : '01';
-            $day = isset($startDate['day']) ? str_pad($startDate['day'], 2, '0', STR_PAD_LEFT) : '01';
-            return "$year-$month-$day";
-        }
-
-        return null;
-    }
+    
 }

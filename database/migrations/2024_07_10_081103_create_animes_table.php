@@ -24,8 +24,10 @@ class CreateAnimesTable extends Migration
             // $table->foreignId('category_id')->references('id')->on('categories')->onDelete('restrict')->onUpdate('cascade');
             $table->date('release_date');
             $table->text('description')->nullable();  // Deskripsi anime
-            $table->enum('status', ['Ongoing', 'Completed', 'Upcoming','FINISHED'])->default('Upcoming');  // Status rilis
-            $table->enum('type', ['TV', 'Movie', 'OVA', 'ONA', 'Special'])->default('TV');  // Tipe anime
+            $table->string('status');
+            $table->string('type');
+            // $table->enum('status', ['Ongoing', 'Completed', 'Upcoming','FINISHED'])->default('Upcoming');  // Status rilis
+            // $table->enum('type', ['TV', 'Movie', 'OVA', 'ONA', 'Special'])->default('TV');  // Tipe anime
             $table->string('studio')->nullable();  // Studio produksi
             $table->integer('episodes')->nullable();  // Jumlah episodeb
             $table->integer('TotalEps')->nullable();  // total episodeb

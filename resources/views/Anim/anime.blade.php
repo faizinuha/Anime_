@@ -6,7 +6,7 @@
                 <div class="row mb-4">
                     <div class="col-lg-3">
                         <div class="anime__details__pic set-bg" data-setbg="{{ asset('storage/' . $anime->image) }}">
-                            <div class="comment"><i class="fa fa-comments"></i> {{ $anime->comments_count }}</div>
+                            <div class="comment"><i class="fa fa-comments" style="color: red;"></i> {{ $anime->comments->count() }}</div>
                             <div class="view"><i class="fa fa-eye"></i> {{ $anime->views_count }}</div>
                         </div>
                     </div>

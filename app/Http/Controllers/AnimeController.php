@@ -61,7 +61,8 @@ class AnimeController extends Controller
 
     public function show($id)
     {
-        $anime = Anime::findOrFail($id);
+        // $anime = Anime::findOrFail($id);
+        $anime = Anime::with('comments')->findOrFail($id);
         return view('Anim.show', compact('anime'));
     }
 
