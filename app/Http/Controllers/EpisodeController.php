@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Episode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use App\models\Anime;
+use App\Models\Anime;
+use Illuminate\Support\Str;
 
 class EpisodeController extends Controller
 {
@@ -32,25 +33,33 @@ class EpisodeController extends Controller
     {
         // Validasi input
         $request->validate([
-            'video' => 'required|file|mimes:mp4,avi,mkv|max:20480', // Maksimal 20MB
+            'video' => 'required|file|mimes:mp4,avi,mkv|max:99999', // Maksimal 20MB
             'episode' => 'required|string|unique:episodes,episode,NULL,id,anime_id,' . $request->anime_id, // Kombinasi episode dan anime_id harus unik
             'anime_id' => 'required|exists:animes,id', // Pastikan anime_id valid
         ]);
 
-        // Simpan file video
+        // Temukan anime berdasarkan ID
         $anime = Anime::findOrFail($request->anime_id);
-        $animeFolder = 'videos/' . ($anime->name);
+        
+        // Gunakan slug untuk nama folder yang lebih aman
+        $animeFolder = 'videos/' . Str::slug($anime->name);
+
+        // Cek apakah folder sudah ada, jika tidak buat folder
+        if (!Storage::disk('public')->exists($animeFolder)) {
+            Storage::disk('public')->makeDirectory($animeFolder);
+        }
+
+        // Simpan file video
         $videoPath = $request->file('video')->store($animeFolder, 'public');
 
-
-        // // Simpan episode baru
-
+        // Simpan episode baru
         $episode = Episode::create([
             'video' => $videoPath,
             'episode' => $request->episode,
             'anime_id' => $request->anime_id,
         ]);
 
+        // Update jumlah episode pada anime yang bersangkutan
         if ($episode) {
             $anime = $episode->anime;
             $episode->anime()->update([
@@ -61,21 +70,35 @@ class EpisodeController extends Controller
         return redirect()->route('episodes.index')->with('success', 'Episode created successfully.');
     }
 
+    /**
+     * Show the form for adding new episodes.
+     */
     public function newEps()
     {
         // Ambil semua anime untuk dropdown
         $animes = Anime::all();
         return view('episode.neweps', compact('animes'));
     }
+
+    /**
+     * Store a new episode.
+     */
     public function createEps(Request $request)
     {
         $request->validate([
-            'video' => 'required|file|mimes:mp4,avi,mkv|max:99999', // Maksimal infinitty
+            'video' => 'required|file|mimes:mp4,avi,mkv|max:99999', // Maksimal infinity
             'episode' => 'required|string',
             'anime_id' => 'required|exists:animes,id',
         ]);
+
         $anime = Anime::findOrFail($request->anime_id);
-        $animeFolder = 'videos/' . ($anime->name);
+        $animeFolder = 'videos/' . Str::slug($anime->name);
+
+        // Cek apakah folder sudah ada, jika tidak buat folder
+        if (!Storage::disk('public')->exists($animeFolder)) {
+            Storage::disk('public')->makeDirectory($animeFolder);
+        }
+
         $videoPath = $request->file('video')->store($animeFolder, 'public');
 
         $episode = Episode::create([
@@ -84,14 +107,17 @@ class EpisodeController extends Controller
             'anime_id' => $request->anime_id,
         ]);
 
+        // Update jumlah episode pada anime
         if ($episode) {
             $anime = Anime::find($request->anime_id); // Find the associated anime
             $anime->update([
                 'episodes' => $anime->animeEpisodes()->count() // Update the episodes count field
             ]);
         }
+
         return redirect()->route('episodes.index')->with('success', 'Episode Berhasil Tambah');
     }
+
     /**
      * Remove the specified episode from storage.
      */
@@ -110,8 +136,7 @@ class EpisodeController extends Controller
                 Storage::disk('public')->deleteDirectory($animeFolder);
             }
         }
-       // Cek jika folder kosong setelah penghapusan video, lalu hapus folder
-       
+
         // Hapus episode dari database
         $episode->delete();
 

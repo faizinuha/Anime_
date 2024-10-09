@@ -16,7 +16,7 @@ class WatchController extends Controller
 
         // Cek apakah anime ditemukan
         if (!$anime) {
-            return redirect()->back()->with('error', 'Anime not found');
+            return redirect()->back()->with('error', 'Anime tidak ditemukan');
         }
 
         $comments = Comment::where('anime_id', $anime->id)->get();
@@ -28,14 +28,14 @@ class WatchController extends Controller
         // Validasi input
         $request->validate([
             'anime_id' => 'required|exists:animes,id',
-            'content' => 'required',
+            'content' => 'required|string|max:1000', // Tambahkan validasi panjang konten
         ]);
 
         // Menyimpan komentar baru
         Comment::create([
             'anime_id' => $request->anime_id,
             'user_id' => auth()->id(),
-            'content' => $request->content()
+            'content' => $request->input('content'), // Ganti dengan input yang benar
         ]);
 
         return redirect()->back()->with('success', 'Komentar berhasil ditambahkan!');

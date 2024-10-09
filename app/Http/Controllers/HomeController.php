@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Anime;
-use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
+use Exception;
+
 class HomeController extends Controller
 {
     public function __construct()
@@ -15,46 +17,37 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * Optimized Anime data retrieval with DB connection check caching.
      */
     public function Anim()
-{
-    try {
-        // Coba lakukan query untuk mengecek koneksi database
-        DB::connection()->getPdo(); // Cek koneksi database
-        $animes = Anime::all();
-        return view('Anim.index', compact('animes'));
-    } catch (\Exception $e) {
-        // Jika ada exception (koneksi gagal), tampilkan halaman khusus
-        if ($e->getCode() == 2002) {
-            return view('errors.no_connection'); // Tampilkan halaman error koneksi
-        } else {
+    {
+        try {
+            // Cek apakah status koneksi tersimpan di cache
+            $dbConnected = Cache::remember('db_connection_status', 60, function () {
+                try {
+                    DB::connection()->getPdo(); // Test koneksi ke database
+                    return true; // Koneksi berhasil
+                } catch (Exception $e) {
+                    return false; // Koneksi gagal
+                }
+            });
+
+            if (!$dbConnected) {
+                // Jika koneksi gagal, arahkan ke halaman error koneksi
+                return view('errors.no_connection');
+            }
+
+            // Mengambil data anime
+            $animes = Anime::all(); // Jika koneksi berhasil, lanjutkan query
+            return view('Anim.index', compact('animes'));
+        } catch (Exception $e) {
+            // Tangani semua error lain yang tidak terkait koneksi database
             return view('errors.Jaringandown', ['message' => $e->getMessage()]);
         }
     }
-}
-    // public function Anim()
-    // {
-    //     try {
-    //         // MeCoba lakukan query untuk cek koneksi database
-    //         DB::connection()->getPdo(); // Test koneksi ke database
-    //         $animes = Anime::all();
-    //         return view('Anim.index', compact('animes')); 
-    //     } catch (Exception $e) {
-    //         // Jika ada exception (koneksi gagal), tampilkan halaman khusus
-    //         if ($e->getCode() == 2002) {
-    //             return view('errors.no_connection'); // Tampilkan halaman periksa koneksi internet
-    //         }
-    //         return view('errors.Jaringandown', ['message' => $e->getMessage()]); // Untuk error lainnya
-    //     }
-    // }
-    
 
     public function index()
     {
         return view('home');
     }
-  
 }
