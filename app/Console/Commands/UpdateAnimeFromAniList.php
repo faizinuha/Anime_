@@ -47,14 +47,14 @@ class UpdateAnimeFromAniList extends Command
     private function processAnimeData($animeData)
     {
         $existingAnime = Anime::where('name', $animeData['title'])->first();
-    
+
         if (!$existingAnime) {
             $anime = new Anime();
             $anime->name = $animeData['title'] ?? 'Judul Tidak Dikenal';
-    
+
             // Handle image download
             $anime->image = $this->downloadImage($animeData['images']['jpg']['image_url'] ?? null, $animeData['mal_id']);
-    
+
             // Other fields
             $anime->description = $animeData['synopsis'] ?? 'Tidak ada deskripsi tersedia';
             $anime->release_date = $animeData['aired']['from'] ?? null;
@@ -62,12 +62,15 @@ class UpdateAnimeFromAniList extends Command
             $anime->studio = $animeData['studios'][0]['name'] ?? 'Studio Tidak Dikenal';
             $anime->type = $animeData['type'] ?? 'Tidak Dikenal';
             $anime->status = $animeData['status'] ?? 'Tidak Dikenal';
-    
+            // Tambahkan ini di prosesAnimeData
+            $anime->trailer = $animeData['trailer']['embed_url'] ?? null; // Set trailer jika ada
+
+
             // Menyimpan sinonim dan total episode
             $synonyms = array_column($animeData['titles'] ?? [], 'title'); // Ambil title dari titles array
             $anime->synonyms = implode(', ', $synonyms); // Gabungkan sinonim menjadi string
             $anime->TotalEps = $animeData['episodes'] ?? 0; // Menyimpan total episode (gunakan episodes yang sudah ada)
-    
+
             try {
                 $anime->save();
                 $this->info("Menambahkan anime baru: " . $animeData['title'] . ", Sinonim: " . $anime->synonyms . ", Total Episode: " . $anime->TotalEps);
@@ -78,7 +81,7 @@ class UpdateAnimeFromAniList extends Command
             $this->info("Anime sudah ada: " . $animeData['title']);
         }
     }
-    
+
 
     private function getRandomAnime()
     {
@@ -132,5 +135,4 @@ class UpdateAnimeFromAniList extends Command
 
         return 'jpg'; // Default to jpg if mime type is unclear
     }
-    
 }
