@@ -9,14 +9,18 @@ class Comment extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['anime_id', 'user_id', 'content','parent_id'];
-    public function user(){
-        
+    protected $fillable = ['anime_id', 'user_id', 'content', 'parent_id'];
+    public function user()
+    {
+
         return $this->belongsTo(User::class);
     }
     public function anime()
     {
         return $this->belongsTo(Anime::class);
     }
-    
+    public function parent()
+    {
+        return $this->belongsTo(Comment::class, 'parent_id');
+    }
 }

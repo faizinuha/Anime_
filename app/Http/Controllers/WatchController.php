@@ -19,7 +19,7 @@ class WatchController extends Controller
             return redirect()->back()->with('error', 'Anime tidak ditemukan');
         }
 
-        $comments = Comment::where('anime_id', $anime->id)->get();
+        $comments = Comment::where('anime_id', $anime->id)->with('parent.user')->get();
         return view('Anim.watch', compact('anime', 'comments', 'episode'));
     }
 

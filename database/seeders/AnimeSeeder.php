@@ -35,7 +35,7 @@ class AnimeSeeder extends Seeder
 
             if ($imageContents === false) {
                 // Fallback ke gambar default jika download gagal
-                $imageContents = file_get_contents('https://via.placeholder.com/800x600?text=Anime');
+                $imageContents = @file_get_contents('https://via.placeholder.com/800x600?text=Anime');
             }
 
             $imageName = Str::random(10) . '.jpg';

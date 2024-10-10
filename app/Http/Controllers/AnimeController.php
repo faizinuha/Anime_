@@ -19,9 +19,10 @@ class AnimeController extends Controller
         $animes = Anime::with([
             'animeEpisodes' => function ($query) {
                 $query->orderBy('episode', 'desc');
-            }])->get();
+            }
+        ])->get();
         // $animes = Anime::with('animeEpisodes')->get();
-        
+
         // dd($animes);
         return view('animes.index', compact('animes'));
     }
@@ -59,11 +60,12 @@ class AnimeController extends Controller
         return redirect()->route('anime.index')->with('success', 'Anime created successfully.');
     }
 
-    public function show($id)
+    public function show($nama) // jika mengambil id pakai $id jika mengambil nama pakai $name
     {
         // $anime = Anime::findOrFail($id);
-        $anime = Anime::with('comments')->findOrFail($id);
-        return view('Anim.show', compact('anime'));
+        // $anime = Anime::with('comments')->findOrFail($id); //pakai ini jika menggunakan id
+        $anime = Anime::where('name', $nama)->with('comments')->first(); //pakai ini jika menggunakan nama
+        return view('Anim.anime', compact('anime'));
     }
 
     public function edit($id)
@@ -83,19 +85,19 @@ class AnimeController extends Controller
             'type' => 'required|in:TV,Movie,OVA,ONA,Special',
             'category_id' => 'required|exists:categories,id'
         ]);
-    
+
         // Temukan anime yang akan diupdate
         $anime = Anime::findOrFail($id);
-    
+
         // Mengisi data anime dengan input yang telah dikonversi
-        $anime->fill($request->except('release_date')); 
+        $anime->fill($request->except('release_date'));
         $anime->release_date = $request->release_date;
-    
+
         // Simpan file jika ada
         if ($request->hasFile('image')) {
             $anime->image = $request->file('image')->store('images', ['disk' => 'public']);
         }
-                
+
         if ($request->hasFile('video')) {
             // Buat folder berdasarkan nama anime
             $animeFolder = 'videos/' . $anime->name;
@@ -103,14 +105,14 @@ class AnimeController extends Controller
             $videoPath = $request->file('video')->store($animeFolder, 'public');
             $anime->video = $videoPath; // Simpan path video di database
         }
-        
+
         if ($request->hasFile('trailer')) {
             $anime->trailer = $request->file('trailer')->store('trailers', ['disk' => 'public']);
         }
-    
+
         // Simpan data anime yang telah diperbarui
         $anime->save();
-    
+
         // Redirect ke halaman index dengan pesan sukses
         return redirect()->route('anime.index')->with('success', 'Anime updated successfully.');
     }
@@ -118,7 +120,7 @@ class AnimeController extends Controller
     public function destroy($id)
     {
         $anime = Anime::findOrFail($id);
-    
+
         // Hapus gambar jika ada
         if ($anime->image) {
             $imagePath = public_path('storage') . '/' . $anime->image;
@@ -127,7 +129,7 @@ class AnimeController extends Controller
                 unlink($imagePath);
             }
         }
-    
+
         // Hapus video jika ada
         if ($anime->video) {
             $videoPath = public_path('videos') . '/' . $anime->video;
@@ -135,11 +137,10 @@ class AnimeController extends Controller
                 unlink($videoPath);
             }
         }
-    
+
         // Hapus data Anime dari database
         $anime->delete();
-    
+
         return redirect()->route('anime.index')->with('success', 'Anime deleted successfully.');
     }
-    
 }

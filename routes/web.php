@@ -14,6 +14,8 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\SearchController;
 use App\Http\controllers\watchController;
 use App\Http\Controllers\EpisodeController;
+use App\Http\Controllers\ReplyController;
+
 // use App\Http\Controllers\Tayangharicontroller;
 
 // Rute untuk halaman verifikasi email
@@ -42,6 +44,8 @@ Route::get('/anime/{anime:name}', [DashboardController::class, 'show'])->name('a
 
 Route::post('/comment', [CommentController::class, 'store'])->name('comment.store');
 Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->name('comment.destroy');
+
+Route::post('/reply', [ReplyController::class, 'reply'])->name('reply.store');
 // ===============================[akhir]=============================================//
 
 // Rute yang dapat diakses tanpa login
@@ -68,46 +72,47 @@ Route::middleware(['auth', 'role:is_admin'])->group(function () {
     Route::get('/Data', [dashboardController::class, 'data'])->name('home.Dates');
     Route::resource('categories', CategoryController::class);
     Route::get('/table', [TableController::class, 'index'])->name('table');
+
+
+
+    Route::get('/user', [UserController::class, 'index'])->name('user');
+    Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
+    Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
+    // ========================[ Bagian crud]================================//
+    // Route::resource('jadwals', JadwalController::class);
+
+    // Route::resource('Tayanghari', Tayangharicontroller::class);
+    Route::resource('table', TableController::class);
+
+    // web search
+
+
+    Route::get('/search', [SearchController::class, 'search'])->name('search');
+    // use App\Http\Controllers\AnimeController;
+    // Menampilkan daftar anime
+    Route::get('/animes', [AnimeController::class, 'index'])->name('anime.index');
+    // Menampilkan form untuk membuat anime baru
+    Route::get('/animes/create', [AnimeController::class, 'create'])->name('anime.create');
+    // Menyimpan anime baru ke database
+    Route::post('/animes', [AnimeController::class, 'store'])->name('anime.store');
+    // Menampilkan form untuk mengedit anime tertentu
+    Route::get('/animes/{id}/edit', [AnimeController::class, 'edit'])->name('anime.edit');
+    // Memperbarui anime tertentu di database
+    Route::put('/animes/{id}', [AnimeController::class, 'update'])->name('anime.update');
+    // Menghapus anime tertentu dari database
+    Route::delete('/animes/{id}', [AnimeController::class, 'destroy'])->name('anime.destroy');
+
+
+
+
+
+
+    // bagian episode
+    Route::get('/episodes', [EpisodeController::class, 'index'])->name('episodes.index');
+    Route::get('/episodes/create', [EpisodeController::class, 'create'])->name('episodes.create');
+    Route::post('/episodes', [EpisodeController::class, 'store'])->name('episodes.store');
+    Route::delete('/episodes/{id}', [EpisodeController::class, 'destroy'])->name('episodes.destroy');
+
+    Route::get('/NewEps', [EpisodeController::class, 'newEps'])->name('episode.newEps');
+    Route::post('/neweps/create', [EpisodeController::class, 'createEps'])->name('episodes.createEps');
 });
-
-
-Route::get('/user', [UserController::class, 'index'])->name('user');
-Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
-Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
-// ========================[ Bagian crud]================================//
-// Route::resource('jadwals', JadwalController::class);
-
-// Route::resource('Tayanghari', Tayangharicontroller::class);
-Route::resource('table', TableController::class);
-
-// web search
-
-
-Route::get('/search', [SearchController::class, 'search'])->name('search');
-// use App\Http\Controllers\AnimeController;
-// Menampilkan daftar anime
-Route::get('/animes', [AnimeController::class, 'index'])->name('anime.index');
-// Menampilkan form untuk membuat anime baru
-Route::get('/animes/create', [AnimeController::class, 'create'])->name('anime.create');
-// Menyimpan anime baru ke database
-Route::post('/animes', [AnimeController::class, 'store'])->name('anime.store');
-// Menampilkan form untuk mengedit anime tertentu
-Route::get('/animes/{id}/edit', [AnimeController::class, 'edit'])->name('anime.edit');
-// Memperbarui anime tertentu di database
-Route::put('/animes/{id}', [AnimeController::class, 'update'])->name('anime.update');
-// Menghapus anime tertentu dari database
-Route::delete('/animes/{id}', [AnimeController::class, 'destroy'])->name('anime.destroy');
-
-
-
-
-
-
-// bagian episode
-Route::get('/episodes', [EpisodeController::class, 'index'])->name('episodes.index');
-Route::get('/episodes/create', [EpisodeController::class, 'create'])->name('episodes.create');
-Route::post('/episodes', [EpisodeController::class, 'store'])->name('episodes.store');
-Route::delete('/episodes/{id}', [EpisodeController::class, 'destroy'])->name('episodes.destroy');
-
-Route::get('/NewEps', [EpisodeController::class, 'newEps'])->name('episode.newEps');
-Route::post('/neweps/create', [EpisodeController::class, 'createEps'])->name('episodes.createEps');
