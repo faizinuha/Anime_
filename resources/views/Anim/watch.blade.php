@@ -8,7 +8,7 @@
                     <div class="anime__video__player">
                         <video id="player" playsinline controls data-poster="{{ asset('storage/' . $anime->image) }}">
                             <source src="{{ asset('storage/' . $episode->video) }}" type="video/mp4" />
-                            <track kind="captions" label="English captions" src="#" srclang="en" default />
+                            <track kind="captions" label="English capt  ions" src="#" srclang="en" default />
                             <track kind="captions" label="Jepang" src="#" srclang="jp" default />
                         </video>
                         <button id="pipButton" class="btn btn-primary" aria-keyshortcuts="i">
@@ -51,9 +51,10 @@
                                             @auth
                                                 <div class="d-flex justify-content-between gap-2">
                                                     <button class="text-light btn p-1 py-0"
-                                                        onclick="replyFrom(this.parentElement.parentElement, '{{ route('reply.store') }}', '{{ $item->id }}', '{{ $anime->id }}')"><small><i
-                                                                class="fa fa-reply "></i>
-                                                            Balas</small></button>
+                                                        onclick="replyFrom(this.parentElement.parentElement, '{{ route('reply.store') }}', '{{ $item->id }}', '{{ $anime->id }}')">
+                                                        <small><i class="fa fa-reply "></i> Balas</small>
+                                                    </button>
+
                                                     @if ($item->user_id == auth()->user()->id)
                                                         <form action="{{ route('comment.destroy', $item->id) }}"
                                                             method="POST">

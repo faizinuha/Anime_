@@ -46,6 +46,7 @@ Route::post('/comment', [CommentController::class, 'store'])->name('comment.stor
 Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->name('comment.destroy');
 
 Route::post('/reply', [ReplyController::class, 'reply'])->name('reply.store');
+
 // ===============================[akhir]=============================================//
 
 // Rute yang dapat diakses tanpa login
