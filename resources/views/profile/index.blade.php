@@ -1,124 +1,129 @@
-<style>
-    body {
-        margin: 0;
-        padding: 0;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(to right, #3498db, #8e44ad);
-    }
-
-    .container {
-        max-width: 600px;
-        padding: 20px;
-        background-color: #f9f9f9;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        text-align: center;
-    }
-
-    h1 {
-        font-size: 24px;
-        color: #333;
-        margin-bottom: 20px;
-    }
-
-    p {
-        font-size: 18px;
-        color: #555;
-        margin: 10px 0;
-    }
-
-    .btn-danger {
-        display: inline-block;
-        padding: 10px 20px;
-        font-size: 16px;
-        color: white;
-        background-color: #e74c3c;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        text-decoration: none;
-        transition: background-color 0.3s;
-    }
-
-    .btn-danger:hover {
-        background-color: #c0392b;
-    }
-
-    .alert {
-        padding: 15px;
-        border-radius: 5px;
-        margin-top: 20px;
-    }
-
-    .alert-success {
-        background-color: #dff0d8;
-        color: #3c763d;
-    }
-
-    .alert-danger {
-        background-color: #f2dede;
-        color: #a94442;
-    }
-
-    .confirm-input {
-        margin: 10px 0;
-        padding: 10px;
-        width: 100%;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-</style>
-
-<div class="container">
-    <h1>Profil Pengguna</h1>
-
-    @forelse($profiles as $profile)
-        <p>Nama: {{ $profile->user->name }}</p>
-        <p>Email: {{ $profile->user->email }}</p>
-        {{-- <p>Role: {{  $profile->user->role}}</p> --}}
-        <hr>
-    @empty
-        <p>Profil tidak ditemukan.</p>
-    @endforelse
-
-    @if(Auth::check())
-        <form id="delete-account-form" action="{{ route('profile.delete-account') }}" method="POST">
-            @csrf
-            @method('DELETE')
-
-            <input type="text" id="confirm-text" class="confirm-input" placeholder="Ketik 'hapus' untuk konfirmasi" required>
-
-            <button type="button" class="btn-danger" onclick="confirmDelete()">Hapus Akun</button>
-        </form>
-    @endif
-
-    @if(session('status'))
-        <div class="alert alert-success">
-            {{ session('status') }}
-        </div>
-    @endif
-
-    @if(session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-    @endif
-</div>
-
-
-<script>
-    function confirmDelete() {
-        const confirmText = document.getElementById('confirm-text').value;
-
-        if (confirmText === 'hapus') {
-            if (confirm('Apakah Anda yakin ingin menghapus akun ini? Ini tidak dapat diurungkan!')) {
-                document.getElementById('delete-account-form').submit();
-            }
-        } else {
-            alert('Silakan ketik "hapus" untuk mengonfirmasi penghapusan akun.');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-    }
-</script>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .breadcrumb {
+            background-color: #4f46e5;
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        .breadcrumb h2 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .profile-section {
+            padding: 60px 0;
+        }
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        @media (min-width: 768px) {
+            .profile-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .profile-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .profile-card h3 {
+            color: #4f46e5;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        .profile-photo {
+            width: 128px;
+            height: 128px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            display: block;
+        }
+        .profile-info {
+            margin-bottom: 15px;
+        }
+        .profile-info strong {
+            display: inline-block;
+            width: 100px;
+        }
+        .edit-button {
+            background-color: #4f46e5;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .edit-button:hover {
+            background-color: #4338ca;
+        }
+    </style>
+</head>
+<body>
+    <section class="breadcrumb">
+        <div class="container">
+            <h2>Profile</h2>
+            <p>Welcome to your profile page.</p>
+        </div>
+    </section>
+
+    @forelse ($profiles as $f )
+    <section class="profile-section">
+        <div class="container">
+            <div class="profile-grid">
+                <div class="profile-card">
+                    <h3>Profile Information</h3>
+                    <img src="{{asset('Img1/verify.png')}}" alt="Profile Photo" class="profile-photo">
+                    <div class="profile-info">
+                        <p><strong>Name:</strong>{{ $f->user->name }}</p>
+                    </div>
+                    <div class="profile-info">
+                        <p><strong>Email:</strong>{{ $f->user->email  }}</p>
+                    </div>
+                    <div class="profile-info">
+                        <p><strong>Favorite Place:</strong> Tokyo, Japan</p>
+                    </div>
+                </div>
+                <div class="profile-card">
+                    <h3>Update Profile</h3>
+                    <button class="edit-button">Edit Profile</button>
+                    <a href="{{route('Anim')}}">
+                        <button class="edit-button">Back to Anime List</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    @empty
+        <span><p>Data Tidak ada </p></span>
+    @endforelse
+</body>
+</html>
