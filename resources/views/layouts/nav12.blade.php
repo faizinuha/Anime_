@@ -128,6 +128,7 @@
                                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                                     Logout
                                                 </a>
+                                                <a href="{{route('profile.index')}}">Profile</a>
                                             </li>
                                         </ul>
                                     </div>

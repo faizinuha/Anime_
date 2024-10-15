@@ -15,6 +15,7 @@ use App\Http\Controllers\SearchController;
 use App\Http\controllers\watchController;
 use App\Http\Controllers\EpisodeController;
 use App\Http\Controllers\ReplyController;
+use App\Http\Controllers\ProfileController;
 
 // use App\Http\Controllers\Tayangharicontroller;
 
@@ -66,6 +67,14 @@ Route::middleware(['guest'])->group(function () {
 //==============================================[user dan admin]===============================================
 // Rute logout untuk pengguna yang sudah login
 Route::middleware(['auth'])->post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+// Route untuk menampilkan profil pengguna
+Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index')->middleware('auth');
+
+// Route untuk hapus akun
+Route::delete('/profile/delete-account', [ProfileController::class, 'deleteAccount'])
+    ->name('profile.delete-account')
+    ->middleware('auth'); 
 
 // Route::resource('animes', AnimeController::class);
 Route::middleware(['auth', 'role:is_admin'])->group(function () {
