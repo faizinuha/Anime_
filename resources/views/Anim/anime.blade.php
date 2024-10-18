@@ -63,7 +63,59 @@
                                 </div>
                             </div>
                             <div class="anime__details__btn">
-                                <a href="#" class="follow-btn"><i class="fa fa-heart-o"></i> Follow</a>
+                                <form action="{{ route('bookmarks.store') }}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="anime_id" value="{{ $anime->id }}">
+                                    <!-- Menyertakan anime_id -->
+                                    <button type="submit" class="follow-btn"><i class="fa fa-heart-o"></i>
+                                        bookmark</button>
+                                </form>
+                                @if (session('message'))
+                                    <div class="bs-toast toast fade show bg-success" role="alert" aria-live="assertive"
+                                        aria-atomic="true">
+                                        <div class="toast-header">
+                                            <i class="bx bx-bell me-2"></i>
+                                            <div class="me-auto fw-semibold">Anime</div>
+                                            <small></small>
+                                            <button type="button" class="btn-close" data-bs-dismiss="toast"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="toast-body">
+                                            {{ session('message') }}
+                                        </div>
+                                    </div>
+                                    <style>
+                                        .toast {
+                                            position: fixed;
+                                            top: 20px;
+                                            right: 20px;
+                                            z-index: 1055;
+                                            background-color: #28a745;
+                                            color: #fff;
+                                            border-radius: 0.25rem;
+                                        }
+
+                                        .toast .toast-body {
+                                            padding: 0.75rem;
+                                        }
+
+                                        .toast .close {
+                                            color: #fff;
+                                            opacity: 0.8;
+                                        }
+                                    </style>
+                                    <script>
+                                        document.addEventListener('DOMContentLoaded', function() {
+                                            var toastElList = [].slice.call(document.querySelectorAll('.toast'));
+                                            var toastList = toastElList.map(function(toastEl) {
+                                                return new bootstrap.Toast(toastEl, {
+                                                    delay: 3000
+                                                });
+                                            });
+                                            toastList.forEach(toast => toast.show());
+                                        });
+                                    </script>
+                                @endif
                                 @if ($anime->animeEpisodes->isNotEmpty())
                                     <a href="{{ route('anime.show', ['watch' => $anime->name, 'episode' => $anime->animeEpisodes->first()->id]) }}"
                                         class="watch-btn">

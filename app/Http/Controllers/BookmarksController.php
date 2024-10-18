@@ -3,62 +3,53 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Bookmark;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 class BookmarksController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
+  
+public function store(Request $request)
+{
+    $request->validate([
+        'anime_id' => 'required|exists:animes,id',
+    ]);
+
+    $user = Auth::user();
+
+    // Cek apakah anime sudah ada di bookmark
+    Log::info('Checking if already bookmarked');
+    $alreadyBookmarked = Bookmark::where('user_id', $user->id)
+        ->where('anime_id', $request->anime_id)
+        ->exists();
+
+    if ($alreadyBookmarked) {
+        Log::info('Already bookmarked');
+        return redirect()->back()->with('message', 'Anime sudah ada di bookmarks Anda.');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+    // Simpan bookmark
+    Log::info('Saving bookmark');
+    Bookmark::create([
+        'user_id' => $user->id,
+        'anime_id' => $request->anime_id,
+    ]);
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    return redirect()->back()->with('message', 'Anime berhasil ditambahkan ke bookmarks.');
+}
+    public function destroy($animeId)
     {
-        //
-    }
+        $user = Auth::user();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        $bookmark = Bookmark::where('user_id', $user->id)
+            ->where('anime_id', $animeId)
+            ->first();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+        if ($bookmark) {
+            $bookmark->delete();
+            return redirect()->back()->with('message', 'Anime berhasil dihapus dari bookmarks.');
+        }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return redirect()->back()->with('message', 'Anime tidak ditemukan di bookmarks Anda.');
     }
 }

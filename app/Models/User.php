@@ -55,6 +55,10 @@ class User extends Authenticatable implements  MustVerifyEmail
     public function profile(){
         return $this->hasOne(Profile::class, 'account_id');
     }
+    public function bookmarks()
+    {
+        return $this->hasMany(Bookmark::class);
+    }
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new CustomPasswordResetNotification($token));
