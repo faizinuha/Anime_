@@ -88,7 +88,7 @@
             <div class="mb-3 form-password-toggle">
               <label class="form-label" for="password">Password</label>
               <div class="input-group input-group-merge">
-                <input type="password" id="password" class="form-control" name="password" placeholder="********" aria-describedby="password" />
+                <input type="password" id="password" class="form-control" name="password" placeholder="********" aria-describedby="password" autocomplete="new-password" />
                 @error('password')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>

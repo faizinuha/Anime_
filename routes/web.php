@@ -16,7 +16,7 @@ use App\Http\controllers\watchController;
 use App\Http\Controllers\EpisodeController;
 use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\ProfileController;
-
+use App\Http\Controllers\BookmarksController;
 // use App\Http\Controllers\Tayangharicontroller;
 
 // Rute untuk halaman verifikasi email
@@ -62,6 +62,9 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/loginuser', [LoginController::class, 'login2'])->name('login2');
     Route::get('/registeruser', [LoginController::class, 'register2'])->name('register2');
 });
+Route::post('/bookmarks', [BookmarksController::class, 'store'])->name('bookmarks.store');
+Route::delete('/bookmarks/{animeId}', [BookmarksController::class, 'destroy'])->name('bookmarks.destroy');
+
 //==============================================[user dan admin]===============================================
 // Route::get('/animes/{anime:name}', [AnimeController::class, 'show'])->name('animes.show');
 //==============================================[user dan admin]===============================================
@@ -74,7 +77,7 @@ Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index
 // Route untuk hapus akun
 Route::delete('/profile/delete-account', [ProfileController::class, 'deleteAccount'])
     ->name('profile.delete-account')
-    ->middleware('auth'); 
+    ->middleware('auth');
 
 // Route::resource('animes', AnimeController::class);
 Route::middleware(['auth', 'role:is_admin'])->group(function () {

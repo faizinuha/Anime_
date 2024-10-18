@@ -4,7 +4,7 @@
     
 </style>
     <section class="hero">
-        <div class="container">
+        <div class="container mb-4">
             <div class="hero__slider owl-carousel">
                 <div class="hero__items set-bg" data-setbg="{{ asset('assetanime/img/hero/hero-1.jpg') }}">
                     <div class="row">
@@ -48,7 +48,7 @@
 
     <!-- Product Section Begin -->
     <section class="product spad">
-        <div class="container">
+        <div class="container mb-4">
             <div class="row">
                 <div class="col-lg-8">
                     <div class="trending__product">
