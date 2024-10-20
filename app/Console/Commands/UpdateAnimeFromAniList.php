@@ -135,4 +135,5 @@ class UpdateAnimeFromAniList extends Command
 
         return 'jpg'; // Default to jpg if mime type is unclear
     }
-}
+    }
+                

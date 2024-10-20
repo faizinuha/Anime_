@@ -71,14 +71,15 @@ Route::delete('/bookmarks/{animeId}', [BookmarksController::class, 'destroy'])->
 // Rute logout untuk pengguna yang sudah login
 Route::middleware(['auth'])->post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-// Route untuk menampilkan profil pengguna
-Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index')->middleware('auth');
-
 // Route untuk hapus akun
-Route::delete('/profile/delete-account', [ProfileController::class, 'deleteAccount'])
+Route::delete('/profile/delete-account', [UserController::class, 'deleteAccount'])
     ->name('profile.delete-account')
     ->middleware('auth');
 
+Route::get('/account', [UserController::class, 'account'])->name('account');
+Route::get('/user', [UserController::class, 'index'])->name('user');
+Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
+Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
 // Route::resource('animes', AnimeController::class);
 Route::middleware(['auth', 'role:is_admin'])->group(function () {
     Route::get('/home', [dashboardController::class, 'index'])->name('home');
@@ -86,11 +87,6 @@ Route::middleware(['auth', 'role:is_admin'])->group(function () {
     Route::resource('categories', CategoryController::class);
     Route::get('/table', [TableController::class, 'index'])->name('table');
 
-
-
-    Route::get('/user', [UserController::class, 'index'])->name('user');
-    Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
-    Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
     // ========================[ Bagian crud]================================//
     // Route::resource('jadwals', JadwalController::class);
 

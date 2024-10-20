@@ -95,35 +95,34 @@
         </div>
     </section>
 
-    @forelse ($profiles as $f )
     <section class="profile-section">
         <div class="container">
             <div class="profile-grid">
                 <div class="profile-card">
                     <h3>Profile Information</h3>
-                    <img src="{{asset('Img1/verify.png')}}" alt="Profile Photo" class="profile-photo">
+                    <!-- Display profile photo if exists -->
+                    <img src="{{ asset($user->photo ?? 'default-photo.jpg') }}" alt="Profile Photo" class="profile-photo">
                     <div class="profile-info">
-                        <p><strong>Name:</strong>{{ $f->user->name }}</p>
+                        <p><strong>Name:</strong> {{ $user->name }}</p>
                     </div>
                     <div class="profile-info">
-                        <p><strong>Email:</strong>{{ $f->user->email  }}</p>
+                        <p><strong>Email:</strong> {{ $user->email }}</p>
                     </div>
+                    <!-- You can add more user information here -->
                     <div class="profile-info">
-                        <p><strong>Favorite Place:</strong> Tokyo, Japan</p>
+                        <p><strong>Favorite Place:</strong> Tokyo, Japan</p> <!-- Example data -->
                     </div>
                 </div>
                 <div class="profile-card">
                     <h3>Update Profile</h3>
-                    <button class="edit-button">Edit Profile</button>
-                    <a href="{{route('Anim')}}">
+                    <!-- Edit button can be linked to an edit page -->
+                    <button class="edit-button" onclick="window.location.href='{{ route('user.edit', $user->id) }}'">Edit Profile</button>
+                    <!-- Example link back to anime list -->
+                    <a href="{{ route('Anim') }}">
                         <button class="edit-button">Back to Anime List</button>
                     </a>
-                </div>
+                </div>          
             </div>
         </div>
-    </section>
-    @empty
-        <span><p>Data Tidak ada </p></span>
-    @endforelse
 </body>
 </html>
