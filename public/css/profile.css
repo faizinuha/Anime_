@@ -1,0 +1,155 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    background-color: #f3f4f6;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.breadcrumb {
+    background-color: #4f46e5;
+    color: white;
+    padding: 60px 0;
+    text-align: center;
+}
+
+.breadcrumb h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.profile-section {
+    padding: 60px 0;
+}
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+@media (min-width: 768px) {
+    .profile-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.profile-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.profile-card h3 {
+    color: #4f46e5;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.profile-photo {
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 20px;
+    display: block;
+}
+
+.profile-info {
+    margin-bottom: 15px;
+}
+
+.profile-info strong {
+    display: inline-block;
+    width: 100px;
+}
+
+.edit-button {
+    background-color: #4f46e5;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.edit-button:hover {
+    background-color: #4338ca;
+}
+.profile-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+.delete-button {
+    background-color: red;
+    color:#f3f4f6;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.delete-button::hover{
+    background-color: #4338ca;
+}
+.bookmark-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.bookmark-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.img-thumbnail-zoom-in {
+    width: 80px; /* Adjust the width of the image */
+    height: 80px; /* Ensure it's square */
+    border-radius: 8px;
+    object-fit: cover;
+    margin-right: 15px;
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.img-thumbnail-zoom-in:hover {
+    transform: scale(1.05);
+}
+
+.anime-info {
+    font-size: 1rem;
+    color: #333;
+    line-height: 1.5;
+}
+
+/* Adjust the responsiveness */
+@media (max-width: 768px) {
+    .bookmark-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .img-thumbnail-zoom-in {
+        margin-bottom: 10px;
+    }
+}

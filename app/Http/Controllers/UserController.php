@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Bookmark;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,8 +18,9 @@ class UserController extends Controller
     public function account()
     {
         // Mengambil data pengguna yang sedang login
-        $user =  Auth::user(); // Mengambil semua data pengguna
-        return view('profile.index', compact('user'));
+        $user = Auth::user();
+        $bookmarks = bookmark::with('anime')->get(); // Mengambil bookmark dan anime terkait
+        return view('profile.index', compact('user', 'bookmarks'));
     }
 
     // Menampilkan halaman edit profil

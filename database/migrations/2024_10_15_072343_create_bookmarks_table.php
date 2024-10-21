@@ -16,10 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('anime_id');
             $table->timestamps();
-        
             // Foreign key untuk user
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-        
             // Foreign key untuk anime
             $table->foreign('anime_id')->references('id')->on('animes')->onDelete('cascade');
         });

@@ -72,10 +72,9 @@ Route::delete('/bookmarks/{animeId}', [BookmarksController::class, 'destroy'])->
 Route::middleware(['auth'])->post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Route untuk hapus akun
-Route::delete('/profile/delete-account', [UserController::class, 'deleteAccount'])
-    ->name('profile.delete-account')
+Route::delete('/account/delete-account', [UserController::class, 'deleteAccount'])
+    ->name('account.delete-account')
     ->middleware('auth');
-
 Route::get('/account', [UserController::class, 'account'])->name('account');
 Route::get('/user', [UserController::class, 'index'])->name('user');
 Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
