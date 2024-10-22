@@ -17,6 +17,7 @@ use App\Http\Controllers\EpisodeController;
 use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BookmarksController;
+use App\Http\Controllers\NobarAnimeController;
 // use App\Http\Controllers\Tayangharicontroller;
 
 // Rute untuk halaman verifikasi email
@@ -124,4 +125,17 @@ Route::middleware(['auth', 'role:is_admin'])->group(function () {
 
     Route::get('/NewEps', [EpisodeController::class, 'newEps'])->name('episode.newEps');
     Route::post('/neweps/create', [EpisodeController::class, 'createEps'])->name('episodes.createEps');
+
+
+    Route::get('/roms', [NobarAnimeController::class, 'index'])->name('roms.index');
+    Route::get('/roms/{id}/show', [NobarAnimeController::class, 'show'])->name('roms.show');
+    // Bergabung dan keluar
+    Route::post('/roms/{id}/join', [NobarAnimeController::class, 'joinRoom'])->name('roms.join');
+    Route::get('/roms/{id}/leave', [NobarAnimeController::class, 'leave'])->name('roms.leave');
+    // Rute untuk edit dan buat
+    Route::get('/roms/{rom}/edit', [NobarAnimeController::class, 'edit'])->name('roms.edit');
+    Route::post('/roms', [NobarAnimeController::class, 'store'])->name('roms.store');
+    Route::get('/roms/create', [NobarAnimeController::class, 'create'])->name('roms.create');
+    Route::put('/roms/{rom}', [NobarAnimeController::class, 'update'])->name('roms.update');
+    
 });

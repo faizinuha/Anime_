@@ -60,4 +60,8 @@ class User extends Authenticatable implements  MustVerifyEmail
     {
         $this->notify(new CustomPasswordResetNotification($token));
     }
+    public function roms()
+{
+    return $this->belongsToMany(NobarAnime::class, 'user_nobars', 'users_id', 'nobar_id');
+}
 }

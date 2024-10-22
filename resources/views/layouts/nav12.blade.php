@@ -86,7 +86,7 @@
                                         {{-- <li><a href="{{route('login2')}}">Login</a></li> --}}
                                     </ul>
                                 </li>
-                                <li><a href="#" id="nobar">Nobar</a></li>
+                                <li><a href="{{route('roms.index')}}" id="nobar">Nobar</a></li>
                                 <li><a href="#">Customer</a></li>
                                 <li>
                                     <a href="#" class="search-switch"><span class="icon_search"></span></a>
@@ -234,10 +234,7 @@
         });
 
 
-        document.getElementById('nobar').addEventListener('click', function(event) {
-            event.preventDefault();
-            alert('Maaf dalam tahap Beta')
-        })
+        
 
         function myFunction() {
             document.getElementById("myDropdown").classList.toggle("show");

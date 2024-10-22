@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class NobarAnime extends Model
 {
     use HasFactory;
+    protected $fillable = ['anime_id', 'user_id','key_rom','tanggal_waktu','jumlah_peserta','status','deskripsi'];
+
+    public function anime(){
+        return $this->belongsTo(Anime::class);
+    }
+    public function users()
+    {
+        return $this->belongsToMany(User::class,'user_nobars', 'nobar_id', 'user_id');
+    }
 }

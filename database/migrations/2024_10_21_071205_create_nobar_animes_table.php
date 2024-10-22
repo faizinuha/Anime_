@@ -20,7 +20,7 @@ return new class extends Migration
             $table->enum('status', ['aktif', 'selesai', 'dibatalkan'])->default('aktif');
             
             $table->foreignId('anime_id')->constrained('animes'); // Foreign key untuk anime
-            $table->foreignId('users_id')->constrained('users'); // Pastikan mengacu pada tabel 'users'
+            $table->foreignId('user_id')->constrained('users'); // Pastikan mengacu pada tabel 'users'
             $table->timestamps();
         });
     }

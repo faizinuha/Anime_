@@ -45,4 +45,7 @@ class Anime extends Model
     {
         return $this->hasMany(Episode::class, 'anime_id'); // Benar menggunakan hasMany
     }
+    public function Nobar(){
+        return $this->belongsTo(NobarAnime::class);
+    }
 }
