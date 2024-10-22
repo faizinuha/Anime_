@@ -15,6 +15,7 @@
         "spatie/laravel-permission": "^6.9"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.14",
         "fakerphp/faker": "^1.9.1",
         "ladumor/laravel-pwa": "^0.0.4",
         "laravel/pint": "^1.0",

@@ -145,7 +145,7 @@
                         <th>Nama</th>
                         <th>Gambar</th>
                         <th>Pv</th>
-                        <th>Rilis</th>
+                        <th>Trailerd</th>
                         {{-- <th>Episode</th> --}}
                         <th>Aksi</th>
                     </tr>
@@ -164,6 +164,13 @@
                                 <div class="media-container">
                                     @if ($anime->video)
                                         <video src="{{ asset('storage/' . $anime->video) }}" controls></video>
+                                    @endif
+                                </div>
+                            </td>
+                            <td>
+                                <div class="media-container">
+                                    @if ($anime->trailer)
+                                        <video src="{{ asset('storage/videos/' . $anime->trailer) }}" controls></video>
                                     @endif
                                 </div>
                             </td>

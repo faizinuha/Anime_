@@ -57,7 +57,7 @@
             <div class="row">
                 <div class="col-lg-2">
                     <div class="header__logo">
-                        <a href="./index.html">
+                        <a href="{{route('Anim')}}">
                             <img src="{{ asset('assetanime/img/logo.png') }}" alt="">
                         </a>
                     </div>

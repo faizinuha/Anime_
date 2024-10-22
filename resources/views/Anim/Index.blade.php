@@ -249,15 +249,6 @@
                                     </h5>
                                 </div>
                             @endforeach
-                                {{-- @forelse ($animeList as $p )
-                                <div class="product__sidebar__view__item set-bg mix day years"
-                                    data-setbg="{{ asset('storage/', $p->image) }}">
-                                    <div class="ep">{{ $p->TotalEps }}</div>
-                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    <h5><a href="#">Boruto: Naruto next generations</a></h5>
-                                </div>                         
-                                @empty      
-                                @endforelse --}}
                                 <div class="product__sidebar__view__item set-bg mix month week"
                                     data-setbg="{{ asset('assetanime/img/sidebar/tv-2.jpg') }}">
                                     <div class="ep">18 / ?</div>
@@ -284,51 +275,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="product__sidebar__comment">
-                            <div class="section-title">
-                                <h5>New Comment</h5>
-                            </div>
-                            <div class="product__sidebar__comment__item">
-                                <div class="product__sidebar__comment__item__pic">
-                                    <img src="{{ asset('assetanime/img/sidebar/comment-1.jpg') }}" alt="">
-                                </div>
-                                <div class="product__sidebar__comment__item__text">
-                                    <ul>
-                                        <li>Active</li>
-                                        <li>Movie</li>
-                                    </ul>
-                                    <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
-                                    <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
-                                </div>
-                            </div>
-                            <div class="product__sidebar__comment__item">
-                                <div class="product__sidebar__comment__item__pic">
-                                    <img src="{{ asset('assetanime/img/sidebar/comment-2.jpg') }}" alt="">
-                                </div>
-                                <div class="product__sidebar__comment__item__text">
-                                    <ul>
-                                        <li>Active</li>
-                                        <li>Movie</li>
-                                    </ul>
-                                    <h5><a href="#">Shirogane Tamashii hen Kouhan sen</a></h5>
-                                    <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
-                                </div>
-                            </div>
-                            <div class="product__sidebar__comment__item">
-                                <div class="product__sidebar__comment__item__pic">
-                                    <img src="{{ asset('assetanime/img/sidebar/comment-3.jpg') }}" alt="">
-                                </div>
-                                <div class="product__sidebar__comment__item__text">
-                                    <ul>
-                                        <li>Active</li>
-                                        <li>Movie</li>
-                                    </ul>
-                                    <h5><a href="#">Kizumonogatari III: Reiket su-hen</a></h5>
-                                    <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
-                                </div>
-                            </div>
-                           
-                        </div>
+                      
                     </div>
                 </div>
             </div>

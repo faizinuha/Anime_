@@ -18,7 +18,9 @@ class WatchController extends Controller
         if (!$anime) {
             return redirect()->back()->with('error', 'Anime tidak ditemukan');
         }
-
+        $trailer = $anime->trailer; // Mendapatkan trailer dari anime
+        $episodes = $anime->episodes; // Mendapatkan semua episode yang terkait
+        
         $comments = Comment::where('anime_id', $anime->id)->with('parent.user')->get();
         return view('Anim.watch', compact('anime', 'comments', 'episode'));
     }

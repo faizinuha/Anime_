@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use App\Models\Anime;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Facades\Cache;
 class UpdateAnimeFromAniList extends Command
 {
     protected $signature = 'anime:update {--random}';
@@ -30,7 +30,9 @@ class UpdateAnimeFromAniList extends Command
 
     private function updatePopularAnimes()
     {
-        $response = Http::get('https://api.jikan.moe/v4/top/anime', ['page' => 5]);
+        $response = Cache::remember('popular_animes_page_5', 60, function () {
+            return Http::retry(3, 1000)->timeout(30)->get('https://api.jikan.moe/v4/top/anime', ['page' => 5]);
+        });
 
         if ($response->failed()) {
             $this->error('Gagal mengambil data dari API Jikan.');
@@ -63,9 +65,8 @@ class UpdateAnimeFromAniList extends Command
             $anime->type = $animeData['type'] ?? 'Tidak Dikenal';
             $anime->status = $animeData['status'] ?? 'Tidak Dikenal';
             // Tambahkan ini di prosesAnimeData
-            $anime->trailer = $animeData['trailer']['embed_url'] ?? null; // Set trailer jika ada
-
-
+            $anime->trailer = $this->downloadVideo($animeData['trailer']['url'] ?? null, $animeData['mal_id']); // Set video trailer jika ada
+            
             // Menyimpan sinonim dan total episode
             $synonyms = array_column($animeData['titles'] ?? [], 'title'); // Ambil title dari titles array
             $anime->synonyms = implode(', ', $synonyms); // Gabungkan sinonim menjadi string
@@ -135,5 +136,50 @@ class UpdateAnimeFromAniList extends Command
 
         return 'jpg'; // Default to jpg if mime type is unclear
     }
+    private function downloadVideo($videoUrl, $malId)
+    {
+        if (!$videoUrl) {
+            return null;
+        }
+    
+        // Cek header untuk mendapatkan ukuran video
+        $headers = Http::head($videoUrl);
+        $contentLength = $headers->header('Content-Length');
+    
+        // Jika ukuran video lebih dari misalnya 50MB, kita bisa skip
+        if ($contentLength && $contentLength > 50 * 1024 * 1024) {
+            $this->error("Ukuran video terlalu besar untuk anime dengan ID: " . $malId);
+            return null;
+        }
+    
+        // Set retry dan timeout
+        $videoResponse = Http::retry(3, 1000)->timeout(120)->get($videoUrl);
+    
+        if ($videoResponse->successful()) {
+            $videoContents = $videoResponse->body();
+            $videoExtension = $this->getVideoExtension($videoResponse);
+            $videoName = 'trailer_' . $malId . '.' . $videoExtension;
+    
+            // Save video to storage
+            Storage::put('public/videos/' . $malId . '/' . $videoName, $videoContents);
+            return 'videos/' . $videoName; // Path stored in the database
+        }
+    
+        $this->error("Gagal mengambil video untuk anime dengan ID: " . $malId);
+        return null;
     }
-                
+    
+
+    private function getVideoExtension($response)
+    {
+        $mimeType = $response->header('Content-Type');
+
+        if (str_contains($mimeType, 'mp4')) {
+            return 'mp4';
+        } elseif (str_contains($mimeType, 'webm')) {
+            return 'webm';
+        }
+
+        return 'mp4'; // Default to mp4 if mime type is unclear
+    }
+}

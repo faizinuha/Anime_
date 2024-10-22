@@ -63,13 +63,31 @@
                                 </div>
                             </div>
                             <div class="anime__details__btn">
+
                                 <form action="{{ route('bookmarks.store') }}" method="post">
                                     @csrf
                                     <input type="hidden" name="anime_id" value="{{ $anime->id }}">
                                     <!-- Menyertakan anime_id -->
                                     <button type="submit" class="follow-btn"><i class="fa fa-heart-o"></i>
                                         bookmark</button>
+
+                                    @if (!empty($anime->trailer))
+                                        <a href="{{ $anime->trailer }}" class="watch-btn">
+                                            <span>Watch Now</span><i class="fa fa-angle-right"></i>
+                                        </a>
+                                    @elseif ($anime->animeEpisodes->isNotEmpty())
+                                        <a href="{{ route('anime.show', ['watch' => $anime->name, 'episode' => $anime->animeEpisodes->first()->id]) }}"
+                                            class="watch-btn">
+                                            <span>Watch Now</span> <i class="fa fa-angle-right"></i>
+                                        </a>
+                                    @else
+                                        {{-- Jika tidak ada trailer dan episode --}}
+                                        <p>No trailer available, and episodes are not found.</p>
+                                    @endif
+
+
                                 </form>
+
                                 @if (session('message'))
                                     <div class="bs-toast toast fade show bg-success" role="alert" aria-live="assertive"
                                         aria-atomic="true">
@@ -116,14 +134,7 @@
                                         });
                                     </script>
                                 @endif
-                                @if ($anime->animeEpisodes->isNotEmpty())
-                                    <a href="{{ route('anime.show', ['watch' => $anime->name, 'episode' => $anime->animeEpisodes->first()->id]) }}"
-                                        class="watch-btn">
-                                        <span>Watch Now</span> <i class="fa fa-angle-right"></i>
-                                    </a>
-                                @else
-                                    <p>No episodes available</p>
-                                @endif
+
                             </div>
                         </div>
                     </div>
@@ -135,30 +146,16 @@
                                 <h5>Episodes</h5>
                             </div>
                             <div class="episode-cards">
-                                {{-- @for ($i = 1; $i <= $anime->episodes; $i++)
-                                    <div class="episode-card">
-                                        <a href="#episode-{{ $i }}">Ep: {{ $i }}</a>
-                                    </div>
-                                    @endfor --}}
-
-                                {{-- @if ($anime->animeEpisodes->isNotEmpty())
-                                        @forelse ($anime->animeEpisodes as $index => $episode)
-                                        <a href="{{ route('anime.show', ['watch' => $anime->name, 'episode' => $episode->id]) }}">Ep: {{ $episode->episode }}</a>
-                                        @empty
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <p>Episode Tidak ada</p>
-                                                </div>
-                                            </div>
-                                        @endforelse
-                                    @endif --}}
                                 @forelse ($anime->animeEpisodes as $index => $episode)
                                     <div class="episode-card">
                                         <a
                                             href="{{ route('anime.show', ['watch' => $anime->name, 'episode' => $episode->id]) }}">Ep:
                                             {{ $episode->episode }}</a>
                                     </div>
+
                                 @empty
+
+                                    <p>Episode not available.</p>
                                 @endforelse
                             </div>
                         </div>
@@ -182,53 +179,9 @@
                                     </h5>
                                 </div>
                             @endforeach
-                            <div class="product__sidebar__view__item set-bg"
-                                data-setbg="{{ asset('assetanime/img/sidebar/tv-2.jpg') }}">
-                                <div class="ep">18 / ?</div>
-                                <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
-                            </div>
-                            <div class="product__sidebar__view__item set-bg"
-                                data-setbg="{{ asset('assetanime/img/sidebar/tv-3.jpg') }}">
-                                <div class="ep">18 / ?</div>
-                                <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                <h5><a href="#">Sword Art Online Alicization War of Underworld</a></h5>
-                            </div>
-                            <div class="product__sidebar__view__item set-bg"
-                                data-setbg="{{ asset('assetanime/img/sidebar/tv-4.jpg') }}">
-                                <div class="ep">18 / ?</div>
-                                <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                <h5><a href="#">Fate/Stay Night: Heaven's Feel I. Presage Flower</a></h5>
-                            </div>
                         </div>
                     </div>
-                    {{-- not  found --}}
-                    {{-- <div class="col-12">
-                        <div id="disqus_thread"></div>
-                        <script>
-                            /**
-                             *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-                             *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-                            /*
-                            var disqus_config = function () {
-                            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-                            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-                            };
-                            */
-                            (function() { // DON'T EDIT BELOW THIS LINE
-                                var d = document,
-                                    s = d.createElement('script');
-                                s.src = 'https://laranime.disqus.com/embed.js';
-                                s.setAttribute('data-timestamp', +new Date());
-                                (d.head || d.body).appendChild(s);
-                            })();
-                        </script>
-                        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments
-                                powered by Disqus.</a></noscript>
-                    </div> --}}
                 </div>
             </div>
     </section>
-    {{-- not found --}}
-    {{-- <script id="dsq-count-scr" src="//laranime.disqus.com/count.js" async></script> --}}
 @endsection

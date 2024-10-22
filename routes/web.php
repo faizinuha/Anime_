@@ -42,7 +42,6 @@ Route::get('/list', [dashboardController::class, 'list'])->name('list');
 Route::get('/watch/{watch:name}-{episode}', [WatchController::class, 'show'])->name('anime.show');
 // Route::get('/watch/{name}', [WatchController::class, 'show'])->name('anime.show');
 Route::get('/anime/{anime:name}', [DashboardController::class, 'show'])->name('animes.show');
-
 Route::post('/comment', [CommentController::class, 'store'])->name('comment.store');
 Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->name('comment.destroy');
 
@@ -79,7 +78,9 @@ Route::get('/account', [UserController::class, 'account'])->name('account');
 Route::get('/user', [UserController::class, 'index'])->name('user');
 Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
 Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
+
 // Route::resource('animes', AnimeController::class);
+
 Route::middleware(['auth', 'role:is_admin'])->group(function () {
     Route::get('/home', [dashboardController::class, 'index'])->name('home');
     Route::get('/Data', [dashboardController::class, 'data'])->name('home.Dates');
