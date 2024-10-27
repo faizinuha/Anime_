@@ -8,7 +8,13 @@
 <div class="container mx-auto mt-10">
     <div class="bg-white shadow-lg rounded-lg overflow-hidden">
         <div class="relative">
+            @if(isset($rom->anime))
             <img src="{{ asset('storage/' . $rom->anime->image) }}" alt="Anime Thumbnail" class="w-full h-64 object-cover">
+            <h1 class="text-4xl font-bold">{{ $rom->anime->name }}</h1>
+        @else
+            <p>Anime data is not available for this room.</p>
+        @endif
+        
             <div class="absolute top-0 left-0 bg-opacity-75 bg-black text-white p-4 rounded-br-lg">
                 <h1 class="text-4xl font-bold">{{ $rom->anime->name }}</h1>
                 <p class="text-lg">{{ date('F j, Y, g:i A', strtotime($rom->tanggal_waktu)) }}</p>
@@ -20,6 +26,7 @@
 
             <div class="flex justify-between items-center mb-6">
                 <div class="text-gray-600">
+                    <p>Nama Ketua: {{ $rom->ketua->name }}</p>
                     <p><strong>Status:</strong> 
                         @if($rom->status == 'aktif')
                             <span class="text-green-600 font-semibold">Active</span>

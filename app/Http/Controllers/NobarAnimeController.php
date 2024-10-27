@@ -81,6 +81,28 @@ class NobarAnimeController extends Controller
         return redirect()->route('roms.index')->with('success', 'Rom berhasil diperbarui!');
     }
 
+
+    // join rom
+    
+    public function show($id)
+    {
+        $rom = NobarAnime::findOrFail($id);
+        $peserta = $rom->users;
+        return view('roms.show', compact('rom', 'peserta'));
+    }
+    public function leave($id)
+    {
+        $rom = NobarAnime::findOrFail($id);
+        $user = Auth::user();
+
+        if ($rom->users()->where('user_id', $user->id)->exists()) {
+            $rom->users()->detach($user->id);
+            $rom->decrement('jumlah_peserta');
+        }
+
+        return redirect()->route('roms.index')->with('success', 'Anda telah keluar dari rom.');
+    }
+
     public function joinRoom(Request $request, $id)
     {
         $request->validate([
@@ -102,24 +124,6 @@ class NobarAnimeController extends Controller
             return redirect()->back()->withErrors(['key_rom' => 'Key Rom tidak valid.']);
         }
     }
-
-    public function show($id)
-    {
-        $rom = NobarAnime::findOrFail($id);
-        $peserta = $rom->users;
-        return view('roms.show', compact('rom', 'peserta'));
-    }
     
-    public function leave($id)
-    {
-        $rom = NobarAnime::findOrFail($id);
-        $user = Auth::user();
-
-        if ($rom->users()->where('user_id', $user->id)->exists()) {
-            $rom->users()->detach($user->id);
-            $rom->decrement('jumlah_peserta');
-        }
-
-        return redirect()->route('roms.index')->with('success', 'Anda telah keluar dari rom.');
-    }
+   
 }

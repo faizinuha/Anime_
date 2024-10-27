@@ -120,7 +120,7 @@
                                 @auth
                                     <div class="user-name">
                                         {{-- <a href="#">{{ auth()->user()->name }}</a> --}}
-                                        <button onclick="myFunction()" class="dropbtn"> {{ auth()->user()->name }}
+                                        <button onclick="myFunction()" class="dropbtn"> {{ Auth::check() ? Auth::user()->name : 'Guest' }} 
                                         </button>
                                         <ul id="myDropdown" class="dropdown-menu">
                                             <li>
