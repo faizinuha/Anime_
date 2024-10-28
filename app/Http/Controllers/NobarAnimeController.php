@@ -32,9 +32,9 @@ class NobarAnimeController extends Controller
             'jumlah_peserta' => 'required|integer|min:1',
             'anime_id' => 'required|exists:animes,id',
         ]);
-    
+
         $user = Auth::user();
-    
+
         $nobarAnime = NobarAnime::create([
             'key_rom' => $request->key_rom,
             'anime_id' => $request->anime_id,
@@ -44,17 +44,17 @@ class NobarAnimeController extends Controller
             'status' => $request->status,
             'user_id' => $user->id,
         ]);
-    
+
         $entryTime = new \DateTime($nobarAnime->tanggal_waktu);
-        $fourAMNextDay = new \DateTime('tomorrow 04:00:00'); 
-    
+        $fourAMNextDay = new \DateTime('tomorrow 04:00:00');
+
         if ($entryTime > $fourAMNextDay) {
             $nobarAnime->delete();
             return redirect()->route('roms.index')->with('error', 'Rom telah dihapus karena waktu lebih dari jam 4 pagi.');
         }
-    
+
         $nobarAnime->users()->attach($user->id);
-    
+
         return redirect()->route('roms.show', $nobarAnime->id)->with('success', 'Rom berhasil dibuat dan Anda telah bergabung!');
     }
 
@@ -83,7 +83,7 @@ class NobarAnimeController extends Controller
 
 
     // join rom
-    
+
     public function show($id)
     {
         $rom = NobarAnime::findOrFail($id);
@@ -124,6 +124,9 @@ class NobarAnimeController extends Controller
             return redirect()->back()->withErrors(['key_rom' => 'Key Rom tidak valid.']);
         }
     }
-    
-   
+    public function watching($id)
+    {
+        $rom = NobarAnime::with('anime')->where('id', $id)->firstOrFail();
+        return view('Roms.watch-nobar', compact('rom'));
+    }
 }

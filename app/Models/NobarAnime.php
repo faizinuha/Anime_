@@ -9,7 +9,10 @@ class NobarAnime extends Model
 {
     use HasFactory;
     protected $fillable = ['anime_id', 'user_id', 'key_rom', 'tanggal_waktu', 'jumlah_peserta', 'status', 'deskripsi'];
-
+ public function getRouteKeyName()
+    {
+        return 'name';
+    }
     public function anime()
     {
         return $this->belongsTo(Anime::class);

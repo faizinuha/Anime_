@@ -47,6 +47,7 @@ Route::get('/roms/create', [NobarAnimeController::class, 'create'])->name('roms.
 Route::get('/roms/{rom}/edit', [NobarAnimeController::class, 'edit'])->name('roms.edit');
 Route::post('/roms', [NobarAnimeController::class, 'store'])->name('roms.store');
 Route::put('/roms/{rom}', [NobarAnimeController::class, 'update'])->name('roms.update');
+Route::get('/watching/{rom}', [NobarAnimeController::class, 'watching'])->name('roms.watching');
 
 // =================================[GUEST ONLY ROUTES]===============================================
 

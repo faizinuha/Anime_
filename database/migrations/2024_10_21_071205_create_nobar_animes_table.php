@@ -21,6 +21,7 @@ return new class extends Migration
             
             $table->foreignId('anime_id')->constrained('animes'); // Foreign key untuk anime
             $table->foreignId('user_id')->constrained('users'); // Pastikan mengacu pada tabel 'users'
+            $table->foreignId('comment_id')->contrained('comments');
             $table->timestamps();
         });
     }

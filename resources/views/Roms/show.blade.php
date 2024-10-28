@@ -39,7 +39,12 @@
                     <p><strong>Participants:</strong> {{ $rom->jumlah_peserta }}</p>
                 </div>
             </div>
-
+            @if (Auth::check() && Auth::user()->id === $rom->user_id)
+            <a href="{{ route('roms.watching', $rom->id) }}" class="btn btn-primary">Mulai</a>
+        @endif
+        
+        
+        
             <div class="bg-gray-100 p-4 rounded-lg">
                 <h3 class="text-2xl font-semibold mb-2">Chat Room</h3>
                 <!-- Chat room content will be here -->

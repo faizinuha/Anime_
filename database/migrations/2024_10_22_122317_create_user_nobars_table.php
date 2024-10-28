@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('nobar_id')->constrained('nobar_animes', 'id');
+            $table->foreignId('comment_id')->constrained('comments');
             $table->timestamps();
         });
     }
