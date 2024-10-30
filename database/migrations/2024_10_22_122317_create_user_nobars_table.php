@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('user_nobars', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('nobar_id')->constrained('nobar_animes', 'id');
-            $table->foreignId('comment_id')->constrained('comments');
+        $table->foreignId('nobar_id')->constrained('nobar_animes', 'id');
             $table->timestamps();
         });
     }

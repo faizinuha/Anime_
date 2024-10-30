@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\NobarAnime;
 use App\Models\Anime;
 use App\Models\User; // Model User untuk peserta
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Comment;
 
 class NobarAnimeController extends Controller
 {
@@ -31,6 +33,7 @@ class NobarAnimeController extends Controller
             'status' => 'required|in:aktif,selesai,dibatalkan',
             'jumlah_peserta' => 'required|integer|min:1',
             'anime_id' => 'required|exists:animes,id',
+            // 'comment_id' => 'required|exists:comments,id', // pastikan ini valid
         ]);
 
         $user = Auth::user();
@@ -43,6 +46,7 @@ class NobarAnimeController extends Controller
             'jumlah_peserta' => $request->jumlah_peserta,
             'status' => $request->status,
             'user_id' => $user->id,
+            // 'comment_id' => $request->comment_id, // menggunakan ID komentar dari request
         ]);
 
         $entryTime = new \DateTime($nobarAnime->tanggal_waktu);
@@ -50,7 +54,7 @@ class NobarAnimeController extends Controller
 
         if ($entryTime > $fourAMNextDay) {
             $nobarAnime->delete();
-            return redirect()->route('roms.index')->with('error', 'Rom telah dihapus karena waktu lebih dari jam 4 pagi.');
+            return redirect()->route('roms.index')->with('error', 'Rom tidak dapat dibuat karena waktu lebih dari jam 4 pagi.');
         }
 
         $nobarAnime->users()->attach($user->id);
@@ -73,6 +77,7 @@ class NobarAnimeController extends Controller
             'status' => 'required|in:aktif,selesai,dibatalkan',
             'jumlah_peserta' => 'required|integer|min:1',
             'anime_id' => 'required|exists:animes,id',
+            'comment_id' => 'required',
         ]);
 
         $rom = NobarAnime::findOrFail($id);
@@ -82,14 +87,18 @@ class NobarAnimeController extends Controller
     }
 
 
-    // join rom
+
 
     public function show($id)
     {
         $rom = NobarAnime::findOrFail($id);
         $peserta = $rom->users;
-        return view('roms.show', compact('rom', 'peserta'));
+        $comments = Comment::where('anime_id', $rom->anime->id)->get(); // Mengambil semua komentar
+        return view('roms.show', compact('rom', 'peserta', 'comments'));
     }
+we
+
+
     public function leave($id)
     {
         $rom = NobarAnime::findOrFail($id);
@@ -124,6 +133,7 @@ class NobarAnimeController extends Controller
             return redirect()->back()->withErrors(['key_rom' => 'Key Rom tidak valid.']);
         }
     }
+
     public function watching($id)
     {
         $rom = NobarAnime::with('anime')->where('id', $id)->firstOrFail();

@@ -1,56 +1,76 @@
-<!-- resources/views/roms/show.blade.php -->
-
 @extends('layouts.app')
 
 @section('content')
-<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-<div class="container mx-auto mt-10">
+<div class="container mt-5">
     <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-        <div class="relative">
-            @if(isset($rom->anime))
-            <img src="{{ asset('storage/' . $rom->anime->image) }}" alt="Anime Thumbnail" class="w-full h-64 object-cover">
-            <h1 class="text-4xl font-bold">{{ $rom->anime->name }}</h1>
-        @else
-            <p>Anime data is not available for this room.</p>
-        @endif
         
-            <div class="absolute top-0 left-0 bg-opacity-75 bg-black text-white p-4 rounded-br-lg">
-                <h1 class="text-4xl font-bold">{{ $rom->anime->name }}</h1>
-                <p class="text-lg">{{ date('F j, Y, g:i A', strtotime($rom->tanggal_waktu)) }}</p>
-            </div>
+        <!-- Anime Thumbnail Section -->
+        <div class="position-relative">
+            @if(isset($rom->anime))
+                <img src="{{ asset('storage/' . $rom->anime->image) }}" alt="Anime Thumbnail" class="w-100 h-64 object-cover">
+                <div class="position-absolute top-0 left-0 bg-black bg-opacity-75 text-white p-4 rounded-bottom">
+                    <h1 class="display-6 font-weight-bold">{{ $rom->anime->name }}</h1>
+                    <p class="h5">{{ date('F j, Y, g:i A', strtotime($rom->tanggal_waktu)) }}</p>
+                </div>
+            @else
+                <p class="text-center text-muted p-4">Anime data is not available for this room.</p>
+            @endif
         </div>
-        <div class="p-6">
-            <h2 class="text-3xl font-semibold mb-4">Room Information</h2>
-            <p class="text-lg text-gray-700 mb-6">{{ $rom->deskripsi ?? 'No description available.' }}</p>
 
-            <div class="flex justify-between items-center mb-6">
-                <div class="text-gray-600">
-                    <p>Nama Ketua: {{ $rom->ketua->name }}</p>
+        <!-- Room Information Section -->
+        <div class="p-5">
+            <h2 class="h3 font-weight-semibold border-bottom pb-3 mb-4">Room Information</h2>
+            <p class="text-muted mb-4">{{ $rom->deskripsi ?? 'No description available.' }}</p>
+
+            <div class="d-flex justify-content-between mb-4">
+                <div class="text-secondary">
+                    <p><strong>Nama Ketua:</strong> {{ $rom->ketua->name }}</p>
                     <p><strong>Status:</strong> 
                         @if($rom->status == 'aktif')
-                            <span class="text-green-600 font-semibold">Active</span>
+                            <span class="badge bg-success">Active</span>
                         @elseif($rom->status == 'selesai')
-                            <span class="text-blue-600 font-semibold">Finished</span>
+                            <span class="badge bg-primary">Finished</span>
                         @else
-                            <span class="text-red-600 font-semibold">Cancelled</span>
+                            <span class="badge bg-danger">Cancelled</span>
                         @endif
                     </p>
                     <p><strong>Participants:</strong> {{ $rom->jumlah_peserta }}</p>
                 </div>
             </div>
+
+            <!-- Mulai Button for Room Host -->
             @if (Auth::check() && Auth::user()->id === $rom->user_id)
-            <a href="{{ route('roms.watching', $rom->id) }}" class="btn btn-primary">Mulai</a>
-        @endif
-        
-        
-        
-            <div class="bg-gray-100 p-4 rounded-lg">
-                <h3 class="text-2xl font-semibold mb-2">Chat Room</h3>
-                <!-- Chat room content will be here -->
-                <p class="text-gray-600">Chat functionality coming soon...</p>
-            </div>
+                <a href="{{ route('roms.watching', $rom->id) }}" class="btn btn-primary">Mulai</a>
+            @endif
         </div>
+
+        <!-- Chat Room Section -->
+        <div class="bg-light p-4 rounded-lg mx-5 mt-4 mb-5">
+            <h3 class="h4 font-weight-semibold mb-3">Chat Room</h3>
+            
+            @forelse ($comments as $comment)
+                <p class="text-secondary">Pesan: {{ $comment->content }}</p>
+            @empty
+                <p class="text-secondary">No comments yet.</p>
+            @endforelse
+        
+            <!-- Comment Form -->
+            @if (Auth::check())
+                <form action="{{ route('comment.store') }}" method="post" class="mt-3">
+                    @csrf
+                    <input type="hidden" namwebe="anime_id" value="{{ $rom->anime->id }}">
+                    <div class="form-group mb-3">
+                        <textarea name="content" placeholder="Write a comment..." class="form-control" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </form>
+            @else
+                <p class="text-muted mt-3">Please <a href="{{ route('login2') }}" class="text-primary">login</a> to comment.</p>
+            @endif
+        </div>
+        
     </div>
 </div>
 @endsection

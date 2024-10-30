@@ -19,6 +19,9 @@ class Comment extends Model
     {
         return $this->belongsTo(Anime::class);
     }
+    // public function nobaranime(){
+    //     return $this->belongsTo(NobarAnime::class);
+    // }
     public function parent()
     {
         return $this->belongsTo(Comment::class, 'parent_id');

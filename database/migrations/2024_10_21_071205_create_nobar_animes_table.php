@@ -18,10 +18,8 @@ return new class extends Migration
             $table->text('deskripsi')->nullable();
             $table->integer('jumlah_peserta')->default(0);
             $table->enum('status', ['aktif', 'selesai', 'dibatalkan'])->default('aktif');
-            
             $table->foreignId('anime_id')->constrained('animes'); // Foreign key untuk anime
             $table->foreignId('user_id')->constrained('users'); // Pastikan mengacu pada tabel 'users'
-            $table->foreignId('comment_id')->contrained('comments');
             $table->timestamps();
         });
     }

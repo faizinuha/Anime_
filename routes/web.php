@@ -28,7 +28,8 @@ Route::get('/list', [dashboardController::class, 'list'])->name('list');
 // Menonton dan Komentar
 Route::get('/watch/{watch:name}-{episode}', [WatchController::class, 'show'])->name('anime.show');
 Route::get('/anime/{anime:name}', [dashboardController::class, 'show'])->name('animes.show');
-Route::post('/comment', [CommentController::class, 'store'])->name('comment.store');
+
+Route::post('/comment/store', [CommentController::class, 'store'])->name('comment.store');
 Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->name('comment.destroy');
 
 // Membalas Komentar
@@ -43,12 +44,13 @@ Route::get('/roms', [NobarAnimeController::class, 'index'])->name('roms.index');
 Route::get('/roms/{id}/show', [NobarAnimeController::class, 'show'])->name('roms.show');
 Route::post('/roms/{id}/join', [NobarAnimeController::class, 'joinRoom'])->name('roms.join');
 Route::get('/roms/{id}/leave', [NobarAnimeController::class, 'leave'])->name('roms.leave');
-Route::get('/roms/create', [NobarAnimeController::class, 'create'])->name('roms.create');
-Route::get('/roms/{rom}/edit', [NobarAnimeController::class, 'edit'])->name('roms.edit');
+Route::get('/roms/create', [NobarAnimeController::class, 'create'])->name(  'roms.create');
 Route::post('/roms', [NobarAnimeController::class, 'store'])->name('roms.store');
+Route::get('/roms/{rom}/edit', [NobarAnimeController::class, 'edit'])->name('roms.edit');
 Route::put('/roms/{rom}', [NobarAnimeController::class, 'update'])->name('roms.update');
 Route::get('/watching/{rom}', [NobarAnimeController::class, 'watching'])->name('roms.watching');
-
+// Rute untuk komentar
+Route::post('/roms/{id}/comments', [NobarAnimeController::class, 'createcomment'])->name('roms.comments.create');
 // =================================[GUEST ONLY ROUTES]===============================================
 
 Route::middleware(['guest'])->group(function () {

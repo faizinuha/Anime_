@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<script src="https://cdn.tailwindcss.com"></script>
+{{-- <script src="https://cdn.tailwindcss.com"></script> --}}
 <div class="container mx-auto mt-10">
     <div class="text-center mb-10">
         <h1 class="text-5xl font-extrabold text-gray-900">Create New Rom</h1>
