@@ -3,18 +3,30 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\{
-    dashboardController, TableController, UserController, 
-    Auth\LoginController, AnimeController, HomeController, 
-    CategoryController, CommentController, SearchController, 
-    WatchController, EpisodeController, ReplyController, 
-    ProfileController, BookmarksController, NobarAnimeController
+    dashboardController,
+    TableController,
+    UserController,
+    Auth\LoginController,
+    AnimeController,
+    HomeController,
+    CategoryController,
+    CommentController,
+    SearchController,
+    WatchController,
+    EpisodeController,
+    ReplyController,
+    ProfileController,
+    BookmarksController,
+    NobarAnimeController
 };
+
 
 // =================================[AUTH ROUTES]===============================================
 
 // Custom route untuk halaman verifikasi email
 Route::get('/auth/verify', fn() => view('auth.verify'))->name('custom.verification.notice');
 Auth::routes(['verify' => true]);  // Otentikasi dengan verifikasi email
+
 
 // Halaman Jaringan Down (offline)
 Route::get('Jaringandown', fn() => view('errors.Jaringandown'));
@@ -44,7 +56,7 @@ Route::get('/roms', [NobarAnimeController::class, 'index'])->name('roms.index');
 Route::get('/roms/{id}/show', [NobarAnimeController::class, 'show'])->name('roms.show');
 Route::post('/roms/{id}/join', [NobarAnimeController::class, 'joinRoom'])->name('roms.join');
 Route::get('/roms/{id}/leave', [NobarAnimeController::class, 'leave'])->name('roms.leave');
-Route::get('/roms/create', [NobarAnimeController::class, 'create'])->name(  'roms.create');
+Route::get('/roms/create', [NobarAnimeController::class, 'create'])->name('roms.create');
 Route::post('/roms', [NobarAnimeController::class, 'store'])->name('roms.store');
 Route::get('/roms/{rom}/edit', [NobarAnimeController::class, 'edit'])->name('roms.edit');
 Route::put('/roms/{rom}', [NobarAnimeController::class, 'update'])->name('roms.update');
@@ -83,6 +95,7 @@ Route::middleware(['auth', 'role:is_admin'])->group(function () {
 
     // Tabel
     Route::get('/table', [TableController::class, 'index'])->name('table');
+
     Route::resource('table', TableController::class);
 
     // Pencarian

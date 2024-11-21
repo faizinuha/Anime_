@@ -86,9 +86,6 @@ class NobarAnimeController extends Controller
         return redirect()->route('roms.index')->with('success', 'Rom berhasil diperbarui!');
     }
 
-
-
-
     public function show($id)
     {
         $rom = NobarAnime::findOrFail($id);
@@ -96,8 +93,6 @@ class NobarAnimeController extends Controller
         $comments = Comment::where('anime_id', $rom->anime->id)->get(); // Mengambil semua komentar
         return view('roms.show', compact('rom', 'peserta', 'comments'));
     }
-we
-
 
     public function leave($id)
     {
@@ -133,7 +128,7 @@ we
             return redirect()->back()->withErrors(['key_rom' => 'Key Rom tidak valid.']);
         }
     }
-
+    
     public function watching($id)
     {
         $rom = NobarAnime::with('anime')->where('id', $id)->firstOrFail();

@@ -20,6 +20,7 @@ class AnimeController extends Controller
             'animeEpisodes' => function ($query) {
                 $query->orderBy('episode', 'desc');
             }])->get();
+            
         // $animes = Anime::with('animeEpisodes')->get();
         
         // dd($animes);

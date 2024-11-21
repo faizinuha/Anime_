@@ -87,7 +87,7 @@
                                     </ul>
                                 </li>
                                 <li><a href="{{route('roms.index')}}" id="nobar">Nobar</a></li>
-                                <li><a href="#">Customer</a></li>
+                                <li><a href="{{route('customer')}}">Customer</a></li>
                                 <li>
                                     <a href="#" class="search-switch"><span class="icon_search"></span></a>
 
