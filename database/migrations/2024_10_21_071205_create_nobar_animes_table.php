@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('nobar_animes', function (Blueprint $table) {
             $table->id();
-            $table->integer('Key_rom')->default(0);
+            $table->string('Key_rom'); // Ubah ke string
             $table->dateTime('tanggal_waktu');
             $table->text('deskripsi')->nullable();
             $table->integer('jumlah_peserta')->default(0);

@@ -63,6 +63,7 @@ Route::put('/roms/{rom}', [NobarAnimeController::class, 'update'])->name('roms.u
 Route::get('/watching/{rom}', [NobarAnimeController::class, 'watching'])->name('roms.watching');
 // Rute untuk komentar
 Route::post('/roms/{id}/comments', [NobarAnimeController::class, 'createcomment'])->name('roms.comments.create');
+
 // =================================[GUEST ONLY ROUTES]===============================================
 
 Route::middleware(['guest'])->group(function () {
